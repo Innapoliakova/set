@@ -4,6 +4,7 @@
 // import Home from "./pages/Home";
 import Header from "./components/Header";
 import Upload from "./components/Upload";
+import Search from "./components/Search";
 import Footer from "./components/Footer";
 
 function App () {
@@ -11,6 +12,7 @@ function App () {
 		<div className="App">
 			<Header />
 			<Upload />
+			<Search />
 			<Footer />
 		</div>
 	);
