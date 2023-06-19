@@ -5,6 +5,7 @@
 import Header from "./components/Header";
 import Upload from "./components/Upload";
 import Search from "./components/Search";
+import Gallery from "./components/Gallery";
 import Footer from "./components/Footer";
 
 function App () {
@@ -13,6 +14,7 @@ function App () {
 			<Header />
 			<Upload />
 			<Search />
+			<Gallery></Gallery>
 			<Footer />
 		</div>
 	);
