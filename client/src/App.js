@@ -14,7 +14,7 @@ function App () {
 			<Header />
 			<Upload />
 			<Search />
-			<Gallery></Gallery>
+			<Gallery />
 			<Footer />
 		</div>
 	);
