@@ -1,0 +1,24 @@
+.search-section {
+    display: flex;
+    
+}
+
+.search-section {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-for-search {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 5px;
+  width: 15px; 
+  height: 15px; 
+  pointer-events: none;
+}
+
+.search-input-field {
+  padding-left: 30px; 
+   font-style: italic;
+}
