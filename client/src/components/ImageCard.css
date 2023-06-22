@@ -1,0 +1,101 @@
+/* ImageCard.css */
+
+.image-card {
+	position: relative;
+	width: 400px;
+	height: 400px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.image-card img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.3s ease;
+}
+
+.image-card:hover img {
+	transform: scale(1.05);
+}
+
+.image-card .details {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	color: #e3b128;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: flex-start;
+}
+
+.image-card:hover .details {
+	opacity: 1;
+}
+
+.image-card .details .description {
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.image-card .details .rating,
+.image-card .details .tags,
+.image-card .details .Date,
+.image-card .details .No.download,
+.image-card .details .categories {
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+.image-card button {
+	position: absolute;
+	padding: 8px 12px;
+	border: none;
+	border-radius: 4px;
+	color: #fff;
+	background-color: rgba(119, 83, 83, 0.37);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.image-card:hover button {
+	opacity: 1;
+}
+
+.image-card button:hover {
+	background-color: rgba(168, 147, 147, 0.9);
+}
+
+.image-card .bookmark-button {
+	left: auto;
+	right: 10px;
+	top: 10px;
+}
+
+/* Additional styles for specific buttons */
+
+.image-card .like-button {
+	top: 10px;
+	left: 10px;
+}
+
+.image-card .download-button {
+	left: auto;
+	right: 10px;
+	bottom: 10px;
+}
+
+.image-card .delete-button {
+	bottom: 10px;
+	right: 80px;
+}
+
+.image-card .icon {
+	width: 20px;
+}

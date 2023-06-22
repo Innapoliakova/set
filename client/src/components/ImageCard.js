@@ -1,3 +1,4 @@
+import "./ImageCard.css";
 import favouriteIcon from "../assets/icons/favorite.svg";
 import downloadIcon from "../assets/icons/download.svg";
 import likeIcon from "../assets/icons/like.svg";
