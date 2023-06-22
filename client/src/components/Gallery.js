@@ -1,7 +1,11 @@
-const Gallery = () => {
+import ImageCard from "./ImageCard";
+
+const Gallery = ({ images, isLogin }) => {
 	return (
 		<div className="gallery-section">
-			<h2>HERE will be GALLERY cards</h2>
+			{images.map((image) => (
+				<ImageCard key={image.id} image={image} isLogin={isLogin} />
+			))}
 		</div>
 	);
 };
