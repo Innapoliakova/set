@@ -1,9 +1,11 @@
-
+import logo from "../assets/icons/cyf.png";
+import "./Header.css";
 const Header = () => {
     return (
         <header>
             <div className="header-section">
-                <h1>CYF's picture gallery</h1>
+            <img src={logo} alt="Logo" className="logo" />
+                <h1 className="title">CYF's picture gallery</h1>
             </div>
         </header>
     );
