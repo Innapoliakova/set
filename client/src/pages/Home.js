@@ -11,6 +11,8 @@ import Footer from "../components/Footer";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
+	const [images, setImages] = useState([]);
+	const [isLogin, setIsLogin] = useState(true);
 
 	useEffect(() => {
 		fetch("/api")
@@ -33,7 +35,7 @@ export function Home() {
 			<Header />
 			<Upload />
 			<Search />
-			<Gallery />
+			<Gallery images={images} isLogin={isLogin} message={message} />
 			<Footer />
 		</div>
 	);

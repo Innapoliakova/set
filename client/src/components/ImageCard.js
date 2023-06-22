@@ -3,7 +3,7 @@ import downloadIcon from "../assets/icons/download.svg";
 import likeIcon from "../assets/icons/like.svg";
 import deleteIcon from "../assets/icons/delete.svg";
 
-const ImageCard = ({ image }) => {
+const ImageCard = ({ image, isLogin }) => {
 	const handleBookmark = () => {
 		// Handle bookmark functionality
 	};
@@ -40,13 +40,16 @@ const ImageCard = ({ image }) => {
 				<img src={downloadIcon} alt="" className="icon" />
 			</button>
 
-			<button onClick={handleDelete} className="delete-button">
-				<img src={deleteIcon} alt="" className="icon" />
-			</button>
-
-			<button onClick={handleBookmark} className="bookmark-button">
-				<img src={favouriteIcon} alt="" className="icon" />
-			</button>
+			{isLogin && (
+				<button onClick={handleDelete} className="delete-button">
+					<img src={deleteIcon} alt="" className="icon" />
+				</button>
+			)}
+			{isLogin && (
+				<button onClick={handleBookmark} className="bookmark-button">
+					<img src={favouriteIcon} alt="" className="icon" />
+				</button>
+			)}
 		</div>
 	);
 };

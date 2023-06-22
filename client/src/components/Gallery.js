@@ -1,9 +1,11 @@
 import ImageCard from "./ImageCard";
 
-const Gallery = ({ images }) => {
+const Gallery = ({ images, isLogin }) => {
 	return (
 		<div className="gallery-section">
-			<ImageCard images={images} />
+			{images.map((image) => (
+				<ImageCard key={image.id} image={image} isLogin={isLogin} />
+			))}
 		</div>
 	);
 };
