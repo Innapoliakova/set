@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 
 import "./Home.css";
 // import logo from "./logo.svg";
-import Header from "./components/Header";
-import Upload from "./components/Upload";
-import Search from "./components/Search";
-import Gallery from "./components/Gallery";
-import Footer from "./components/Footer";
+import Header from "../components/Header";
+import Upload from "../components/Upload";
+import Search from "../components/Search";
+import Gallery from "../components/Gallery";
+import Footer from "../components/Footer";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
