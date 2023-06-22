@@ -1,7 +1,9 @@
-const Gallery = () => {
+import ImageCard from "./ImageCard";
+
+const Gallery = ({ images }) => {
 	return (
 		<div className="gallery-section">
-			<h2>HERE will be GALLERY cards</h2>
+			<ImageCard images={images} />
 		</div>
 	);
 };
