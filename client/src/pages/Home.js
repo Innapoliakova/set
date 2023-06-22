@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import "./Home.css";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
+import Header from "./components/Header";
+import Upload from "./components/Upload";
+import Search from "./components/Search";
+import Gallery from "./components/Gallery";
+import Footer from "./components/Footer";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
@@ -24,21 +29,29 @@ export function Home() {
 	}, []);
 
 	return (
-		<main role="main">
-			<div>
-				<img
-					className="logo"
-					data-qa="logo"
-					src={logo}
-					alt="Just the React logo"
-				/>
-				<h1 className="message" data-qa="message">
-					{message}
-				</h1>
-				<Link to="/about/this/site">About</Link>
-			</div>
-		</main>
+		<div className="App">
+			<Header />
+			<Upload />
+			<Search />
+			<Gallery />
+			<Footer />
+		</div>
 	);
+
+	// <main role="main">
+	// 	// 	<div>
+	// 	// 		<img
+	// 			className="logo"
+	// 			data-qa="logo"
+	// 			src={logo}
+	// 			alt="Just the React logo"
+	// 		/>
+	// 		<h1 className="message" data-qa="message">
+	// 			{message}
+	// 		</h1>
+	// 		<Link to="/about/this/site">About</Link>
+	// 	</div>
+	// </main>
 }
 
 export default Home;
