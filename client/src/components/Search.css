@@ -1,9 +1,11 @@
 .search-section {
-    display: flex;
-    
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.search-section {
+.search-container {
   position: relative;
   display: inline-block;
 }
@@ -12,13 +14,20 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 5px;
-  width: 15px; 
-  height: 15px; 
+  left: 10px;
+  width: 20px;
+  height: 20px;
   pointer-events: none;
 }
 
 .search-input-field {
-  padding-left: 30px; 
-   font-style: italic;
+  padding: 10px 40px;
+  font-size: 16px;
+  font-style: italic;
+  width: 300px;
+}
+
+.search-button {
+  padding: 10px 40px;
+  font-size: 16px;
 }

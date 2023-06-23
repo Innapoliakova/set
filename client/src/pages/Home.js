@@ -13,6 +13,7 @@ export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [images, setImages] = useState([]);
 	const [isLogin, setIsLogin] = useState(true);
+	const [searchQuery, setSearchQuery] = useState("");
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -31,11 +32,18 @@ export function Home() {
 		fetchData();
 	}, []);
 
+	const handleSearch = (query) => {
+		setSearchQuery(query);
+		// our search logic will be here or call a search API -??
+		console.log("/////", query);
+	};
+
+
 	return (
 		<div className="App">
 			<Header />
 			<Upload />
-			<Search />
+			<Search handleSearch={handleSearch} />
 			<Gallery images={images} isLogin={isLogin} message={message} />
 			<Footer />
 		</div>
