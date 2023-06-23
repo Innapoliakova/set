@@ -19,7 +19,7 @@ const Footer = () => {
 				<a href="https://www.facebook.com/codeyourfuture.io">
         <FacebookRoundedIcon className="fb" />
       </a>
-	   <a href="https://twitter.com/CodeYourFuture">
+  <a href="https://twitter.com/CodeYourFuture">
           <TwitterIcon className="tw" />
         </a>
         <a href="https://www.linkedin.com/company/codeyourfuture/mycompany/">
@@ -34,8 +34,20 @@ const Footer = () => {
         <a href="mailto:london@codeyourfuture.io">
           <EmailRoundedIcon className="email" />
         </a>
+		<div className="footer-bottom">
+          <p>
+            © All rights reserved | Registered{" "}
+            <a href="https://register-of-charities.charitycommission.gov.uk/charity-details/?regid=1174929&subid=0">
+              UK
+            </a>
+            and{" "}
+            <a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number=SC050753">
+              Scottish
+            </a>{" "}
+            charity | <a href="feedback">Send website feedback</a>
+          </p>
+        </div>
 
-        
 
 			</div>
 		</footer>
