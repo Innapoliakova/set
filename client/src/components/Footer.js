@@ -9,7 +9,7 @@ const Footer = () => {
 	return (
 		<footer>
 			<div className="footer-section">
-				 <span className="newsletter">Sign up to our newsletter</span>
+				<span className="newsletter">Sign up to our newsletter</span>
         <input
           type="email"
           placeholder="Enter your email"
