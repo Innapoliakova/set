@@ -1,4 +1,5 @@
 import ImageCard from "./ImageCard";
+import "./Gallery.css";
 
 const Gallery = ({ images, isLogin }) => {
 	return (
