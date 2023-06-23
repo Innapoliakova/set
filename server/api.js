@@ -11,4 +11,13 @@ router.get("/", (_, res) => {
 	res.json({ message: "Hello, world!" });
 });
 
+router.get("/images", async (_, res) => {
+	logger.debug("images imported from exampleData.json");
+	try {
+		res.status(200).json(images);
+	} catch (err) {
+		console.error(err);
+	}
+});
+
 export default router;
