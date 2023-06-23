@@ -1,3 +1,5 @@
+import "./Filter.css";
+
 const Filter = ({ selectedFilters, handleFilterChange }) => {
 	return (
 		<div className="filter-section">
