@@ -9,4 +9,16 @@ router.get("/", (_, res) => {
 	res.json({ message: "Hello, world!" });
 });
 
+router.get("/images", (_, res) => {
+	res.json({ message: "Get images" });
+});
+
+router.get("/image", (req, res) => {
+	res.json({ message: "Get image" });
+});
+
+router.put("/image", (req, res) => {
+	res.json({ message: "Put image" });
+});
+
 export default router;
