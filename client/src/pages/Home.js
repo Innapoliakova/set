@@ -14,20 +14,37 @@ export function Home() {
 	const [images, setImages] = useState([]);
 	const [isLogin, setIsLogin] = useState(true);
 
+	// useEffect(() => {
+	// 	fetch("/api")
+	// 		.then((res) => {
+	// 			if (!res.ok) {
+	// 				throw new Error(res.statusText);
+	// 			}
+	// 			return res.json();
+	// 		})
+	// 		.then((body) => {
+	// 			setMessage(body.message);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.error(err);
+	// 		});
+	// }, []);
+
 	useEffect(() => {
-		fetch("/api")
-			.then((res) => {
+		const fetchData = async () => {
+			try {
+				const res = await fetch("/api/images");
 				if (!res.ok) {
 					throw new Error(res.statusText);
 				}
-				return res.json();
-			})
-			.then((body) => {
-				setMessage(body.message);
-			})
-			.catch((err) => {
+				const images = await res.json();
+				setMessage(null);
+				setImages(images);
+			} catch (err) {
 				console.error(err);
-			});
+			}
+		};
+		fetchData();
 	}, []);
 
 	return (
