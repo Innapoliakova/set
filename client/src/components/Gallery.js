@@ -1,12 +1,21 @@
 import ImageCard from "./ImageCard";
+import "./Gallery.css";
 
-const Gallery = ({ images, isLogin }) => {
+const Gallery = ({ images, isLogin, message }) => {
 	return (
-		<div className="gallery-section">
-			{images.map((image) => (
-				<ImageCard key={image.id} image={image} isLogin={isLogin} />
-			))}
-		</div>
+		<>
+			{message ? (
+				<h1 className="message" data-qa="message">
+					{message}
+				</h1>
+			) : (
+				<div className="gallery-section">
+					{images.map((image) => (
+						<ImageCard key={image.id} image={image} isLogin={isLogin} />
+					))}
+				</div>
+			)}
+		</>
 	);
 };
 
