@@ -8,11 +8,13 @@ import Upload from "../components/Upload";
 import Search from "../components/Search";
 import Gallery from "../components/Gallery";
 import Footer from "../components/Footer";
+import Filter from "../components/Filter";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [images, setImages] = useState([]);
 	const [isLogin, setIsLogin] = useState(true);
+	const [selectedFilters, setSelectedFilters] = useState([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -31,10 +33,24 @@ export function Home() {
 		fetchData();
 	}, []);
 
+	const handleFilterChange = (filter) => {
+			if (selectedFilters.includes(filter)) {
+				setSelectedFilters(
+				selectedFilters.filter((item) => item !== filter)
+				);
+				} else {
+				setSelectedFilters([...selectedFilters, filter]);
+				}
+				};
+
 	return (
 		<div className="App">
 			<Header />
 			<Upload />
+			<Filter
+				selectedFilters={selectedFilters}
+				handleFilterChange={handleFilterChange}
+			/>
 			<Search />
 			<Gallery images={images} isLogin={isLogin} message={message} />
 			<Footer />
