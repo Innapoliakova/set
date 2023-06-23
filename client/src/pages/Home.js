@@ -15,19 +15,20 @@ export function Home() {
 	const [isLogin, setIsLogin] = useState(true);
 
 	useEffect(() => {
-		fetch("/api")
-			.then((res) => {
+		const fetchData = async () => {
+			try {
+				const res = await fetch("/api/images");
 				if (!res.ok) {
 					throw new Error(res.statusText);
 				}
-				return res.json();
-			})
-			.then((body) => {
-				setMessage(body.message);
-			})
-			.catch((err) => {
+				const images = await res.json();
+				setMessage(null);
+				setImages(images);
+			} catch (err) {
 				console.error(err);
-			});
+			}
+		};
+		fetchData();
 	}, []);
 
 	return (
@@ -39,21 +40,6 @@ export function Home() {
 			<Footer />
 		</div>
 	);
-
-	// <main role="main">
-	// 	// 	<div>
-	// 	// 		<img
-	// 			className="logo"
-	// 			data-qa="logo"
-	// 			src={logo}
-	// 			alt="Just the React logo"
-	// 		/>
-	// 		<h1 className="message" data-qa="message">
-	// 			{message}
-	// 		</h1>
-	// 		<Link to="/about/this/site">About</Link>
-	// 	</div>
-	// </main>
 }
 
 export default Home;
