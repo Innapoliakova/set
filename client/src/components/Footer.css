@@ -1,0 +1,45 @@
+.footer-section{
+    padding: 5px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: rgb(227, 235, 239);
+  }
+  .button {
+    background-color: #ff2a13;
+    padding: 8px;
+    width: 90px;
+    height: 45px;
+  }
+  
+  .fb,
+  .tw,
+  .link,
+  .instag,
+  .github,
+  .email {
+    color: black;
+  }
+  
+  .fb :hover,
+  .tw :hover,
+  .link :hover,
+  .instag :hover,
+  .github :hover,
+  .email :hover {
+    color: red;
+  }
+  
+  .email-required {
+    background: #efefef;
+    padding: 5px;
+    margin-right: 2px;
+    width: 150px;
+    height: 30px;
+  }
+  .newsletter {
+    margin: 2px;
+  }
+  
