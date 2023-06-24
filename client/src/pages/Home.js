@@ -14,10 +14,8 @@ export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [images, setImages] = useState([]);
 	const [isLogin, setIsLogin] = useState(true);
-
+ const [selectedFilters, setSelectedFilters] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
-
-	
 
 
 	useEffect(() => {
@@ -37,15 +35,19 @@ export function Home() {
 		fetchData();
 	}, []);
 
+ const handleFilterChange = (filter) => {
+		if (selectedFilters.includes(filter)) {
+			setSelectedFilters(selectedFilters.filter((item) => item !== filter));
+		} else {
+			setSelectedFilters([...selectedFilters, filter]);
+		}
+ };
+
 	const handleSearch = (query) => {
 		setSearchQuery(query);
 		// our search logic will be here or call a search API -??
 		console.log("/////", query);
 	};
-
-
-	
-
 
 	return (
 		<div className="App">
@@ -57,10 +59,11 @@ export function Home() {
 				</h2>
 			</div>
 			<Upload />
-
+			<Filter
+				selectedFilters={selectedFilters}
+				handleFilterChange={handleFilterChange}
+			/>
 			<Search handleSearch={handleSearch} />
-			
-
 			<Gallery images={images} isLogin={isLogin} message={message} />
 			<Footer />
 		</div>
