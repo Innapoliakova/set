@@ -3,10 +3,6 @@ import multerS3 from "multer-s3";
 import { S3Client } from "@aws-sdk/client-s3";
 import path from "node:path";
 
-console.log(
-	process.env.ACCESS_KEY_ID, // store it in .env file to keep it safe
-	process.env.SECRET_ACCESS_KEY
-);
 // create s3 instance using S3Client
 // (this is how we create s3 instance in v3)
 const s3 = new S3Client({
@@ -56,7 +52,6 @@ function sanitizeFile(file, cb) {
 export const uploadImage = multer({
 	storage: s3Storage,
 	fileFilter: (req, file, callback) => {
-		console.log("req", req);
 		sanitizeFile(file, callback);
 	},
 	limits: {
