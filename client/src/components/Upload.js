@@ -1,11 +1,12 @@
-// import React from 'react';
 import React, { useState } from "react";
 import "./upload.css";
-const Upload = () => {
-// 	const handleFileUpload = (event) => {
-// 		const file = event.target.files[0];
 
-// };
+
+const Upload = () => {
+ 	const handleFileUpload = (event) => {
+ 		const file = event.target.files[0];
+
+ };
 
  const [input1, setInput1] = useState("description");
  const [input2, setInput2] = useState("tags");
@@ -29,13 +30,16 @@ const Upload = () => {
 
 
 	<div className="container">
-	<div className="input-field">
- <input type="text" value={input1} onChange={handleInput1Change} />
+	<div className="input-field input1">
+ <input type="text" value={input1} onChange={handleInput1Change} >
+ 
+ </input>
+ 
 	</div>
-	<div className="input-field">
+	<div className="input-field input2">
  <input type="text" value={input2} onChange={handleInput2Change} />
 	</div>
-	<div className="input-field">
+	<div className="input-field input3">
  <input type="text" value={input3} onChange={handleInput3Change} />
 	</div>
   </div>
