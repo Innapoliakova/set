@@ -8,52 +8,66 @@ import Upload from "../components/Upload";
 import Search from "../components/Search";
 import Gallery from "../components/Gallery";
 import Footer from "../components/Footer";
+import Filter from "../components/Filter";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [images, setImages] = useState([]);
 	const [isLogin, setIsLogin] = useState(true);
+ const [selectedFilters, setSelectedFilters] = useState([]);
+	const [searchQuery, setSearchQuery] = useState("");
+
 
 	useEffect(() => {
-		fetch("/api")
-			.then((res) => {
+		const fetchData = async () => {
+			try {
+				const res = await fetch("/api/images");
 				if (!res.ok) {
 					throw new Error(res.statusText);
 				}
-				return res.json();
-			})
-			.then((body) => {
-				setMessage(body.message);
-			})
-			.catch((err) => {
+				const images = await res.json();
+				setMessage(null);
+				setImages(images);
+			} catch (err) {
 				console.error(err);
-			});
+			}
+		};
+		fetchData();
 	}, []);
+
+ const handleFilterChange = (filter) => {
+		if (selectedFilters.includes(filter)) {
+			setSelectedFilters(selectedFilters.filter((item) => item !== filter));
+		} else {
+			setSelectedFilters([...selectedFilters, filter]);
+		}
+ };
+
+	const handleSearch = (query) => {
+		setSearchQuery(query);
+		// our search logic will be here or call a search API -??
+		console.log("/////", query);
+	};
 
 	return (
 		<div className="App">
 			<Header />
+			<div>
+				<h2>
+					Unlock your creative potential with our user-friendly app, seamlessly
+					discovering, uploading, and utilizing a vast array of assets.
+				</h2>
+			</div>
 			<Upload />
-			<Search />
+			<Filter
+				selectedFilters={selectedFilters}
+				handleFilterChange={handleFilterChange}
+			/>
+			<Search handleSearch={handleSearch} />
 			<Gallery images={images} isLogin={isLogin} message={message} />
 			<Footer />
 		</div>
 	);
-
-	// <main role="main">
-	// 	// 	<div>
-	// 	// 		<img
-	// 			className="logo"
-	// 			data-qa="logo"
-	// 			src={logo}
-	// 			alt="Just the React logo"
-	// 		/>
-	// 		<h1 className="message" data-qa="message">
-	// 			{message}
-	// 		</h1>
-	// 		<Link to="/about/this/site">About</Link>
-	// 	</div>
-	// </main>
 }
 
 export default Home;
