@@ -9,7 +9,7 @@
   .input-field {
     margin-bottom: 10px;
     border-radius: 7px;
-   
+   display: inline-block;
   }
   .input-field:last-child {
     margin-right: 0;
