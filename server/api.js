@@ -4,12 +4,9 @@ import logger from "./utils/logger";
 
 import images from "./exampleData.json";
 
-const router = Router();
+import { uploadImage } from "./utils/uploadImage";
 
-router.get("/", (_, res) => {
-	logger.debug("Welcoming everyone...");
-	res.json({ message: "Hello, world!" });
-});
+const router = Router();
 
 router.get("/images", (_, res) => {
 	try {
@@ -27,8 +24,21 @@ router.get("/image", (req, res) => {
 	}
 });
 
-router.put("/image", (req, res) => {
-	res.json({ message: "Put image" });
-});
+router.put(
+	"/image",
+	uploadImage.single("image"), // our uploadImage middleware
+	(req, res) => {
+
+		// location key in req.file holds the s3 url for the image
+		let data = {};
+		if (req.file) {
+			data.image = req.file.location;
+			
+		}
+		res.json(data);
+
+		// HERE IS YOUR LOGIC TO UPDATE THE DATA IN DATABASE
+	}
+);
 
 export default router;
