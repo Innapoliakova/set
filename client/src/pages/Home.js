@@ -14,9 +14,8 @@ export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [images, setImages] = useState([]);
 	const [isLogin, setIsLogin] = useState(true);
- const [selectedFilters, setSelectedFilters] = useState([]);
+	const [selectedFilters, setSelectedFilters] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
-
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -27,7 +26,7 @@ export function Home() {
 				}
 				const images = await res.json();
 				setMessage(null);
-				setImages(images);
+				setImages(images.data);
 			} catch (err) {
 				console.error(err);
 			}
@@ -35,13 +34,13 @@ export function Home() {
 		fetchData();
 	}, []);
 
- const handleFilterChange = (filter) => {
+	const handleFilterChange = (filter) => {
 		if (selectedFilters.includes(filter)) {
 			setSelectedFilters(selectedFilters.filter((item) => item !== filter));
 		} else {
 			setSelectedFilters([...selectedFilters, filter]);
 		}
- };
+	};
 
 	const handleSearch = (query) => {
 		setSearchQuery(query);
