@@ -6,6 +6,10 @@ import images from "./exampleData.json";
 
 import { uploadImage } from "./utils/uploadImage";
 
+import { v4 as uuidv4 } from "uuid";
+
+import pool from "./db";
+
 const router = Router();
 
 router.get("/images", (_, res) => {
@@ -50,7 +54,19 @@ router.post(
 
 			const { description, tags, categories } = req.body; // Extract description, tags, and categories from the request body
 
-		// HERE IS YOUR LOGIC TO UPDATE THE DATA IN DATABASE
+			const id = uuidv4(); // Generate a unique ID for the image
+
+			await pool.query(
+				"INSERT INTO images(id,description, tags, categories, url) VALUES($1, $2, $3, $4, $5)",
+				[id, description, tags, categories, url]
+			); // Use parameterized query values to add the image details to images table
+			res.status(200).json("Image were added successfully");
+		} catch (error) {
+			logger.error(error);
+			res
+				.status(500)
+				.json({ success: false, error: true, message: error.toString() });
+		}
 	}
 );
 
