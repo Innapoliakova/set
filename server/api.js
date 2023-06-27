@@ -24,18 +24,31 @@ router.get("/image", (req, res) => {
 	}
 });
 
-router.put(
+router.post(
 	"/image",
 	uploadImage.single("image"), // our uploadImage middleware
-	(req, res) => {
+	async (req, res) => {
+		try {
+			if (!req.body || Object.entries(req.body).length === 0) {
+				return res.status(400).json({
+					success: false,
+					error: true,
+					message: "The request body is empty.",
+				});
+			}
 
-		// location key in req.file holds the s3 url for the image
-		let data = {};
-		if (req.file) {
-			data.image = req.file.location;
-			
-		}
-		res.json(data);
+			if (!req.file) {
+				return res.status(400).json({
+					success: false,
+					error: true,
+					message: "No image file found in the request.",
+				});
+			}
+
+			// location key in req.file holds the s3 url for the image
+			const url = req.file.location;
+
+			const { description, tags, categories } = req.body; // Extract description, tags, and categories from the request body
 
 		// HERE IS YOUR LOGIC TO UPDATE THE DATA IN DATABASE
 	}
