@@ -14,7 +14,7 @@ const s3 = new S3Client({
 });
 
 const s3Storage = multerS3({
-	s3: s3, // s3 instance
+	s3, // s3 instance
 	bucket: "cyf-images-fp", // change it as per your project requirement
 	acl: "public-read", // storage access type
 	metadata: (req, file, cb) => {
