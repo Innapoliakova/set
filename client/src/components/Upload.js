@@ -57,9 +57,13 @@ const Upload = () => {
 	return (
 
 			<form className="upload-section" onSubmit={handleImageUploadSubmit}>
-			<input type="file" name="imageFile" className="inputfile" onChange={handleInputChange}/>
+			
 
-
+			<div class="file-input-container">
+			<input type="file" name="imageFile" id="myFileInput" className="hidden" onChange={handleInputChange}/>
+			<label for="myFileInput" class="custom-button">Select File</label>
+		  </div>
+		  
 	<div className="container">
 	<div className="input-field input1">
  <input type="text" name="description"  onChange={handleInputChange} placeholder="description" >
@@ -72,7 +76,7 @@ const Upload = () => {
 	</div>
 	<div className="input-field input3">
  
- <select type="text" name="categories" onSelect={handleInputChange}>
+ <select type="text" className="categoriesbtn" name="categories" onSelect={handleInputChange}>
 						<option value="">Categories</option>
 						<option value="photos">Photos</option>
 						<option value="illustrations">Illustrations</option>
@@ -81,7 +85,7 @@ const Upload = () => {
 					</select>
 	</div>
   </div>
-  <button> submit </button>
+  <button className="submitbtn"> submit </button>
     </form>
 	);
 };
