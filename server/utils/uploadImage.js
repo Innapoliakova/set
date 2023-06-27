@@ -44,7 +44,7 @@ function sanitizeFile(file, cb) {
 		return cb(null, true); // no errors
 	} else {
 		// pass error msg to callback, which can be displayed in frontend
-		cb("Error: File type not allowed!");
+		cb("Error: Invalid file format! Please upload a file with a valid extension. Only .png, .jpg, .jpeg, .gif, .svg formats are accepted.");
 	}
 }
 
