@@ -28,18 +28,12 @@ router.put(
 	"/image",
 	uploadImage.single("image"), // our uploadImage middleware
 	(req, res) => {
-		/*
-           req.file = {
-             fieldname, originalname,
-             mimetype, size, bucket, key, location
-           }
-        */
-		console.log("request", req.file);
+
 		// location key in req.file holds the s3 url for the image
 		let data = {};
 		if (req.file) {
 			data.image = req.file.location;
-			res.json(data);
+			
 		}
 		res.json(data);
 
