@@ -3,46 +3,85 @@ import "./upload.css";
 
 
 const Upload = () => {
- 	const handleFileUpload = (event) => {
- 		const file = event.target.files[0];
+ 	
 
- };
+ const [newImage, setNewImage] = useState(
+	{
+		description: "",
+		tags: "",
+		categories: "",
+	}
+ );
 
- const [input1, setInput1] = useState("");
- const [input2, setInput2] = useState("");
- const [input3, setInput3] = useState("");
 
-	const handleInput1Change = (event) => {
-		setInput1(event.target.value);
+	const handleInputChange = (event) => {
+		let { name, value = null } = event.target;
+
+		if (name === "imageFile") {
+			value = event.target.files[0];
+		}
+
+		setNewImage((newImage) => ({
+			...newImage,
+			[name]: value,
+		}));
+		
 	};
 
-	const handleInput2Change = (event) => {
-		setInput2(event.target.value);
- };
- const handleInput3Change = (event) => {
-		setInput3(event.target.value);
- };
+	const handleImageUploadSubmit = async(event) => {
+		event.preventDefault();
+
+		const formData = new FormData();
+		formData.append("image", newImage.imageFile);
+		formData.append("description", newImage.description);
+		formData.append("tags", newImage.tags);
+		formData.append("categories", newImage.categories);
+
+		try {
+			await fetch("/api/image", {
+				method: "Put",
+				body: formData,
+			});
+			console.log("Image uploaded successfully.");
+		} catch (error) {
+			console.error("Error uploading image:", error);
+		}
+		event.target.reset();
+		
+		
+	}
+
+
 
 
 	return (
-			<form className="upload-section" >
-			<input type="file"  className="inputfile"/>
+
+			<form className="upload-section" onSubmit={handleImageUploadSubmit}>
+			<input type="file" name="imageFile" className="inputfile" onChange={handleInputChange}/>
 
 
 	<div className="container">
 	<div className="input-field input1">
- <input type="text" value={input1} onChange={handleInput1Change} placeholder="description" >
+ <input type="text" name="description"  onChange={handleInputChange} placeholder="description" >
  
  </input>
  
 	</div>
 	<div className="input-field input2">
- <input type="text" value={input2} onChange={handleInput2Change} placeholder="tags" />
+ <input type="text" name="tags" onChange={handleInputChange} placeholder="tags" />
 	</div>
 	<div className="input-field input3">
- <input type="text" value={input3} onChange={handleInput3Change} placeholder="categories"/>
+ 
+ <select type="text" name="categories" onSelect={handleInputChange}>
+						<option value="">Categories</option>
+						<option value="photos">Photos</option>
+						<option value="illustrations">Illustrations</option>
+						<option value="logos">Logos</option>
+						<option value="icons">Icons</option>
+					</select>
 	</div>
   </div>
+  <button> submit </button>
     </form>
 	);
 };
