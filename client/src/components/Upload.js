@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import "./upload.css";
 
-
 const Upload = () => {
- 	
-
- const [newImage, setNewImage] = useState(
-	{
+	const [newImage, setNewImage] = useState({
 		description: "",
 		tags: "",
 		categories: "",
-	}
- );
-
+	});
 
 	const handleInputChange = (event) => {
 		let { name, value = null } = event.target;
@@ -25,10 +19,9 @@ const Upload = () => {
 			...newImage,
 			[name]: value,
 		}));
-		
 	};
 
-	const handleImageUploadSubmit = async(event) => {
+	const handleImageUploadSubmit = async (event) => {
 		event.preventDefault();
 
 		const formData = new FormData();
@@ -39,7 +32,7 @@ const Upload = () => {
 
 		try {
 			await fetch("/api/image", {
-				method: "Put",
+				method: "POST",
 				body: formData,
 			});
 			console.log("Image uploaded successfully.");
@@ -47,46 +40,57 @@ const Upload = () => {
 			console.error("Error uploading image:", error);
 		}
 		event.target.reset();
-		
-		
-	}
-
-
-
+	};
 
 	return (
+		<form className="upload-section" onSubmit={handleImageUploadSubmit}>
+			<div className="file-input-container">
+				<input
+					type="file"
+					name="imageFile"
+					id="myFileInput"
+					className="hidden"
+					onChange={handleInputChange}
+				/>
+				<label htmlFor="myFileInput" className="custom-button">
+					Select File
+				</label>
+			</div>
 
-			<form className="upload-section" onSubmit={handleImageUploadSubmit}>
-			
-
-			<div class="file-input-container">
-			<input type="file" name="imageFile" id="myFileInput" className="hidden" onChange={handleInputChange}/>
-			<label for="myFileInput" class="custom-button">Select File</label>
-		  </div>
-		  
-	<div className="container">
-	<div className="input-field input1">
- <input type="text" name="description"  onChange={handleInputChange} placeholder="description" >
- 
- </input>
- 
-	</div>
-	<div className="input-field input2">
- <input type="text" name="tags" onChange={handleInputChange} placeholder="tags" />
-	</div>
-	<div className="input-field input3">
- 
- <select type="text" className="categoriesbtn" name="categories" onSelect={handleInputChange}>
+			<div className="container">
+				<div className="input-field input1">
+					<input
+						type="text"
+						name="description"
+						onChange={handleInputChange}
+						placeholder="description"
+					></input>
+				</div>
+				<div className="input-field input2">
+					<input
+						type="text"
+						name="tags"
+						onChange={handleInputChange}
+						placeholder="tags"
+					/>
+				</div>
+				<div className="input-field input3">
+					<select
+						type="text"
+						className="categoriesbtn"
+						name="categories"
+						onSelect={handleInputChange}
+					>
 						<option value="">Categories</option>
 						<option value="photos">Photos</option>
 						<option value="illustrations">Illustrations</option>
 						<option value="logos">Logos</option>
 						<option value="icons">Icons</option>
 					</select>
-	</div>
-  </div>
-  <button className="submitbtn"> submit </button>
-    </form>
+				</div>
+			</div>
+			<button className="submitbtn"> submit </button>
+		</form>
 	);
 };
 
