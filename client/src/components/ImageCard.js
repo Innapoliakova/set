@@ -23,12 +23,12 @@ const ImageCard = ({ image, isLogin }) => {
 
 	return (
 		<div className="image-card">
-			<img width="400" height="250" src={image.src} alt="" />
+			<img width="400" height="250" src={image.url} alt="" />
 			<div className="details">
 				<div className="description">{image.description}</div>
 				<div className="rating">Likes: {image.rating}</div>
 				<div className="tags">Tags: {image.tags}</div>
-				<div className="Date">Date: {image.date}</div>
+				<div className="Date">Date: {image.upload_date}</div>
 				<div className="No.download">Downloads times: {image.no_download}</div>
 				<div className="categories">Categories: {image.categories}</div>
 			</div>
