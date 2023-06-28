@@ -6,6 +6,10 @@ import images from "./exampleData.json";
 
 import { uploadImage } from "./utils/uploadImage";
 
+import { v4 as uuidv4 } from "uuid";
+
+import pool from "./db";
+
 const router = Router();
 
 router.get("/images", async (_, res) => {
@@ -32,20 +36,45 @@ router.get("/image", (req, res) => {
 	}
 });
 
-router.put(
+router.post(
 	"/image",
 	uploadImage.single("image"), // our uploadImage middleware
-	(req, res) => {
+	async (req, res) => {
+		try {
+			if (!req.body || Object.entries(req.body).length === 0) {
+				return res.status(400).json({
+					success: false,
+					error: true,
+					message: "The request body is empty.",
+				});
+			}
 
-		// location key in req.file holds the s3 url for the image
-		let data = {};
-		if (req.file) {
-			data.image = req.file.location;
-			
+			if (!req.file) {
+				return res.status(400).json({
+					success: false,
+					error: true,
+					message: "No image file found in the request.",
+				});
+			}
+
+			// location key in req.file holds the s3 url for the image
+			const url = req.file.location;
+
+			const { description, tags, categories } = req.body; // Extract description, tags, and categories from the request body
+
+			const id = uuidv4(); // Generate a unique ID for the image
+
+			await pool.query(
+				"INSERT INTO images(id,description, tags, categories, url) VALUES($1, $2, $3, $4, $5)",
+				[id, description, tags, categories, url]
+			); // Use parameterized query values to add the image details to images table
+			res.status(200).json("Image were added successfully");
+		} catch (error) {
+			logger.error(error);
+			res
+				.status(500)
+				.json({ success: false, error: true, message: error.toString() });
 		}
-		res.json(data);
-
-		// HERE IS YOUR LOGIC TO UPDATE THE DATA IN DATABASE
 	}
 );
 
