@@ -12,11 +12,19 @@ import pool from "./db";
 
 const router = Router();
 
-router.get("/images", (_, res) => {
+router.get("/images", async (_, res) => {
 	try {
-		res.status(200).json(images);
-	} catch (err) {
-		logger.error(err);
+		// Retrieve all images from the database table
+		const allImages = await pool.query("SELECT * FROM images ORDER BY id;");
+
+		// Send a success response with the retrieved image data
+		return res.status(200).json({ data: allImages.rows });
+	} catch (error) {
+		// Log the error details for debugging purposes
+		logger.error(error);
+
+		// Send an error response with an appropriate status code and message
+		res.status(500).json({ error: true, message: "Internal server error" });
 	}
 });
 

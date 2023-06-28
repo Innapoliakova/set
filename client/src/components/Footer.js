@@ -4,6 +4,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
+import "./Footer.css";
 
 const Footer = () => {
 	return (
