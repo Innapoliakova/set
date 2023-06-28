@@ -20,11 +20,28 @@ router.get("/images", (_, res) => {
 	}
 });
 
-router.get("/image", (req, res) => {
+router.get("/image/:id", async (req, res) => {
 	try {
-		res.status(200).json(images[0]);
-	} catch (err) {
-		logger.error(err);
+		const { id } = req.params;
+
+		// Retrieve image from the database using the provided id
+		const image = await pool.query("SELECT * FROM images WHERE id = $1;", [id]);
+
+		// Check if image exists
+		if (!image) {
+			res.status(400).json("ID is not valid");
+		} else {
+			// Return the image data if it exists
+			res.status(200).json(image.rows);
+		}
+	} catch (error) {
+		// Log any errors that occur during the request
+		logger.error(error);
+
+		// Send a 500 Internal Server Error response with error details
+		res
+			.status(500)
+			.json({ success: false, error: true, message: error.toString() });
 	}
 });
 
