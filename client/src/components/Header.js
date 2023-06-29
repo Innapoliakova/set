@@ -4,38 +4,56 @@ import "./Header.css";
 
 const Header = () => {
 	const [showLoginForm, setShowLoginForm] = useState(false);
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [username, setUsername] = useState("");
+	const [loginEmail, setLoginEmail] = useState("");
+	const [loginPassword, setLoginPassword] = useState("");
+	const [joinEmail, setJoinEmail] = useState("");
+	const [joinPassword, setJoinPassword] = useState("");
+	const [joinUsername, setJoinUsername] = useState("");
 
 	const handleLoginClick = () => {
 		setShowLoginForm(true);
-		setEmail("");
-		setPassword("");
-		setUsername("");
+		setLoginEmail("");
+		setLoginPassword("");
+		setJoinEmail("");
+		setJoinPassword("");
+		setJoinUsername("");
 	};
 
-	const handleEmailChange = (event) => {
-		setEmail(event.target.value);
+	const handleLoginEmailChange = (event) => {
+		setLoginEmail(event.target.value);
 	};
 
-	const handlePasswordChange = (event) => {
-		setPassword(event.target.value);
+	const handleLoginPasswordChange = (event) => {
+		setLoginPassword(event.target.value);
 	};
 
-	const handleUsernameChange = (event) => {
-		setUsername(event.target.value);
+	const handleJoinEmailChange = (event) => {
+		setJoinEmail(event.target.value);
 	};
 
-	const handleLoginFormSubmit = (event) => {
+	const handleJoinPasswordChange = (event) => {
+		setJoinPassword(event.target.value);
+	};
+
+	const handleJoinUsernameChange = (event) => {
+		setJoinUsername(event.target.value);
+	};
+
+	const handleLoginSubmit = (event) => {
 		event.preventDefault();
-		if (showLoginForm) {
-			// We will add 'login logic' here - email and password
-			console.log("Login submitted:", email, password);
-		} else {
-			// We will add 'join logic' here - username, email, and password
-			console.log("Join submitted:", username, email, password);
-		}
+		// 'login' logic here with loginEmail and loginPassword
+		console.log("Login submitted:", loginEmail, loginPassword);
+		setLoginEmail("");
+		setLoginPassword("");
+	};
+
+	const handleJoinSubmit = (event) => {
+		event.preventDefault();
+		// 'join' logic here with joinUsername, joinEmail, and joinPassword
+		console.log("Join submitted:", joinUsername, joinEmail, joinPassword);
+		setJoinEmail("");
+		setJoinPassword("");
+		setJoinUsername("");
 	};
 
 	return (
@@ -53,48 +71,48 @@ const Header = () => {
 			</div>
 			{showLoginForm && (
 				<div className="modal">
-					<form onSubmit={handleLoginFormSubmit}>
-						{showLoginForm && (
-							<>
-								<input
-									type="text"
-									placeholder="Username"
-									value={username}
-									onChange={handleUsernameChange}
-								/>
-								<input
-									type="email"
-									placeholder="Email"
-									value={email}
-									onChange={handleEmailChange}
-								/>
-								<input
-									type="password"
-									placeholder="Password"
-									value={password}
-									onChange={handlePasswordChange}
-								/>
-								<button type="submit">Join</button>
-							</>
-						)}
-						{showLoginForm && (
-							<>
-								<input
-									type="text"
-									placeholder="Username or Email"
-									value={email}
-									onChange={handleEmailChange}
-								/>
-								<input
-									type="password"
-									placeholder="Password"
-									value={password}
-									onChange={handlePasswordChange}
-								/>
-								<button type="submit">Login</button>
-							</>
-						)}
-					</form>
+					<div className="form-field">
+						<form onSubmit={handleLoginSubmit}>
+							<h2>Login</h2>
+							<input
+								type="text"
+								placeholder="Email"
+								value={loginEmail}
+								onChange={handleLoginEmailChange}
+							/>
+							<input
+								type="password"
+								placeholder="Password"
+								value={loginPassword}
+								onChange={handleLoginPasswordChange}
+							/>
+							<button type="submit">Login</button>
+						</form>
+					</div>
+					<div className="form-field">
+						<form onSubmit={handleJoinSubmit}>
+							<h2>Join</h2>
+							<input
+								type="text"
+								placeholder="Username"
+								value={joinUsername}
+								onChange={handleJoinUsernameChange}
+							/>
+							<input
+								type="email"
+								placeholder="Email"
+								value={joinEmail}
+								onChange={handleJoinEmailChange}
+							/>
+							<input
+								type="password"
+								placeholder="Password"
+								value={joinPassword}
+								onChange={handleJoinPasswordChange}
+							/>
+							<button type="submit">Join</button>
+						</form>
+					</div>
 				</div>
 			)}
 		</header>
@@ -102,5 +120,4 @@ const Header = () => {
 };
 
 export default Header;
-
 
