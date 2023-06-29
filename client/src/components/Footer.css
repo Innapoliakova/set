@@ -52,4 +52,23 @@
   .newsletter {
     margin: 10px;
   }
-  
+  div > footer > div > div > p > a:nth-child(1),
+a:link {
+  color: rgb(237, 67, 67);
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+
+div > footer > div > div > p > a:nth-child(2),
+a:link {
+  color: rgb(237, 67, 67);
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+div > footer > div > div > p > a:nth-child(3),
+a:link {
+  color: rgb(237, 67, 67);
+  text-decoration: underline;
+  text-decoration-color: rgb(20, 18, 18);
+  cursor: pointer;
+}
