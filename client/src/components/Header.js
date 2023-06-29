@@ -9,7 +9,7 @@ const Header = () => {
 	const [username, setUsername] = useState("");
 
 	const handleLoginClick = () => {
-		setShowLoginForm(!showLoginForm);
+		setShowLoginForm(true);
 		setEmail("");
 		setPassword("");
 		setUsername("");
@@ -49,55 +49,58 @@ const Header = () => {
 				</div>
 				<div className="login-button">
 					<button onClick={handleLoginClick}>Login</button>
-					{showLoginForm && (
-						<form onSubmit={handleLoginFormSubmit}>
-							{showLoginForm && (
-								<>
-									<input
-										type="text"
-										placeholder="Username"
-										value={username}
-										onChange={handleUsernameChange}
-									/>
-									<input
-										type="email"
-										placeholder="Email"
-										value={email}
-										onChange={handleEmailChange}
-									/>
-									<input
-										type="password"
-										placeholder="Password"
-										value={password}
-										onChange={handlePasswordChange}
-									/>
-									<button type="submit">Join</button>
-								</>
-							)}
-							{showLoginForm && (
-								<>
-									<input
-										type="text"
-										placeholder="Username or Email"
-										value={email}
-										onChange={handleEmailChange}
-									/>
-									<input
-										type="password"
-										placeholder="Password"
-										value={password}
-										onChange={handlePasswordChange}
-									/>
-									<button type="submit">Login</button>
-								</>
-							)}
-						</form>
-					)}
 				</div>
 			</div>
+			{showLoginForm && (
+				<div className="modal">
+					<form onSubmit={handleLoginFormSubmit}>
+						{showLoginForm && (
+							<>
+								<input
+									type="text"
+									placeholder="Username"
+									value={username}
+									onChange={handleUsernameChange}
+								/>
+								<input
+									type="email"
+									placeholder="Email"
+									value={email}
+									onChange={handleEmailChange}
+								/>
+								<input
+									type="password"
+									placeholder="Password"
+									value={password}
+									onChange={handlePasswordChange}
+								/>
+								<button type="submit">Join</button>
+							</>
+						)}
+						{showLoginForm && (
+							<>
+								<input
+									type="text"
+									placeholder="Username or Email"
+									value={email}
+									onChange={handleEmailChange}
+								/>
+								<input
+									type="password"
+									placeholder="Password"
+									value={password}
+									onChange={handlePasswordChange}
+								/>
+								<button type="submit">Login</button>
+							</>
+						)}
+					</form>
+				</div>
+			)}
 		</header>
 	);
 };
 
 export default Header;
+
 
