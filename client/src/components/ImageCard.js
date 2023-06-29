@@ -13,8 +13,51 @@ const ImageCard = ({ image, isLogin }) => {
 		// Handle like functionality
 	};
 
-	const handleDownload = () => {
-		// Handle download functionality
+	const handleDownload = async (imageId, imageTags, imageUrl) => {
+		try {
+			// Fetch the image data from the specified API endpoint
+			const response = await fetch(`/api/image/${imageId}`, {
+				method: "GET",
+				headers: { "Content-Type": "application/json" },
+			});
+
+			if (response.status === 200) {
+				// Convert the response data to a Blob object
+				const imageData = await response.blob();
+
+				// Define the filename based on the availability of imageTags
+				let filename;
+				if (imageTags) {
+					// Extract the first tag
+					const firstTag = imageTags.replace(/\s+/g, "-");
+					// Extract the file extension from the imageUrl
+					const fileExtension = imageUrl.split(".").pop();
+					// Construct the filename with the first tag and file extension
+					filename = `cyf-${firstTag}.${fileExtension}`;
+				} else {
+					// Extract the last part of the URL as the filename when imageTags are not available
+					const urlParts = imageUrl.split("/");
+					const lastPart = urlParts[urlParts.length - 1];
+					filename = `cyf-${lastPart}`;
+				}
+
+				// Create an object URL for the image data
+				const objectUrl = URL.createObjectURL(imageData);
+
+				// Create an anchor element for initiating the download
+				const anchorElement = document.createElement("a");
+				anchorElement.href = objectUrl;
+				anchorElement.setAttribute("download", filename);
+				anchorElement.click();
+
+				// Revoke the object URL after the download is complete
+				URL.revokeObjectURL(objectUrl);
+			} else {
+				throw new Error("Image download failed");
+			}
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	const handleDelete = () => {
