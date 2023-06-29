@@ -70,48 +70,50 @@ const Header = () => {
 				</div>
 			</div>
 			{showLoginForm && (
-				<div className="modal">
-					<div className="form-field">
-						<form onSubmit={handleLoginSubmit}>
-							<h2>Login</h2>
-							<input
-								type="text"
-								placeholder="Email"
-								value={loginEmail}
-								onChange={handleLoginEmailChange}
-							/>
-							<input
-								type="password"
-								placeholder="Password"
-								value={loginPassword}
-								onChange={handleLoginPasswordChange}
-							/>
-							<button type="submit">Login</button>
-						</form>
-					</div>
-					<div className="form-field">
-						<form onSubmit={handleJoinSubmit}>
-							<h2>Join</h2>
-							<input
-								type="text"
-								placeholder="Username"
-								value={joinUsername}
-								onChange={handleJoinUsernameChange}
-							/>
-							<input
-								type="email"
-								placeholder="Email"
-								value={joinEmail}
-								onChange={handleJoinEmailChange}
-							/>
-							<input
-								type="password"
-								placeholder="Password"
-								value={joinPassword}
-								onChange={handleJoinPasswordChange}
-							/>
-							<button type="submit">Join</button>
-						</form>
+				<div className="modal-container">
+					<div className="modal">
+						<div className="form-field">
+							<form className="loginForm" onSubmit={handleLoginSubmit}>
+								<h2>Login</h2>
+								<input
+									type="text"
+									placeholder="Email"
+									value={loginEmail}
+									onChange={handleLoginEmailChange}
+								/>
+								<input
+									type="password"
+									placeholder="Password"
+									value={loginPassword}
+									onChange={handleLoginPasswordChange}
+								/>
+								<button type="submit">Login</button>
+							</form>
+						</div>
+						<div className="form-field">
+							<form onSubmit={handleJoinSubmit}>
+								<h2>Join</h2>
+								<input
+									type="text"
+									placeholder="Username"
+									value={joinUsername}
+									onChange={handleJoinUsernameChange}
+								/>
+								<input
+									type="email"
+									placeholder="Email"
+									value={joinEmail}
+									onChange={handleJoinEmailChange}
+								/>
+								<input
+									type="password"
+									placeholder="Password"
+									value={joinPassword}
+									onChange={handleJoinPasswordChange}
+								/>
+								<button type="submit">Join</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			)}
