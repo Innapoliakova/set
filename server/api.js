@@ -40,7 +40,7 @@ router.get("/image/:id", async (req, res) => {
 			res.status(400).json("ID is not valid");
 		} else {
 			// Return the image data if it exists
-			res.status(200).json(image.rows);
+			res.status(200).json(image.rows[0]);
 		}
 	} catch (error) {
 		// Log any errors that occur during the request
