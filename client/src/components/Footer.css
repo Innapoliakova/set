@@ -63,6 +63,7 @@
   
   .email-required {
     background: #efefef;
+
     height: auto;
   font-size: 1em;
   line-height: 1.5em;
@@ -81,12 +82,38 @@
   -webkit-transition: padding 0.25s;
   text-shadow: none;
   box-shadow: none;
+
+   
+
   }
   .newsletter {
-    margin: 2px;
+    margin: 10px;
   }
+
   *,
 *:before,
 *:after {
   box-sizing: border-box;
 }
+
+  div > footer > div > div > p > a:nth-child(1),
+a:link {
+  color: rgb(237, 67, 67);
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+
+div > footer > div > div > p > a:nth-child(2),
+a:link {
+  color: rgb(237, 67, 67);
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+div > footer > div > div > p > a:nth-child(3),
+a:link {
+  color: rgb(237, 67, 67);
+  text-decoration: underline;
+  text-decoration-color: rgb(20, 18, 18);
+  cursor: pointer;
+}
+
