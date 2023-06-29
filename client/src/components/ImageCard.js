@@ -37,7 +37,10 @@ const ImageCard = ({ image, isLogin }) => {
 				<img src={likeIcon} alt="" className="icon" />
 			</button>
 
-			<button onClick={handleDownload} className="download-button">
+			<button
+				onClick={() => handleDownload(image.id, image.tags, image.url)}
+				className="download-button"
+			>
 				<img src={downloadIcon} alt="" className="icon" />
 			</button>
 
