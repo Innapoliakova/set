@@ -28,16 +28,23 @@ router.get("/images", async (_, res) => {
 	}
 });
 
-router.get("/image/:id", async (req, res) => {
+router.get("/image/:idParams", async (req, res) => {
 	try {
-		const { id } = req.params;
+		const { idParams } = req.params;
+    		const id = idParams.split("_")[0];
+		// Increment the No of downloads for the image in the database when downloaded
+		if (idParams.split("_")[1] === "download") {
+		await pool.query("UPDATE images SET no_download=(no_download + 1) WHERE id = $1;", [
+		id,
+		]);
+		}
 
 		// Retrieve image from the database using the provided id
 		const image = await pool.query("SELECT * FROM images WHERE id = $1;", [id]);
 
 		// Check if image exists
 		if (image.rows.length === 0) {
-			res.status(400).json("ID is not valid");
+			res.status(404).json("Image not found");
 		} else {
 			// Return the image data if it exists
 			res.status(200).json(image.rows[0]);
