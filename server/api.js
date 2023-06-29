@@ -36,7 +36,7 @@ router.get("/image/:id", async (req, res) => {
 		const image = await pool.query("SELECT * FROM images WHERE id = $1;", [id]);
 
 		// Check if image exists
-		if (!image) {
+		if (image.rows.length === 0) {
 			res.status(400).json("ID is not valid");
 		} else {
 			// Return the image data if it exists
