@@ -56,6 +56,10 @@ const Header = () => {
 		setJoinUsername("");
 	};
 
+	const handleCloseModal = () => {
+		setShowLoginForm(false);
+	};
+
 	return (
 		<header>
 			<div className="header-section">
@@ -72,6 +76,9 @@ const Header = () => {
 			{showLoginForm && (
 				<div className="modal-container">
 					<div className="modal">
+						<button className="close-button" onClick={handleCloseModal}>
+							<i className="iconCloseLogin">X</i>
+						</button>
 						<div className="form-field">
 							<form className="loginForm" onSubmit={handleLoginSubmit}>
 								<h2>Login</h2>
