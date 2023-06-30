@@ -16,7 +16,7 @@ const ImageCard = ({ image, isLogin }) => {
 	const handleDownload = async (imageId, imageTags, imageUrl) => {
 		try {
 			// Fetch the image data from the specified API endpoint
-			const response = await fetch(`/api/image/${imageId}_download`, {
+			const response = await fetch(`/api/image/${imageId}/download?downloadAction=ture`, {
 				method: "GET",
 				headers: { "Content-Type": "application/json" },
 			});
