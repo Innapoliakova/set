@@ -39,13 +39,15 @@
   .submitbtn{
     position: absolute;
     left: 1100px;
-    top: 41%;
+    top: 42%;
     width: 120px;
-    height: 30px;
+    height: 35px;
     border-radius: 10px;
     border: 0px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     color: gray;
+    font-size: 15px;
+    line-height: 15px;
   }
   .submitbtn:hover{
     background-color: black;
@@ -83,11 +85,39 @@
     color: gray;
     font-size: 12px;
     width: 180px;
+    height: 35px;
   }
 
   .custom-button:hover{
     background-color: black;
     color: white;
     transition: o.3s;
+  }
+
+
+  .filterinput {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    position: absolute;
+    left: 30%;
+    top: 55%;
+  }
+  .selectinput{
+    width: 210px;
+    height: 35px;
+    border-radius: 10px;
+    color: gray;
+    position: absolute;
+    left: 50%;
+    top: 55%;
+  }
+  .ulprinter {
+   width: auto;
+   height: auto;
+    margin-left: 30%;
+    margin-top: 150px;
+    list-style: none;
   }
   
