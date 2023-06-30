@@ -28,12 +28,12 @@ router.get("/images", async (_, res) => {
 	}
 });
 
-router.get("/image/:idParams", async (req, res) => {
+router.get("/image/:id/download", async (req, res) => {
 	try {
-		const { idParams } = req.params;
-    		const id = idParams.split("_")[0];
+		const { id } = req.params;
+		const { downloadAction } = req.query;
 		// Increment the No of downloads for the image in the database when downloaded
-		if (idParams.split("_")[1] === "download") {
+		if (downloadAction) {
 		await pool.query("UPDATE images SET no_download=(no_download + 1) WHERE id = $1;", [
 		id,
 		]);
