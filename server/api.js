@@ -28,11 +28,35 @@ router.get("/images", async (_, res) => {
 	}
 });
 
-router.get("/image", (req, res) => {
+router.get("/image/:id/download", async (req, res) => {
 	try {
-		res.status(200).json(images[0]);
-	} catch (err) {
-		logger.error(err);
+		const { id } = req.params;
+		const { downloadAction } = req.query;
+		// Increment the No of downloads for the image in the database when downloaded
+		if (downloadAction) {
+		await pool.query("UPDATE images SET no_download=(no_download + 1) WHERE id = $1;", [
+		id,
+		]);
+		}
+
+		// Retrieve image from the database using the provided id
+		const image = await pool.query("SELECT * FROM images WHERE id = $1;", [id]);
+
+		// Check if image exists
+		if (image.rows.length === 0) {
+			res.status(404).json("Image not found");
+		} else {
+			// Return the image data if it exists
+			res.status(200).json(image.rows[0]);
+		}
+	} catch (error) {
+		// Log any errors that occur during the request
+		logger.error(error);
+
+		// Send a 500 Internal Server Error response with error details
+		res
+			.status(500)
+			.json({ success: false, error: true, message: error.toString() });
 	}
 });
 

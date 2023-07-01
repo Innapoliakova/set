@@ -40,6 +40,8 @@
     position: absolute;
     left: 1100px;
     top: 42%;
+
+
     width: 120px;
     height: 35px;
     border-radius: 10px;
@@ -93,6 +95,7 @@
     color: white;
     transition: o.3s;
   }
+
 
 
   .filterinput {

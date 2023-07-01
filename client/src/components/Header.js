@@ -1,9 +1,11 @@
+
 import React, { useState } from "react";
 import logo from "../assets/icons/cyf.png";
 import "./Header.css";
 
 const Header = () => {
 	const [showLoginForm, setShowLoginForm] = useState(false);
+	const [selectedForm, setSelectedForm] = useState("login");
 	const [loginEmail, setLoginEmail] = useState("");
 	const [loginPassword, setLoginPassword] = useState("");
 	const [joinEmail, setJoinEmail] = useState("");
@@ -12,11 +14,16 @@ const Header = () => {
 
 	const handleLoginClick = () => {
 		setShowLoginForm(true);
+		setSelectedForm("login");
 		setLoginEmail("");
 		setLoginPassword("");
 		setJoinEmail("");
 		setJoinPassword("");
 		setJoinUsername("");
+	};
+
+	const handleFormChange = (form) => {
+		setSelectedForm(form);
 	};
 
 	const handleLoginEmailChange = (event) => {
@@ -56,6 +63,10 @@ const Header = () => {
 		setJoinUsername("");
 	};
 
+	const handleCloseModal = () => {
+		setShowLoginForm(false);
+	};
+
 	return (
 		<header>
 			<div className="header-section">
@@ -72,47 +83,63 @@ const Header = () => {
 			{showLoginForm && (
 				<div className="modal-container">
 					<div className="modal">
+						<button className="close-button" onClick={handleCloseModal}>
+							<i className="iconClose">X</i>
+						</button>
 						<div className="form-field">
-							<form className="loginForm" onSubmit={handleLoginSubmit}>
-								<h2>Login</h2>
-								<input
-									type="text"
-									placeholder="Email"
-									value={loginEmail}
-									onChange={handleLoginEmailChange}
-								/>
-								<input
-									type="password"
-									placeholder="Password"
-									value={loginPassword}
-									onChange={handleLoginPasswordChange}
-								/>
-								<button type="submit">Login</button>
-							</form>
-						</div>
-						<div className="form-field">
-							<form onSubmit={handleJoinSubmit}>
-								<h2>Join</h2>
-								<input
-									type="text"
-									placeholder="Username"
-									value={joinUsername}
-									onChange={handleJoinUsernameChange}
-								/>
-								<input
-									type="email"
-									placeholder="Email"
-									value={joinEmail}
-									onChange={handleJoinEmailChange}
-								/>
-								<input
-									type="password"
-									placeholder="Password"
-									value={joinPassword}
-									onChange={handleJoinPasswordChange}
-								/>
-								<button type="submit">Join</button>
-							</form>
+							<div className="form-options">
+								<button
+									className={selectedForm === "login" ? "active" : ""}
+									onClick={() => handleFormChange("login")}
+								>
+									Login
+								</button>
+								<button
+									className={selectedForm === "join" ? "active" : ""}
+									onClick={() => handleFormChange("join")}
+								>
+									Join
+								</button>
+							</div>
+							{selectedForm === "login" ? (
+								<form className="loginForm" onSubmit={handleLoginSubmit}>
+									<input
+										type="text"
+										placeholder="Email"
+										value={loginEmail}
+										onChange={handleLoginEmailChange}
+									/>
+									<input
+										type="password"
+										placeholder="Password"
+										value={loginPassword}
+										onChange={handleLoginPasswordChange}
+									/>
+									<button type="submit">Login</button>
+								</form>
+							) : (
+								<form onSubmit={handleJoinSubmit}>
+									<input
+										type="text"
+										placeholder="Username"
+										value={joinUsername}
+										onChange={handleJoinUsernameChange}
+									/>
+									<input
+										type="email"
+										placeholder="Email"
+										value={joinEmail}
+										onChange={handleJoinEmailChange}
+									/>
+									<input
+										type="password"
+										placeholder="Password"
+										value={joinPassword}
+										onChange={handleJoinPasswordChange}
+									/>
+									<button type="submit">Join</button>
+								</form>
+							)}
 						</div>
 					</div>
 				</div>
@@ -122,4 +149,5 @@ const Header = () => {
 };
 
 export default Header;
+
 
