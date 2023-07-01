@@ -38,8 +38,8 @@
 
   .submitbtn{
     position: absolute;
-    left: 1100px;
-    top: 41%;
+    /* left: 1100px;
+    top: 41%; */
     width: 120px;
     height: 30px;
     border-radius: 10px;
