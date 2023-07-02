@@ -4,7 +4,7 @@ import downloadIcon from "../assets/icons/download.svg";
 import likeIcon from "../assets/icons/like.svg";
 import deleteIcon from "../assets/icons/delete.svg";
 
-const ImageCard = ({ image, isLogin }) => {
+const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 	const handleBookmark = () => {
 		// Handle bookmark functionality
 	};
@@ -13,13 +13,16 @@ const ImageCard = ({ image, isLogin }) => {
 		// Handle like functionality
 	};
 
-	const handleDownload = async (imageId, imageTags, imageUrl) => {
+	const handleDownload = async (imageId, imageTags, imageKey) => {
 		try {
 			// Fetch the image data from the specified API endpoint
-			const response = await fetch(`/api/image/${imageId}/download?downloadAction=ture`, {
-				method: "GET",
-				headers: { "Content-Type": "application/json" },
-			});
+			const response = await fetch(
+				`/api/image/${imageId}/download?downloadAction=ture`,
+				{
+					method: "GET",
+					headers: { "Content-Type": "application/json" },
+				}
+			);
 
 			if (response.status === 200) {
 				// Convert the response data to a Blob object
@@ -29,16 +32,14 @@ const ImageCard = ({ image, isLogin }) => {
 				let filename;
 				if (imageTags) {
 					// Extract the first tag
-					const firstTag = imageTags.replace(/\s+/g, "-");
+					const firstTag = imageTags.split(" ")[0];
 					// Extract the file extension from the imageUrl
-					const fileExtension = imageUrl.split(".").pop();
+					const fileExtension = imageKey.split(".").pop();
 					// Construct the filename with the first tag and file extension
 					filename = `cyf-${firstTag}.${fileExtension}`;
 				} else {
-					// Extract the last part of the URL as the filename when imageTags are not available
-					const urlParts = imageUrl.split("/");
-					const lastPart = urlParts[urlParts.length - 1];
-					filename = `cyf-${lastPart}`;
+					// Construct the filename with cyf and image key
+					filename = `cyf-${imageKey}`;
 				}
 
 				// Create an object URL for the image data
@@ -81,7 +82,7 @@ const ImageCard = ({ image, isLogin }) => {
 			</button>
 
 			<button
-				onClick={() => handleDownload(image.id, image.tags, image.url)}
+				onClick={() => handleDownload(image.id, image.tags, image.key)}
 				className="download-button"
 			>
 				<img src={downloadIcon} alt="" className="icon" />
