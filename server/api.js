@@ -2,7 +2,6 @@ import { Router } from "express";
 
 import logger from "./utils/logger";
 
-import images from "./exampleData.json";
 
 import { uploadImage } from "./utils/uploadImage";
 
