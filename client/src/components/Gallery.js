@@ -1,7 +1,7 @@
 import ImageCard from "./ImageCard";
 import "./Gallery.css";
 
-const Gallery = ({ images, isLogin, message }) => {
+const Gallery = ({ images, isLogin, message, setUpdateImages }) => {
 	return (
 		<>
 			{message ? (
@@ -11,7 +11,12 @@ const Gallery = ({ images, isLogin, message }) => {
 			) : (
 				<div className="gallery-section">
 					{images.map((image) => (
-						<ImageCard key={image.id} image={image} isLogin={isLogin} />
+						<ImageCard
+							key={image.id}
+							image={image}
+							isLogin={isLogin}
+							setUpdateImages={setUpdateImages}
+						/>
 					))}
 				</div>
 			)}
