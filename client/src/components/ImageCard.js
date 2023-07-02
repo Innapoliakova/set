@@ -78,6 +78,10 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 				// If the response status is not 200, throw an error indicating that the image deletion failed
 				throw new Error("Image delete failed");
 			}
+		} catch (err) {
+			// Catch any errors that occur during the fetch request or response handling
+			console.error(err);
+		}
 	};
 
 	return (
@@ -104,6 +108,10 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 			</button>
 
 			{isLogin && (
+				<button
+					onClick={() => handleDelete(image.key)}
+					className="delete-button"
+				>
 					<img src={deleteIcon} alt="" className="icon" />
 				</button>
 			)}
