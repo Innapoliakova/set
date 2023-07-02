@@ -29,19 +29,15 @@ export function Home() {
 				setMessage(null);
 				setImages(allImages.data);
 			} catch (err) {
-				console.error(err);
+             console.error(err);
 			}
-		};
-		fetchData();
+            };
+           fetchData();
 	}, [updateImages]);
 
-	const handleFilterChange = (filter) => {
-		if (selectedFilters.includes(filter)) {
-			setSelectedFilters(selectedFilters.filter((item) => item !== filter));
-		} else {
-			setSelectedFilters([...selectedFilters, filter]);
-		}
-	};
+		const handleFilterChange = (filter) => {
+		setSelectedFilters(filter);
+		};
 
 	const handleSearch = (query) => {
 		setSearchQuery(query);
