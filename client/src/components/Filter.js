@@ -1,4 +1,5 @@
 import "./Filter.css";
+
 const Filter = ({ setSelectedFilter }) => {
     const handleFilterChange = (event) => {
         const filter = event.target.value;
@@ -31,5 +32,7 @@ const Filter = ({ setSelectedFilter }) => {
             </div>
         </div>
     );
+
+
 };
 export default Filter;
