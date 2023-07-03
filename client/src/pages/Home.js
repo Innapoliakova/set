@@ -60,7 +60,12 @@ export function Home() {
 				handleFilterChange={handleFilterChange}
 			/>
 			<Search handleSearch={handleSearch} />
-			<Gallery images={images} isLogin={isLogin} message={message} />
+			<Gallery
+				images={images}
+				isLogin={isLogin}
+				message={message}
+				setUpdateImages={setUpdateImages}
+			/>
 			<Footer />
 		</div>
 	);
