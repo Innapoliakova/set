@@ -11,33 +11,29 @@ import pool from "./db";
 const router = Router();
 
 router.get("/images", async (req, res) => {
-    try {
- const { filter } = req.query;
+	try {
+		const { filter } = req.query;
 
+		let allImages;
+		if (filter !== "null") {
+			allImages = await pool.query(
+				"SELECT * FROM images WHERE categories LIKE $1 ORDER BY id;",
+				[filter]
+			);
+		} else {
+			allImages = await pool.query("SELECT * FROM images ORDER BY id;");
+		}
 
-// Validate the filter input if necessary
- // e.g., if (filter && !isValidFilter(filter)) { ... }
+		// Send a success response with the retrieved image data
+		return res.status(200).json({ data: allImages.rows });
+	} catch (error) {
+		// Log the error details for debugging purposes
+		logger.error(error);
 
- let allImages;
-if (filter !== "null") {
-        allImages = await pool.query(
-    "SELECT * FROM images WHERE categories LIKE $1 ORDER BY id;",
-[filter]
-        );
- } else {
-        allImages = await pool.query("SELECT * FROM images ORDER BY id;");
- }
-
- // Send a success response with the retrieved image data
- return res.status(200).json({ data: allImages.rows });
-    } catch (error) {
- // Log the error details for debugging purposes
- logger.error(error);
-
- // Send an error response with an appropriate status code and message
- res.status(500).json({ error: true, message: "Internal server error" });
-    }
-  });
+		// Send an error response with an appropriate status code and message
+		res.status(500).json({ error: true, message: "Internal server error" });
+	}
+});
 
 router.get("/image/:id/download", async (req, res) => {
 	try {

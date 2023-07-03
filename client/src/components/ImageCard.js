@@ -13,50 +13,25 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 		// Handle like functionality
 	};
 
-
-	const handleDownload = async (imageId, imageTags, imageKey) => {
+	const handleDownload = async (imageId) => {
 		try {
 			// Fetch the image data from the specified API endpoint
 			const response = await fetch(
-				`/api/image/${imageId}/download?downloadAction=ture`,
+				`/api/image/${imageId}/download?downloadAction=true`,
 				{
 					method: "GET",
 					headers: { "Content-Type": "application/json" },
 				}
 			);
 
-
 			if (response.status === 200) {
-				// Convert the response data to a Blob object
-				const imageData = await response.blob();
-
-				// Define the filename based on the availability of imageTags
-				let filename;
-				if (imageTags) {
-					// Extract the first tag
-
-					const firstTag = imageTags.split(" ")[0];
-					// Extract the file extension from the imageUrl
-					const fileExtension = imageKey.split(".").pop();
-					// Construct the filename with the first tag and file extension
-					filename = `cyf-${firstTag}.${fileExtension}`;
-				} else {
-					// Construct the filename with cyf and image key
-					filename = `cyf-${imageKey}`;
-
-				}
-
-				// Create an object URL for the image data
-				const objectUrl = URL.createObjectURL(imageData);
+				// Convert the response data to a json object
+				const imageData = await response.json();
 
 				// Create an anchor element for initiating the download
 				const anchorElement = document.createElement("a");
-				anchorElement.href = objectUrl;
-				anchorElement.setAttribute("download", filename);
+				anchorElement.href = imageData.url;
 				anchorElement.click();
-
-				// Revoke the object URL after the download is complete
-				URL.revokeObjectURL(objectUrl);
 			} else {
 				throw new Error("Image download failed");
 			}
@@ -64,6 +39,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 			console.error(err);
 		}
 	};
+
 
 	const handleDelete = async (imageKey) => {
 		try {
@@ -75,7 +51,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 			if (response.status === 200) {
 				// If the response status is 200 (OK), parse the response message as JSON
 				const resMessage = await response.json();
-				console.log(resMessage);
+				console.log(resMessage.message);
 				// Update the state variable 'updateImages' to trigger a re-render and update the images
 				setUpdateImages((prevUpdateImages) => !prevUpdateImages);
 			} else {
@@ -105,9 +81,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 			</button>
 
 			<button
-
 				onClick={() => handleDownload(image.id, image.tags, image.key)}
-
 				className="download-button"
 			>
 				<img src={downloadIcon} alt="" className="icon" />

@@ -70,7 +70,7 @@ export const deleteImageFromS3 = async (key) => {
 			Key: key,
 		});
 		await s3.send(command);
-		logger.log(`Successfully deleted image with URL: ${key}`);
+		logger.log("Successfully deleted image with URL: ", key);
 	} catch (err) {
 		logger.error("Error deleting image from S3:", err);
 	}
