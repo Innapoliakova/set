@@ -72,7 +72,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 			if (response.status === 200) {
 				// If the response status is 200 (OK), parse the response message as JSON
 				const resMessage = await response.json();
-				console.log(resMessage);
+				console.log(resMessage.message);
 				// Update the state variable 'updateImages' to trigger a re-render and update the images
 				setUpdateImages((prevUpdateImages) => !prevUpdateImages);
 			} else {
