@@ -7,48 +7,52 @@ const Filter = ({ selectedFilters, handleFilterChange }) => {
 			<div className="filter-options">
 				<label
 					className={`filter-option ${
-						selectedFilters.includes("photo") ? "active" : ""
+						selectedFilters === "photo" ? "active" : ""
 					}`}
 				>
 					<input
-						type="checkbox"
-						checked={selectedFilters.includes("photo")}
+						type="radio"
+						value="photo"
+            checked={selectedFilters === "photo"}
 						onChange={() => handleFilterChange("photo")}
 					/>
 					Photos
 				</label>
 				<label
 					className={`filter-option ${
-						selectedFilters.includes("illustration") ? "active" : ""
+						selectedFilters === "illustration" ? "active" : ""
 					}`}
 				>
 					<input
-						type="checkbox"
-						checked={selectedFilters.includes("illustration")}
+						type="radio"
+						value="illustration"
+            checked={selectedFilters === "illustration"}
 						onChange={() => handleFilterChange("illustration")}
 					/>
 					Illustrations
 				</label>
 				<label
 					className={`filter-option ${
-						selectedFilters.includes("logo") ? "active" : ""
+						selectedFilters === "logo" ? "active" : ""
 					}`}
 				>
 					<input
-						type="checkbox"
-						checked={selectedFilters.includes("logo")}
+						type="radio"
+						value="logo"
+            checked={selectedFilters === "logo"}
 						onChange={() => handleFilterChange("logo")}
 					/>
 					Logos
 				</label>
 				<label
 					className={`filter-option ${
-						selectedFilters.includes("icon") ? "active" : ""
+						selectedFilters === "icon" ? "active" : ""
 					}`}
 				>
 					<input
-						type="checkbox"
-						checked={selectedFilters.includes("icon")}
+						type="radio"
+						value="icon"
+            checked={selectedFilters === "icon"}
 						onChange={() => handleFilterChange("icon")}
 					/>
 					Icons
