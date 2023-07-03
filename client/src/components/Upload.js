@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./upload.css";
 
-const Upload = () => {
+const Upload = ({ setUpdateImages }) => {
 	const [newImage, setNewImage] = useState({
 		description: "",
 		tags: "",
@@ -36,6 +36,7 @@ const Upload = () => {
 				body: formData,
 			});
 			console.log("Image uploaded successfully.");
+			setUpdateImages((updateImages) => !updateImages);
 		} catch (error) {
 			console.error("Error uploading image:", error);
 		}

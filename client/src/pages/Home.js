@@ -16,6 +16,7 @@ export function Home() {
 	const [isLogin, setIsLogin] = useState(true);
 	const [selectedFilters, setSelectedFilters] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
+	const [updateImages, setUpdateImages] = useState(true);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -24,23 +25,19 @@ export function Home() {
 				if (!res.ok) {
 					throw new Error(res.statusText);
 				}
-				const images = await res.json();
+				const allImages = await res.json();
 				setMessage(null);
-				setImages(images.data);
+				setImages(allImages.data);
 			} catch (err) {
-				console.error(err);
+             console.error(err);
 			}
-		};
-		fetchData();
-	}, []);
+            };
+           fetchData();
+	}, [updateImages]);
 
-	const handleFilterChange = (filter) => {
-		if (selectedFilters.includes(filter)) {
-			setSelectedFilters(selectedFilters.filter((item) => item !== filter));
-		} else {
-			setSelectedFilters([...selectedFilters, filter]);
-		}
-	};
+		const handleFilterChange = (filter) => {
+		setSelectedFilters(filter);
+		};
 
 	const handleSearch = (query) => {
 		setSearchQuery(query);
@@ -57,13 +54,18 @@ export function Home() {
 					discovering, uploading, and utilizing a vast array of assets.
 				</h2>
 			</div>
-			<Upload />
+			<Upload setUpdateImages={setUpdateImages} />
 			<Filter
 				selectedFilters={selectedFilters}
 				handleFilterChange={handleFilterChange}
 			/>
 			<Search handleSearch={handleSearch} />
-			<Gallery images={images} isLogin={isLogin} message={message} />
+			<Gallery
+				images={images}
+				isLogin={isLogin}
+				message={message}
+				setUpdateImages={setUpdateImages}
+			/>
 			<Footer />
 		</div>
 	);
