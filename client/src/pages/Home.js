@@ -39,6 +39,7 @@ export function Home() {
 
 
 
+
     const handleSearch = (query) => {
         setSearchQuery(query);
         // our search logic will be here or call a search API -??
@@ -64,6 +65,6 @@ export function Home() {
             <Footer />
         </div>
     );
-}
+
 
 export default Home;
