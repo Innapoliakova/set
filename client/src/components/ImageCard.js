@@ -13,7 +13,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 		// Handle like functionality
 	};
 
-	const handleDownload = async (imageId, imageTags, imageKey) => {
+	const handleDownload = async (imageId) => {
 		try {
 			// Fetch the image data from the specified API endpoint
 			const response = await fetch(
@@ -25,35 +25,13 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 			);
 
 			if (response.status === 200) {
-				// Convert the response data to a Blob object
-				const imageData = await response.blob();
-
-				// Define the filename based on the availability of imageTags
-				let filename;
-				if (imageTags) {
-					// Extract the first tag
-
-					const firstTag = imageTags.split(" ")[0];
-					// Extract the file extension from the imageUrl
-					const fileExtension = imageKey.split(".").pop();
-					// Construct the filename with the first tag and file extension
-					filename = `cyf-${firstTag}.${fileExtension}`;
-				} else {
-					// Construct the filename with cyf and image key
-					filename = `cyf-${imageKey}`;
-				}
-
-				// Create an object URL for the image data
-				const objectUrl = URL.createObjectURL(imageData);
+				// Convert the response data to a json object
+				const imageData = await response.json();
 
 				// Create an anchor element for initiating the download
 				const anchorElement = document.createElement("a");
-				anchorElement.href = objectUrl;
-				anchorElement.setAttribute("download", filename);
+				anchorElement.href = imageData.url;
 				anchorElement.click();
-
-				// Revoke the object URL after the download is complete
-				URL.revokeObjectURL(objectUrl);
 			} else {
 				throw new Error("Image download failed");
 			}
@@ -61,6 +39,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 			console.error(err);
 		}
 	};
+
 
 	const handleDelete = async (imageKey) => {
 		try {
