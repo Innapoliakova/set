@@ -11,63 +11,59 @@ import Footer from "../components/Footer";
 import Filter from "../components/Filter";
 
 export function Home() {
-	const [message, setMessage] = useState("Loading...");
-	const [images, setImages] = useState([]);
-	const [isLogin, setIsLogin] = useState(true);
-	const [selectedFilters, setSelectedFilters] = useState([]);
-	const [searchQuery, setSearchQuery] = useState("");
-	const [updateImages, setUpdateImages] = useState(true);
+    const [message, setMessage] = useState("Loading...");
+    const [images, setImages] = useState([]);
+    const [isLogin, setIsLogin] = useState(true);
+    const [selectedFilter, setSelectedFilter] = useState(null);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [updateImages, setUpdateImages] = useState(true);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const res = await fetch("/api/images");
-				if (!res.ok) {
-					throw new Error(res.statusText);
-				}
-				const allImages = await res.json();
-				setMessage(null);
-				setImages(allImages.data);
-			} catch (err) {
-				console.error(err);
-			}
-		};
-		fetchData();
-	}, [updateImages]);
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log(selectedFilter);
+            try {
+                const res = await fetch(`/api/images?filter=${selectedFilter}`);
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                const allImages = await res.json();
+                setMessage(null);
+                setImages(allImages.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchData();
+    }, [updateImages, selectedFilter]);
 
-	const handleFilterChange = (filter) => {
-		if (selectedFilters.includes(filter)) {
-			setSelectedFilters(selectedFilters.filter((item) => item !== filter));
-		} else {
-			setSelectedFilters([...selectedFilters, filter]);
-		}
-	};
 
-	const handleSearch = (query) => {
-		setSearchQuery(query);
-		// our search logic will be here or call a search API -??
-		console.log("/////", query);
-	};
 
-	return (
-		<div className="App">
-			<Header />
-			<div>
-				<h2>
-					Unlock your creative potential with our user-friendly app, seamlessly
-					discovering, uploading, and utilizing a vast array of assets.
-				</h2>
-			</div>
-			<Upload setUpdateImages={setUpdateImages} />
-			<Filter
-				selectedFilters={selectedFilters}
-				handleFilterChange={handleFilterChange}
-			/>
-			<Search handleSearch={handleSearch} />
-			<Gallery images={images} isLogin={isLogin} message={message} />
-			<Footer />
-		</div>
-	);
+
+    const handleSearch = (query) => {
+        setSearchQuery(query);
+        // our search logic will be here or call a search API -??
+        console.log("/////", query);
+    };
+
+    return (
+        <div className="App">
+            <Header />
+            <div>
+                <h2>
+                    Unlock your creative potential with our user-friendly app, seamlessly
+                    discovering, uploading, and utilizing a vast array of assets.
+                </h2>
+            </div>
+            <Upload setUpdateImages={setUpdateImages} />
+            <Filter
+                setSelectedFilter={setSelectedFilter}
+
+            />
+            <Search handleSearch={handleSearch} />
+            <Gallery images={images} isLogin={isLogin} message={message} />
+            <Footer />
+        </div>
+    );
 }
 
 export default Home;

@@ -1,61 +1,35 @@
 import "./Filter.css";
-
-const Filter = ({ selectedFilters, handleFilterChange }) => {
-	return (
-		<div className="filter-section">
-			<h3>Filter by:</h3>
-			<div className="filter-options">
-				<label
-					className={`filter-option ${
-						selectedFilters.includes("photo") ? "active" : ""
-					}`}
-				>
-					<input
-						type="checkbox"
-						checked={selectedFilters.includes("photo")}
-						onChange={() => handleFilterChange("photo")}
-					/>
-					Photos
-				</label>
-				<label
-					className={`filter-option ${
-						selectedFilters.includes("illustration") ? "active" : ""
-					}`}
-				>
-					<input
-						type="checkbox"
-						checked={selectedFilters.includes("illustration")}
-						onChange={() => handleFilterChange("illustration")}
-					/>
-					Illustrations
-				</label>
-				<label
-					className={`filter-option ${
-						selectedFilters.includes("logo") ? "active" : ""
-					}`}
-				>
-					<input
-						type="checkbox"
-						checked={selectedFilters.includes("logo")}
-						onChange={() => handleFilterChange("logo")}
-					/>
-					Logos
-				</label>
-				<label
-					className={`filter-option ${
-						selectedFilters.includes("icon") ? "active" : ""
-					}`}
-				>
-					<input
-						type="checkbox"
-						checked={selectedFilters.includes("icon")}
-						onChange={() => handleFilterChange("icon")}
-					/>
-					Icons
-				</label>
-			</div>
-		</div>
-	);
+const Filter = ({ setSelectedFilter }) => {
+    const handleFilterChange = (event) => {
+        const filter = event.target.value;
+        setSelectedFilter(filter);
+    };
+    return (
+        <div className="filter-section" onChange={handleFilterChange}>
+            <h3>Filter by:</h3>
+            <div className="filter-options">
+                <label className="filter-option">
+                    <input type="radio" name="filter" value="null" defaultChecked />
+                    All Images
+                </label>
+                <label className="filter-option ">
+                    <input type="radio" name="filter" value="photos" />
+                    Photos
+                </label>
+                <label className="filter-option">
+                    <input type="radio" name="filter" value="illustrations" />
+                    Illustrations
+                </label>
+                <label className="filter-option">
+                    <input type="radio" name="filter" value="logos" />
+                    Logos
+                </label>
+                <label className="filter-option">
+                    <input type="radio" name="filter" value="icons" />
+                    Icons
+                </label>
+            </div>
+        </div>
+    );
 };
-
 export default Filter;
