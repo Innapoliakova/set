@@ -13,6 +13,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 		// Handle like functionality
 	};
 
+
 	const handleDownload = async (imageId, imageTags, imageKey) => {
 		try {
 			// Fetch the image data from the specified API endpoint
@@ -24,6 +25,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 				}
 			);
 
+
 			if (response.status === 200) {
 				// Convert the response data to a Blob object
 				const imageData = await response.blob();
@@ -32,6 +34,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 				let filename;
 				if (imageTags) {
 					// Extract the first tag
+
 					const firstTag = imageTags.split(" ")[0];
 					// Extract the file extension from the imageUrl
 					const fileExtension = imageKey.split(".").pop();
@@ -40,6 +43,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 				} else {
 					// Construct the filename with cyf and image key
 					filename = `cyf-${imageKey}`;
+
 				}
 
 				// Create an object URL for the image data
@@ -101,7 +105,9 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 			</button>
 
 			<button
+
 				onClick={() => handleDownload(image.id, image.tags, image.key)}
+
 				className="download-button"
 			>
 				<img src={downloadIcon} alt="" className="icon" />
