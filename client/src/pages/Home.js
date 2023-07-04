@@ -15,7 +15,7 @@ export function Home() {
 	const [images, setImages] = useState([]);
 	const [isLogin, setIsLogin] = useState(true);
 	const [selectedFilters, setSelectedFilters] = useState([]);
-	const [searchQuery, setSearchQuery] = useState("");
+	
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -32,7 +32,7 @@ export function Home() {
 			}
 		};
 		fetchData();
-	}, []);
+	}, [images]);
 
 	const handleFilterChange = (filter) => {
 		if (selectedFilters.includes(filter)) {
@@ -42,11 +42,7 @@ export function Home() {
 		}
 	};
 
-	const handleSearch = (query) => {
-		setSearchQuery(query);
-		// our search logic will be here or call a search API -??
-		console.log("/////", query);
-	};
+
 
 	return (
 		<div className="App">
@@ -62,7 +58,7 @@ export function Home() {
 				selectedFilters={selectedFilters}
 				handleFilterChange={handleFilterChange}
 			/>
-			<Search handleSearch={handleSearch} />
+			  <Search  />
 			<Gallery images={images} isLogin={isLogin} message={message} />
 			<Footer />
 		</div>

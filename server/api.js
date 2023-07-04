@@ -78,4 +78,27 @@ router.post(
 	}
 );
 
+
+
+
+
+router.get("/search", async (req, res) => {
+	try {
+ const searchQuery = req.query.searchQuery; // Get the search query from the request query parameters
+console.log(searchQuery)
+	  // Perform the filter logic based on the search query
+ let filteredImages = await pool.query(
+   `SELECT * FROM images WHERE lower(description) LIKE $1 OR lower(tags) LIKE $1 ORDER BY rating DESC;`,
+  [`%${searchQuery.toLowerCase()}%`]
+  );
+   res.json(filteredImages.rows); // Return the filtered images as JSON
+} catch (err) {
+console.error(err);
+	res.status(500).json({ error: "An error occurred while searching for images." });
+   }
+  });
+
+
+
+
 export default router;

@@ -3,17 +3,36 @@ import "./Search.css";
 
 import React, { useState } from "react";
 
-const Search = ({ handleSearch }) => {
+
+const Search = ( ) => {
 	const [searchQuery, setSearchQuery] = useState("");
 
 	const handleChange = (event) => {
 		setSearchQuery(event.target.value);
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		handleSearch(searchQuery);
-	};
+		
+		try {
+			const response = await fetch(
+			  `api/search?searchQuery=${searchQuery}`,
+			  {
+				method: "GET",
+				headers: { "Content-Type": "application/json" },
+			  }
+			);
+			if (response.status === 200) {
+			  const data = await response.json();
+			  setImages(data);
+			}
+		  } catch (err) {
+			console.error(err);
+		  }
+		};
+	
+
+
 
 	return (
 		<div className="search-section">
