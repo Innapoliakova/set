@@ -44,6 +44,7 @@ const Upload = ({ setUpdateImages }) => {
 	};
 
 	return (
+		
 		<form className="upload-section" onSubmit={handleImageUploadSubmit}>
 			<div className="file-input-container">
 				<input
@@ -90,8 +91,11 @@ const Upload = ({ setUpdateImages }) => {
 					</select>
 				</div>
 			</div>
+
 			<button className="submitbtn"> submit </button>
+
 		</form>
+		
 	);
 };
 

@@ -12,16 +12,23 @@ const router = Router();
 
 router.get("/images", async (req, res) => {
 	try {
-		const { filter } = req.query;
+
+		const { filter, searchQuery } = req.query;
+
 
 		let allImages;
 		if (filter !== "null") {
 			allImages = await pool.query(
-				"SELECT * FROM images WHERE categories LIKE $1 ORDER BY id;",
-				[filter]
+
+				"SELECT * FROM images WHERE categories LIKE $1 AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date;",
+				[filter, `%${searchQuery.toLowerCase()}%`]
 			);
 		} else {
-			allImages = await pool.query("SELECT * FROM images ORDER BY id;");
+			allImages = await pool.query(
+				"SELECT * FROM images WHERE (lower(description) LIKE $1 OR lower(tags) LIKE $1) ORDER BY upload_date;",
+				[`%${searchQuery.toLowerCase()}%`]
+			);
+
 		}
 
 		// Send a success response with the retrieved image data
@@ -111,22 +118,6 @@ router.post(
 	}
 );
 
-router.delete("/:imageKey", async (req, res) => {
-	try {
-		// Get the location of the image to be deleted from the database or request body
-		const { imageKey } = req.params;
 
-		// Call the deleteImageFromS3 function to delete the image
-		await deleteImageFromS3(imageKey);
-
-		// Delete the image from your database or perform any other logic
-		await pool.query("DELETE FROM images WHERE key = $1;", [imageKey]);
-
-		res.status(200).json({ message: "Image deleted successfully" });
-	} catch (error) {
-		logger.error("Error deleting image:", error);
-		res.status(500).json({ error: "Failed to delete image" });
-	}
-});
 
 export default router;

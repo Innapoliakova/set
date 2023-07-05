@@ -14,12 +14,14 @@ export function Home() {
 	const [isLogin, setIsLogin] = useState(true);
 	const [selectedFilter, setSelectedFilter] = useState(null);
 	const [searchQuery, setSearchQuery] = useState("");
-	const [updateImages, setUpdateImages] = useState(true);
-
-	useEffect(() => {
+useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const res = await fetch(`/api/images?filter=${selectedFilter}`);
+
+				const res = await fetch(
+					`/api/images?filter=${selectedFilter}&searchQuery=${searchQuery}`
+				);
+
 				if (!res.ok) {
 					throw new Error(res.statusText);
 				}
@@ -31,13 +33,20 @@ export function Home() {
 			}
 		};
 		fetchData();
-	}, [updateImages, selectedFilter]);
 
-	const handleSearch = (query) => {
-		setSearchQuery(query);
-		// our search logic will be here or call a search API -??
-		console.log("/////", query);
+	}, [updateImages, selectedFilter, searchQuery]);
+	
+
+	const handleFilterChange = (filter) => {
+		if (selectedFilters.includes(filter)) {
+			setSelectedFilters(selectedFilters.filter((item) => item !== filter));
+		} else {
+			setSelectedFilters([...selectedFilters, filter]);
+		}
 	};
+
+
+
 
 	return (
 		<div className="App">
@@ -48,15 +57,16 @@ export function Home() {
 					discovering, uploading, and utilizing a vast array of assets.
 				</h2>
 			</div>
-			<Upload setUpdateImages={setUpdateImages} />
-			<Filter setSelectedFilter={setSelectedFilter} />
-			<Search handleSearch={handleSearch} />
-			<Gallery
-				images={images}
-				isLogin={isLogin}
-				message={message}
-				setUpdateImages={setUpdateImages}
+
+			<Upload />
+			<Filter
+				selectedFilters={selectedFilters}
+				handleFilterChange={handleFilterChange}
 			/>
+			
+					<Search setSearchQuery={setSearchQuery} />
+			<Gallery images={images} isLogin={isLogin} message={message} />
+
 			<Footer />
 		</div>
 	);
