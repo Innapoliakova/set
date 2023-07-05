@@ -1,5 +1,6 @@
 import ImageCard from "./ImageCard";
 import "./Gallery.css";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 const Gallery = ({ images, isLogin, message, setUpdateImages }) => {
 	return (
@@ -10,14 +11,20 @@ const Gallery = ({ images, isLogin, message, setUpdateImages }) => {
 				</h1>
 			) : (
 				<div className="gallery-section">
-					{images.map((image) => (
-						<ImageCard
-							key={image.id}
-							image={image}
-							isLogin={isLogin}
-							setUpdateImages={setUpdateImages}
-						/>
-					))}
+					<ResponsiveMasonry
+						columnsCountBreakPoints={{ 350: 1, 400: 2, 750: 3, 900: 4 }}
+					>
+						<Masonry gutter="1.5rem">
+							{images.map((image) => (
+								<ImageCard
+									key={image.id}
+									image={image}
+									isLogin={isLogin}
+									setUpdateImages={setUpdateImages}
+								/>
+							))}
+						</Masonry>
+					</ResponsiveMasonry>
 				</div>
 			)}
 		</>
