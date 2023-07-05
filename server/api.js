@@ -12,14 +12,11 @@ const router = Router();
 
 router.get("/images", async (req, res) => {
 	try {
-
 		const { filter, searchQuery } = req.query;
-
 
 		let allImages;
 		if (filter !== "null") {
 			allImages = await pool.query(
-
 				"SELECT * FROM images WHERE categories LIKE $1 AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date;",
 				[filter, `%${searchQuery.toLowerCase()}%`]
 			);
@@ -28,7 +25,6 @@ router.get("/images", async (req, res) => {
 				"SELECT * FROM images WHERE (lower(description) LIKE $1 OR lower(tags) LIKE $1) ORDER BY upload_date;",
 				[`%${searchQuery.toLowerCase()}%`]
 			);
-
 		}
 
 		// Send a success response with the retrieved image data
@@ -97,8 +93,9 @@ router.post(
 			}
 
 			// location key in req.file holds the s3 url for the image
-			const url = req.file.location;
-			const key = req.file.key;
+			const { location, key } = req.file;
+
+			const imageKey = key || location.split("/")[0];
 
 			const { description, tags, categories } = req.body; // Extract description, tags, and categories from the request body
 
@@ -106,7 +103,7 @@ router.post(
 
 			await pool.query(
 				"INSERT INTO images(id,description, tags, categories, url, key) VALUES($1, $2, $3, $4, $5, $6)",
-				[id, description, tags, categories, url, key]
+				[id, description, tags, categories, location, imageKey]
 			); // Use parameterized query values to add the image details to images table
 			res.status(200).json("Image were added successfully");
 		} catch (error) {
@@ -118,6 +115,22 @@ router.post(
 	}
 );
 
+router.delete("/:imageKey", async (req, res) => {
+	try {
+		// Get the location of the image to be deleted from the database or request body
+		const { imageKey } = req.params;
 
+		// Call the deleteImageFromS3 function to delete the image
+		await deleteImageFromS3(imageKey);
+
+		// Delete the image from your database or perform any other logic
+		await pool.query("DELETE FROM images WHERE key = $1;", [imageKey]);
+
+		res.status(200).json({ message: "Image deleted successfully" });
+	} catch (error) {
+		logger.error("Error deleting image:", error);
+		res.status(500).json({ error: "Failed to delete image" });
+	}
+});
 
 export default router;

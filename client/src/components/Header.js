@@ -1,7 +1,8 @@
-
 import React, { useState } from "react";
 import logo from "../assets/icons/cyf.png";
 import "./Header.css";
+
+import { Link } from "react-router-dom";
 
 const Header = () => {
 	const [showLoginForm, setShowLoginForm] = useState(false);
@@ -69,13 +70,6 @@ const Header = () => {
 
 	return (
 		<header>
-		 <div className="background--co1Y8">
-      <img
-        src="https://airtame.com/wp-content/uploads/2019/06/Code-your-future-02-2400x1098.png"
-        className="imageBanner"
-        alt=""
-      />
-	  </div>
 			<div className="header-section">
 				<div className="image">
 					<img src={logo} alt="Logo" className="logo" />
@@ -83,6 +77,11 @@ const Header = () => {
 				<div className="title">
 					<h1 className="title">CYF's picture gallery</h1>
 				</div>
+
+				<Link to="/upload">
+					<button>Upload</button>
+				</Link>
+
 				<div className="login-button">
 					<button onClick={handleLoginClick}>Login</button>
 				</div>
@@ -156,5 +155,3 @@ const Header = () => {
 };
 
 export default Header;
-
-

@@ -1,3 +1,8 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
 .logo {
 	width: 100px;
 }
@@ -8,8 +13,7 @@
 
 .message:hover {
 	background-color: yellow;
-} */
-
-h2 {
+}
+*/ h2 {
 	text-align: center;
 }
