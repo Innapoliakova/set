@@ -12,10 +12,22 @@ import pool from "./db";
 
 const router = Router();
 
-router.get("/images", async (_, res) => {
+router.get("/images", async (req, res) => {
 	try {
-		// Retrieve all images from the database table
-		const allImages = await pool.query("SELECT * FROM images ORDER BY id;");
+		const { filter, searchQuery } = req.query;
+
+		let allImages;
+		if (filter !== "null") {
+			allImages = await pool.query(
+				"SELECT * FROM images WHERE categories LIKE $1 AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date;",
+				[filter, `%${searchQuery.toLowerCase()}%`]
+			);
+		} else {
+			allImages = await pool.query(
+				"SELECT * FROM images WHERE (lower(description) LIKE $1 OR lower(tags) LIKE $1) ORDER BY upload_date;",
+				[`%${searchQuery.toLowerCase()}%`]
+			);
+		}
 
 		// Send a success response with the retrieved image data
 		return res.status(200).json({ data: allImages.rows });
@@ -101,27 +113,6 @@ router.post(
 		}
 	}
 );
-
-
-
-
-
-router.get("/search", async (req, res) => {
-	try {
- const searchQuery = req.query.searchQuery; // Get the search query from the request query parameters
-console.log(searchQuery)
-	  // Perform the filter logic based on the search query
- let filteredImages = await pool.query(
-   `SELECT * FROM images WHERE lower(description) LIKE $1 OR lower(tags) LIKE $1 ORDER BY rating DESC;`,
-  [`%${searchQuery.toLowerCase()}%`]
-  );
-   res.json(filteredImages.rows); // Return the filtered images as JSON
-} catch (err) {
-console.error(err);
-	res.status(500).json({ error: "An error occurred while searching for images." });
-   }
-  });
-
 
 
 
