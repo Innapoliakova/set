@@ -1,38 +1,18 @@
 import SearchIcon from "../assets/icons/search.png";
 import "./Search.css";
+import { useState } from "react";
 
-import React, { useState } from "react";
-
-
-const Search = ( ) => {
-	const [searchQuery, setSearchQuery] = useState("");
+const Search = ({ setSearchQuery }) => {
+	const [searchInput, setSearchInput] = useState("");
 
 	const handleChange = (event) => {
-		setSearchQuery(event.target.value);
+		setSearchInput(event.target.value.trim());
 	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		
-		try {
-			const response = await fetch(
-			  `api/search?searchQuery=${searchQuery}`,
-			  {
-				method: "GET",
-				headers: { "Content-Type": "application/json" },
-			  }
-			);
-			if (response.status === 200) {
-			  const data = await response.json();
-			  setImages(data);
-			}
-		  } catch (err) {
-			console.error(err);
-		  }
-		};
-	
-
-
+		setSearchQuery(searchInput);
+	};
 
 	return (
 		<div className="search-section">
@@ -42,7 +22,6 @@ const Search = ( ) => {
 						type="text"
 						className="search-input-field"
 						placeholder="Search"
-						value={searchQuery}
 						onChange={handleChange}
 					/>
 					<img
