@@ -72,8 +72,8 @@ const Header = () => {
 		 <div className="background--co1Y8">
       <img
         src="https://airtame.com/wp-content/uploads/2019/06/Code-your-future-02-2400x1098.png"
-        className="imageBanner---h3G2"
-        alt="Free mixed hero backgrounds"
+        className="imageBanner"
+        alt=""
       />
 	  </div>
 			<div className="header-section">
