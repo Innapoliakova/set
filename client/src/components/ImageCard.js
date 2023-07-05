@@ -4,7 +4,7 @@ import downloadIcon from "../assets/icons/download.svg";
 import likeIcon from "../assets/icons/like.svg";
 import deleteIcon from "../assets/icons/delete.svg";
 
-const ImageCard = ({ image, isLogin }) => {
+const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 	const handleBookmark = () => {
 		// Handle bookmark functionality
 	};
@@ -13,45 +13,25 @@ const ImageCard = ({ image, isLogin }) => {
 		// Handle like functionality
 	};
 
-	const handleDownload = async (imageId, imageTags, imageUrl) => {
+	const handleDownload = async (imageId) => {
 		try {
 			// Fetch the image data from the specified API endpoint
-			const response = await fetch(`/api/image/${imageId}/download?downloadAction=ture`, {
-				method: "GET",
-				headers: { "Content-Type": "application/json" },
-			});
+			const response = await fetch(
+				`/api/image/${imageId}/download?downloadAction=true`,
+				{
+					method: "GET",
+					headers: { "Content-Type": "application/json" },
+				}
+			);
 
 			if (response.status === 200) {
-				// Convert the response data to a Blob object
-				const imageData = await response.blob();
-
-				// Define the filename based on the availability of imageTags
-				let filename;
-				if (imageTags) {
-					// Extract the first tag
-					const firstTag = imageTags.replace(/\s+/g, "-");
-					// Extract the file extension from the imageUrl
-					const fileExtension = imageUrl.split(".").pop();
-					// Construct the filename with the first tag and file extension
-					filename = `cyf-${firstTag}.${fileExtension}`;
-				} else {
-					// Extract the last part of the URL as the filename when imageTags are not available
-					const urlParts = imageUrl.split("/");
-					const lastPart = urlParts[urlParts.length - 1];
-					filename = `cyf-${lastPart}`;
-				}
-
-				// Create an object URL for the image data
-				const objectUrl = URL.createObjectURL(imageData);
+				// Convert the response data to a json object
+				const imageData = await response.json();
 
 				// Create an anchor element for initiating the download
 				const anchorElement = document.createElement("a");
-				anchorElement.href = objectUrl;
-				anchorElement.setAttribute("download", filename);
+				anchorElement.href = imageData.url;
 				anchorElement.click();
-
-				// Revoke the object URL after the download is complete
-				URL.revokeObjectURL(objectUrl);
 			} else {
 				throw new Error("Image download failed");
 			}
@@ -60,8 +40,28 @@ const ImageCard = ({ image, isLogin }) => {
 		}
 	};
 
-	const handleDelete = () => {
-		// Handle delete functionality
+
+	const handleDelete = async (imageKey) => {
+		try {
+			// Send a DELETE request to the specified endpoint (/api/{imageKey}) to delete the image
+			const response = await fetch(`/api/${imageKey}`, {
+				method: "DELETE",
+			});
+
+			if (response.status === 200) {
+				// If the response status is 200 (OK), parse the response message as JSON
+				const resMessage = await response.json();
+				console.log(resMessage.message);
+				// Update the state variable 'updateImages' to trigger a re-render and update the images
+				setUpdateImages((prevUpdateImages) => !prevUpdateImages);
+			} else {
+				// If the response status is not 200, throw an error indicating that the image deletion failed
+				throw new Error("Image delete failed");
+			}
+		} catch (err) {
+			// Catch any errors that occur during the fetch request or response handling
+			console.error(err);
+		}
 	};
 
 	return (
@@ -81,14 +81,17 @@ const ImageCard = ({ image, isLogin }) => {
 			</button>
 
 			<button
-				onClick={() => handleDownload(image.id, image.tags, image.url)}
+				onClick={() => handleDownload(image.id, image.tags, image.key)}
 				className="download-button"
 			>
 				<img src={downloadIcon} alt="" className="icon" />
 			</button>
 
 			{isLogin && (
-				<button onClick={handleDelete} className="delete-button">
+				<button
+					onClick={() => handleDelete(image.key)}
+					className="delete-button"
+				>
 					<img src={deleteIcon} alt="" className="icon" />
 				</button>
 			)}

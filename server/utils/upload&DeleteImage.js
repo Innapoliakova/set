@@ -1,7 +1,8 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
-import { S3Client } from "@aws-sdk/client-s3";
+import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import path from "node:path";
+import logger from "./logger";
 
 // create s3 instance using S3Client
 // (this is how we create s3 instance in v3)
@@ -44,7 +45,9 @@ function sanitizeFile(file, cb) {
 		return cb(null, true); // no errors
 	} else {
 		// pass error msg to callback, which can be displayed in frontend
-		cb("Error: Invalid file format! Please upload a file with a valid extension. Only .png, .jpg, .jpeg, .gif, .svg formats are accepted.");
+		cb(
+			"Error: Invalid file format! Please upload a file with a valid extension. Only .png, .jpg, .jpeg, .gif, .svg formats are accepted."
+		);
 	}
 }
 
@@ -58,3 +61,17 @@ export const uploadImage = multer({
 		fileSize: 1024 * 1024 * 2, // 2mb file size
 	},
 });
+
+// Delete functionality
+export const deleteImageFromS3 = async (key) => {
+	try {
+		const command = new DeleteObjectCommand({
+			Bucket: "cyf-images-fp",
+			Key: key,
+		});
+		await s3.send(command);
+		logger.log("Successfully deleted image with URL: ", key);
+	} catch (err) {
+		logger.error("Error deleting image from S3:", err);
+	}
+};

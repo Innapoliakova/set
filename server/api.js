@@ -2,9 +2,7 @@ import { Router } from "express";
 
 import logger from "./utils/logger";
 
-import images from "./exampleData.json";
-
-import { uploadImage } from "./utils/uploadImage";
+import { uploadImage, deleteImageFromS3 } from "./utils/upload&DeleteImage";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -14,11 +12,14 @@ const router = Router();
 
 router.get("/images", async (req, res) => {
 	try {
+
 		const { filter, searchQuery } = req.query;
+
 
 		let allImages;
 		if (filter !== "null") {
 			allImages = await pool.query(
+
 				"SELECT * FROM images WHERE categories LIKE $1 AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date;",
 				[filter, `%${searchQuery.toLowerCase()}%`]
 			);
@@ -27,6 +28,7 @@ router.get("/images", async (req, res) => {
 				"SELECT * FROM images WHERE (lower(description) LIKE $1 OR lower(tags) LIKE $1) ORDER BY upload_date;",
 				[`%${searchQuery.toLowerCase()}%`]
 			);
+
 		}
 
 		// Send a success response with the retrieved image data
@@ -46,9 +48,10 @@ router.get("/image/:id/download", async (req, res) => {
 		const { downloadAction } = req.query;
 		// Increment the No of downloads for the image in the database when downloaded
 		if (downloadAction) {
-		await pool.query("UPDATE images SET no_download=(no_download + 1) WHERE id = $1;", [
-		id,
-		]);
+			await pool.query(
+				"UPDATE images SET no_download=(no_download + 1) WHERE id = $1;",
+				[id]
+			);
 		}
 
 		// Retrieve image from the database using the provided id
@@ -95,14 +98,15 @@ router.post(
 
 			// location key in req.file holds the s3 url for the image
 			const url = req.file.location;
+			const key = req.file.key;
 
 			const { description, tags, categories } = req.body; // Extract description, tags, and categories from the request body
 
 			const id = uuidv4(); // Generate a unique ID for the image
 
 			await pool.query(
-				"INSERT INTO images(id,description, tags, categories, url) VALUES($1, $2, $3, $4, $5)",
-				[id, description, tags, categories, url]
+				"INSERT INTO images(id,description, tags, categories, url, key) VALUES($1, $2, $3, $4, $5, $6)",
+				[id, description, tags, categories, url, key]
 			); // Use parameterized query values to add the image details to images table
 			res.status(200).json("Image were added successfully");
 		} catch (error) {

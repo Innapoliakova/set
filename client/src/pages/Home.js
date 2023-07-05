@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
 
 import "./Home.css";
-// import logo from "./logo.svg";
 import Header from "../components/Header";
 import Upload from "../components/Upload";
 import Search from "../components/Search";
@@ -14,14 +12,16 @@ export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [images, setImages] = useState([]);
 	const [isLogin, setIsLogin] = useState(true);
-	const [selectedFilters, setSelectedFilters] = useState([]);
+	const [selectedFilter, setSelectedFilter] = useState(null);
 	const [searchQuery, setSearchQuery] = useState("");
 useEffect(() => {
 		const fetchData = async () => {
 			try {
+
 				const res = await fetch(
 					`/api/images?filter=${selectedFilter}&searchQuery=${searchQuery}`
 				);
+
 				if (!res.ok) {
 					throw new Error(res.statusText);
 				}
@@ -33,6 +33,7 @@ useEffect(() => {
 			}
 		};
 		fetchData();
+
 	}, [updateImages, selectedFilter, searchQuery]);
 	
 
@@ -46,6 +47,7 @@ useEffect(() => {
 
 
 
+
 	return (
 		<div className="App">
 			<Header />
@@ -55,6 +57,7 @@ useEffect(() => {
 					discovering, uploading, and utilizing a vast array of assets.
 				</h2>
 			</div>
+
 			<Upload />
 			<Filter
 				selectedFilters={selectedFilters}
@@ -63,6 +66,7 @@ useEffect(() => {
 			
 					<Search setSearchQuery={setSearchQuery} />
 			<Gallery images={images} isLogin={isLogin} message={message} />
+
 			<Footer />
 		</div>
 	);
