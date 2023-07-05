@@ -26,15 +26,15 @@ const Search = ({ handleSearch }) => {
 						value={searchQuery}
 						onChange={handleChange}
 					/>
-					<img
+					{/* <img
 						className="icon-for-search"
 						src={SearchIcon}
 						alt="icon for searching"
-					/>
+					/> */}
 				</div>
-				<button type="submit" className="search-button">
+				{/* <button type="submit" className="search-button">
 					Search
-				</button>
+				</button> */}
 			</form>
 		</div>
 	);
