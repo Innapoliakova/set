@@ -7,26 +7,34 @@ const Filter = ({ setSelectedFilter }) => {
 	};
 	return (
 		<div className="filter-section" onChange={handleFilterChange}>
-			<h3>Filter by:</h3>
 			<div className="filter-options">
-				<label className="filter-option">
-					<input type="radio" name="filter" value="null" defaultChecked />
+				<input
+					type="radio"
+					name="filter"
+					id="filter1"
+					value="null"
+					defaultChecked
+				/>
+				<label htmlFor="filter1" className="filter-option">
 					All Images
 				</label>
-				<label className="filter-option ">
-					<input type="radio" name="filter" value="photos" />
+
+				<input type="radio" name="filter" id="filter2" value="photos" />
+				<label htmlFor="filter2" className="filter-option ">
 					Photos
 				</label>
-				<label className="filter-option">
-					<input type="radio" name="filter" value="illustrations" />
+
+				<input type="radio" name="filter" id="filter3" value="illustrations" />
+				<label htmlFor="filter3" className="filter-option">
 					Illustrations
 				</label>
-				<label className="filter-option">
-					<input type="radio" name="filter" value="logos" />
+				<input type="radio" name="filter" id="filter4" value="logos" />
+				<label htmlFor="filter4" className="filter-option">
 					Logos
 				</label>
-				<label className="filter-option">
-					<input type="radio" name="filter" value="icons" />
+				<input type="radio" name="filter" id="filter5" value="icons" />
+
+				<label htmlFor="filter5" className="filter-option">
 					Icons
 				</label>
 			</div>
