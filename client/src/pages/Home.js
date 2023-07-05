@@ -15,24 +15,26 @@ export function Home() {
 	const [images, setImages] = useState([]);
 	const [isLogin, setIsLogin] = useState(true);
 	const [selectedFilters, setSelectedFilters] = useState([]);
-	
-
-	useEffect(() => {
+	const [searchQuery, setSearchQuery] = useState("");
+useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const res = await fetch("/api/images");
+				const res = await fetch(
+					`/api/images?filter=${selectedFilter}&searchQuery=${searchQuery}`
+				);
 				if (!res.ok) {
 					throw new Error(res.statusText);
 				}
-				const images = await res.json();
+				const allImages = await res.json();
 				setMessage(null);
-				setImages(images.data);
+				setImages(allImages.data);
 			} catch (err) {
 				console.error(err);
 			}
 		};
 		fetchData();
-	}, [images]);
+	}, [updateImages, selectedFilter, searchQuery]);
+	
 
 	const handleFilterChange = (filter) => {
 		if (selectedFilters.includes(filter)) {
@@ -58,7 +60,8 @@ export function Home() {
 				selectedFilters={selectedFilters}
 				handleFilterChange={handleFilterChange}
 			/>
-			  <Search  />
+			
+					<Search setSearchQuery={setSearchQuery} />
 			<Gallery images={images} isLogin={isLogin} message={message} />
 			<Footer />
 		</div>
