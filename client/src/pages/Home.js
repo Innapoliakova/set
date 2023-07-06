@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 
 import "./Home.css";
 import Header from "../components/Header";
-import Search from "../components/Search";
+import Hero from "../components/Hero";
+// import Search from "../components/Search";
 import Gallery from "../components/Gallery";
 import Footer from "../components/Footer";
 import Filter from "../components/Filter";
@@ -37,13 +38,8 @@ export function Home() {
 	return (
 		<div className="App">
 			<Header />
-			<div>
-				<h2>
-					Unlock your creative potential with our user-friendly app, seamlessly
-					discovering, uploading, and utilizing a vast array of assets.
-				</h2>
-			</div>
-			<Search setSearchQuery={setSearchQuery} />
+			<Hero></Hero>
+			{/* <Search setSearchQuery={setSearchQuery} /> */}
 			<Filter setSelectedFilter={setSelectedFilter} />
 			<Gallery
 				images={images}

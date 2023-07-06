@@ -74,9 +74,9 @@ const Header = () => {
 				<div className="image">
 					<img src={logo} alt="Logo" className="logo" />
 				</div>
-				<div className="title">
+				{/* <div className="title">
 					<h1 className="title">CYF's picture gallery</h1>
-				</div>
+				</div> */}
 
 				<Link to="/upload">
 					<button>Upload</button>

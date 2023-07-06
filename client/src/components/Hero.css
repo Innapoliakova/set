@@ -1,0 +1,22 @@
+.hero {
+  background-image: url("https://airtame.com/wp-content/uploads/2019/06/Code-your-future-02-2400x1098.png");
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:flex-start;
+}
+
+.hero h1 {
+  font-size: 46px;
+  font-weight:bolder;
+  color: black;
+}
+
+.hero h2 {
+  font-size: 26px;
+  color: black;
+  margin-bottom: 160px;
+}
