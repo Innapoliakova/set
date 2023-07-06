@@ -32,6 +32,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 				const anchorElement = document.createElement("a");
 				anchorElement.href = imageData.url;
 				anchorElement.click();
+				setUpdateImages((prevUpdateImages) => !prevUpdateImages);
 			} else {
 				throw new Error("Image download failed");
 			}
@@ -40,8 +41,13 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 		}
 	};
 
-
 	const handleDelete = async (imageKey) => {
+		// Check if imageKey is null or empty
+		if (!imageKey) {
+			// Handle the case when imageKey is null or empty
+			console.error("Invalid image key");
+			return;
+		}
 		try {
 			// Send a DELETE request to the specified endpoint (/api/{imageKey}) to delete the image
 			const response = await fetch(`/api/${imageKey}`, {
@@ -71,7 +77,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 				<div className="description">{image.description}</div>
 				<div className="rating">Likes: {image.rating}</div>
 				<div className="tags">Tags: {image.tags}</div>
-				<div className="Date">Date: {image.upload_date}</div>
+				<div className="Date">Date: {image.upload_date.split("T")[0]}</div>
 				<div className="No.download">Downloads times: {image.no_download}</div>
 				<div className="categories">Categories: {image.categories}</div>
 			</div>
