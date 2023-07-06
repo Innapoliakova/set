@@ -1,18 +1,16 @@
-import SearchIcon from "../assets/icons/search.png";
 import "./Search.css";
+import { useState } from "react";
 
-import React, { useState } from "react";
-
-const Search = ({ handleSearch }) => {
-	const [searchQuery, setSearchQuery] = useState("");
+const Search = ({ setSearchQuery }) => {
+	const [searchInput, setSearchInput] = useState("");
 
 	const handleChange = (event) => {
-		setSearchQuery(event.target.value);
+		setSearchInput(event.target.value.trim());
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		handleSearch(searchQuery);
+		setSearchQuery(searchInput);
 	};
 
 	return (
@@ -23,21 +21,17 @@ const Search = ({ handleSearch }) => {
 						type="text"
 						className="search-input-field"
 						placeholder="Search"
-						value={searchQuery}
 						onChange={handleChange}
 					/>
-					{/* <img
-						className="icon-for-search"
-						src={SearchIcon}
-						alt="icon for searching"
-					/> */}
 				</div>
-				{/* <button type="submit" className="search-button">
-					Search
-				</button> */}
 			</form>
 		</div>
 	);
 };
-
 export default Search;
+
+
+
+
+
+

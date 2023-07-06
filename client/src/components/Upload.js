@@ -80,7 +80,7 @@ const Upload = ({ setUpdateImages }) => {
 						type="text"
 						className="categoriesbtn"
 						name="categories"
-						onSelect={handleInputChange}
+						onChange={handleInputChange}
 					>
 						<option value="">Categories</option>
 						<option value="photos">Photos</option>

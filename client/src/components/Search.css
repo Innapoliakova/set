@@ -1,26 +1,25 @@
-
 #root > div > div.search-section > form > div > input {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  background-color: #f7f7f7;
-  border: 1px solid #f7f7f7;
-  padding-left: 50px; /* Add padding to accommodate the search icon */
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/1890px-Vector_search_icon.svg.png); /* Replace 'search-icon.svg' with your search icon image path */
-  background-repeat: no-repeat;
-  background-position: 25px center; /* Adjust the position of the search icon */
-  background-size: 15px; /* Adjust the size of the search icon */
-  margin: 0 auto;
-  width: 575px;
-  border-radius: 30px;
-  border: 1px solid #dcdcdc;
-  height: 45px;
-  border: none;
-  width: 500px;
-  font-size: 16px;
-  outline: none;
-  margin-top: 80px;
-  box-shadow: 1px 1px 8px 1px #dcdcdc;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	background-color: #f7f7f7;
+	border: 1px solid #f7f7f7;
+	padding-left: 50px; /* Add padding to accommodate the search icon */
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/1890px-Vector_search_icon.svg.png); /* Replace 'search-icon.svg' with your search icon image path */
+	background-repeat: no-repeat;
+	background-position: 25px center; /* Adjust the position of the search icon */
+	background-size: 15px; /* Adjust the size of the search icon */
+	margin: 0 auto;
+	width: 575px;
+	border-radius: 30px;
+	border: 1px solid #dcdcdc;
+	height: 45px;
+	border: none;
+	width: 500px;
+	font-size: 16px;
+	outline: none;
+	margin-top: 80px;
+	box-shadow: 1px 1px 8px 1px #dcdcdc;
 }

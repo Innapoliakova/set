@@ -19,31 +19,53 @@
   }
   
   .input-field input {
-    width: 200px;
+    
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
+    width: 150px;
+    height: 30px;
+    
+
   }
 
   .input1 {
     position: absolute;
-    left: 300px;
+    left: 340px;
+    top: -21px;
+    
   }
-
+  .input2 {
+    position: absolute;
+    left: 75px;
+    top: -21px;
+    
+  }
   .input3 {
     position: absolute;
     left: 600px;
-    top: 0%;
-  }
+    top: -21px;
+    width: 120px;
+    height: 30px;
+    }
+
 
   .submitbtn{
     position: absolute;
+
+    left: 1100px;
+    top: -60%;
+
     width: 120px;
     height: 30px;
     border-radius: 10px;
     border: 0px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     color: gray;
+
+    font-size: 15px;
+    line-height: 12px;
+
   }
   .submitbtn:hover{
     background-color: black;
@@ -51,10 +73,11 @@
     transition: o.3s;
   }
   .categoriesbtn{
-    width: 210px;
-    height: 35px;
+    width: 150px;
+    height: 30px;
     border-radius: 10px;
     color: gray;
+    
   }
 
   .file-input-container {
@@ -66,7 +89,7 @@
     display: none;
   }
   
-  .custom-button {
+  .upload-section .file-input-container .custom-button {
     /* Style your custom button */
     /* Example styles */
     background-color: #f1f1f1;
@@ -80,7 +103,11 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     color: gray;
     font-size: 12px;
-    width: 180px;
+    width: 120px;
+    height: 30px;
+    display: block;
+    line-height: 15px;
+
   }
 
   .custom-button:hover{
@@ -88,4 +115,44 @@
     color: white;
     transition: o.3s;
   }
-  
+
+
+
+
+  .filterinput {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    position: absolute;
+    left: 30%;
+    top: 55%;
+  }
+  .selectinput{
+    width: 210px;
+    height: 35px;
+    border-radius: 10px;
+    color: gray;
+    position: absolute;
+    left: 50%;
+    top: 55%;
+  }
+  .ulprinter {
+   width: auto;
+   height: auto;
+    margin-left: 30%;
+    margin-top: 150px;
+    list-style: none;
+  }
+
+
+  .input-field input2{
+    height: 35px;
+  }
+  .upload-section{
+    
+    display: inline-none;
+    position: relative;
+  }
+
+

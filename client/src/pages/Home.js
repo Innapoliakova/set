@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import "./Home.css";
 import Header from "../components/Header";
-import Upload from "../components/Upload";
 import Search from "../components/Search";
 import Gallery from "../components/Gallery";
 import Footer from "../components/Footer";
@@ -19,7 +18,9 @@ export function Home() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const res = await fetch(`/api/images?filter=${selectedFilter}`);
+				const res = await fetch(
+					`/api/images?filter=${selectedFilter}&searchQuery=${searchQuery}`
+				);
 				if (!res.ok) {
 					throw new Error(res.statusText);
 				}
@@ -31,13 +32,7 @@ export function Home() {
 			}
 		};
 		fetchData();
-	}, [updateImages, selectedFilter]);
-
-	const handleSearch = (query) => {
-		setSearchQuery(query);
-		// our search logic will be here or call a search API -??
-		console.log("/////", query);
-	};
+	}, [updateImages, selectedFilter, searchQuery]);
 
 	return (
 		<div className="App">
@@ -48,9 +43,8 @@ export function Home() {
 					discovering, uploading, and utilizing a vast array of assets.
 				</h2>
 			</div>
-			<Upload setUpdateImages={setUpdateImages} />
+			<Search setSearchQuery={setSearchQuery} />
 			<Filter setSelectedFilter={setSelectedFilter} />
-			<Search handleSearch={handleSearch} />
 			<Gallery
 				images={images}
 				isLogin={isLogin}
