@@ -12,6 +12,7 @@ const Header = () => {
 	const [joinEmail, setJoinEmail] = useState("");
 	const [joinPassword, setJoinPassword] = useState("");
 	const [joinUsername, setJoinUsername] = useState("");
+	const [showHeader, setShowHeader] = useState(false);
 
 	const handleLoginClick = () => {
 		setShowLoginForm(true);
@@ -69,15 +70,11 @@ const Header = () => {
 	};
 
 	return (
-		<header>
+		<header className={showHeader ? "show" : ""}>
 			<div className="header-section">
 				<div className="image">
 					<img src={logo} alt="Logo" className="logo" />
 				</div>
-				{/* <div className="title">
-					<h1 className="title">CYF's picture gallery</h1>
-				</div> */}
-
 				<Link to="/upload">
 					<button>Upload</button>
 				</Link>

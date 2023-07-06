@@ -6,7 +6,26 @@ body {
 	color: #555;
 }
 
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+header.show {
+  display: block;
+}
+
+header.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
 .header-section {
+	  position: sticky;
+  top: 0;
 	background-color: #efefef;
 	padding: 2px;
 	display: flex;
