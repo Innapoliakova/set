@@ -41,10 +41,11 @@ header.sticky {
 	margin-left: 20px;
 }
 
-.title {
-	font-size: 70px;
-	text-align: center;
-	margin: 0;
+.btn-pos {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content:end;
 }
 
 button {
@@ -56,6 +57,7 @@ button {
 	font-size: 24px;
 	cursor: pointer;
 	margin-top: 20px;
+	margin-right: 20px;
 }
 
 button:hover {

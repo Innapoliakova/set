@@ -75,12 +75,13 @@ const Header = () => {
 				<div className="image">
 					<img src={logo} alt="Logo" className="logo" />
 				</div>
-				<Link to="/upload">
-					<button>Upload</button>
-				</Link>
-
-				<div className="login-button">
-					<button onClick={handleLoginClick}>Login</button>
+				<div className="btn-pos">
+					<Link to="/upload">
+						<button>Upload</button>
+					</Link>
+					<div className="login-button">
+						<button onClick={handleLoginClick}>Login</button>
+					</div>
 				</div>
 			</div>
 			{showLoginForm && (
