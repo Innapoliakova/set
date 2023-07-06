@@ -1,4 +1,4 @@
-#root > div > div.search-section > form > div > input {
+.search-section > form > div > input {
 	position: relative;
 	top: 50%;
 	left: 50%;
@@ -12,14 +12,14 @@
 	background-position: 25px center; /* Adjust the position of the search icon */
 	background-size: 15px; /* Adjust the size of the search icon */
 	margin: 0 auto;
-	width: 575px;
+	width: 670px;
 	border-radius: 30px;
 	border: 1px solid #dcdcdc;
-	height: 45px;
+	height: 55px;
 	border: none;
-	width: 500px;
+	width: 270%;
 	font-size: 16px;
 	outline: none;
-	margin-top: 80px;
+	margin-top: 340px;
 	box-shadow: 1px 1px 8px 1px #dcdcdc;
 }
