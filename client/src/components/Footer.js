@@ -10,6 +10,16 @@ const Footer = () => {
 	return (
 		<footer>
 			<div className="footer-section">
+      <form
+          action="https://codeyourfuture.us14.list-manage.com/subscribe/post?u=e1b6978d5b6510703a76a9a80&amp;id=a97f8e5cb9"
+          method="post"
+          id=""
+          name="mc-embedded-subscribe-form"
+          className="validate"
+          target="_blank"
+          noValidate
+        >
+
 				<span className="newsletter">Sign up to our newsletter</span>
         <input
           type="email"
@@ -35,6 +45,7 @@ const Footer = () => {
         <a href="mailto:london@codeyourfuture.io">
           <EmailRoundedIcon className="email" />
         </a>
+</form>
 		<div className="footer-bottom">
           <p>
             © All rights reserved | Registered{" "}
