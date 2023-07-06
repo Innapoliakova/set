@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import "./Home.css";
 import Header from "../components/Header";
-import Upload from "../components/Upload";
 import Search from "../components/Search";
 import Gallery from "../components/Gallery";
 import Footer from "../components/Footer";
@@ -14,14 +13,14 @@ export function Home() {
 	const [isLogin, setIsLogin] = useState(true);
 	const [selectedFilter, setSelectedFilter] = useState(null);
 	const [searchQuery, setSearchQuery] = useState("");
-useEffect(() => {
+	const [updateImages, setUpdateImages] = useState(true);
+
+	useEffect(() => {
 		const fetchData = async () => {
 			try {
-
 				const res = await fetch(
 					`/api/images?filter=${selectedFilter}&searchQuery=${searchQuery}`
 				);
-
 				if (!res.ok) {
 					throw new Error(res.statusText);
 				}
@@ -33,20 +32,7 @@ useEffect(() => {
 			}
 		};
 		fetchData();
-
 	}, [updateImages, selectedFilter, searchQuery]);
-	
-
-	const handleFilterChange = (filter) => {
-		if (selectedFilters.includes(filter)) {
-			setSelectedFilters(selectedFilters.filter((item) => item !== filter));
-		} else {
-			setSelectedFilters([...selectedFilters, filter]);
-		}
-	};
-
-
-
 
 	return (
 		<div className="App">
@@ -57,16 +43,14 @@ useEffect(() => {
 					discovering, uploading, and utilizing a vast array of assets.
 				</h2>
 			</div>
-
-			<Upload />
-			<Filter
-				selectedFilters={selectedFilters}
-				handleFilterChange={handleFilterChange}
+			<Search setSearchQuery={setSearchQuery} />
+			<Filter setSelectedFilter={setSelectedFilter} />
+			<Gallery
+				images={images}
+				isLogin={isLogin}
+				message={message}
+				setUpdateImages={setUpdateImages}
 			/>
-			
-					<Search setSearchQuery={setSearchQuery} />
-			<Gallery images={images} isLogin={isLogin} message={message} />
-
 			<Footer />
 		</div>
 	);

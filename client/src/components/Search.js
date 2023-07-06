@@ -1,4 +1,3 @@
-import SearchIcon from "../assets/icons/search.png";
 import "./Search.css";
 import { useState } from "react";
 
@@ -24,18 +23,15 @@ const Search = ({ setSearchQuery }) => {
 						placeholder="Search"
 						onChange={handleChange}
 					/>
-					{/* <img
-						className="icon-for-search"
-						src={SearchIcon}
-						alt="icon for searching"
-					/> */}
 				</div>
-				{/* <button type="submit" className="search-button">
-					Search
-				</button> */}
 			</form>
 		</div>
 	);
 };
-
 export default Search;
+
+
+
+
+
+
