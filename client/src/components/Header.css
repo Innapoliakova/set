@@ -53,15 +53,11 @@ button {
 	color: #333;
 	padding: 10px 20px;
 	border: none;
-	border-radius: 5px;
+	border-radius: 20px;
 	font-size: 24px;
 	cursor: pointer;
 	margin-top: 20px;
-	margin-right: 20px;
-}
-
-button:hover {
-	background-color: #ddd;
+	margin-right: 50px;
 }
 
 .modal-container {
@@ -136,6 +132,31 @@ h2 {
 	margin-top: 20px;
 }
 
-.login-button {
-	text-decoration: none;
+.logBut {
+	color: rgb(98,98,98);
+	font-weight: 500;
+}
+.logBut:hover {
+	border: 2px solid;
+}
+
+.upBut {
+	
+	background-color: rgb(133,213,153);
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/d/da/Upload_icon_mask.svg);
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: 22px;
+	width: 165px;
+	color: white;
+	font-weight: 500;
+	padding-right: 0;
+	background-origin: content-box;
+
+  text-align: center
+	;
+}
+
+.upBut:hover {
+	background-color: rgba(133,213,153,0.8);
 }

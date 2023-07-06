@@ -76,11 +76,11 @@ const Header = () => {
 					<img src={logo} alt="Logo" className="logo" />
 				</div>
 				<div className="btn-pos">
-					<Link to="/upload">
-						<button>Upload</button>
-					</Link>
 					<div className="login-button">
-						<button onClick={handleLoginClick}>Login</button>
+						<button className="logBut" onClick={handleLoginClick}>Login</button>
+						<Link to="/upload">
+							<button className="upBut">Upload</button>
+						</Link>
 					</div>
 				</div>
 			</div>
