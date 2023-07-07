@@ -1,286 +1,217 @@
-// import React, { useState } from "react";
-// import "./uploadPage.css";
-// import { useNavigate } from "react-router-dom";
-
-// const Upload = () => {
-// 	const navigate = useNavigate();
-
-// 	const [newImage, setNewImage] = useState({
-// 		description: "",
-// 		tags: "",
-// 		categories: "",
-// 	});
-
-// 	const handleInputChange = (event) => {
-// 		let { name, value = null } = event.target;
-
-// 		if (name === "imageFile") {
-// 			value = event.target.files[0];
-// 		}
-
-// 		setNewImage((newImage) => ({
-// 			...newImage,
-// 			[name]: value,
-// 		}));
-// 	};
-
-// 	const handleImageUploadSubmit = async (event) => {
-// 		event.preventDefault();
-
-// 		const formData = new FormData();
-// 		formData.append("image", newImage.imageFile);
-// 		formData.append("description", newImage.description);
-// 		formData.append("tags", newImage.tags);
-// 		formData.append("categories", newImage.categories);
-
-// 		try {
-// 			await fetch("/api/image", {
-// 				method: "POST",
-// 				body: formData,
-// 			});
-// 			console.log("Image uploaded successfully.");
-
-// 			navigate("/"); // Navigate back to the home page after successful upload
-// 			event.target.reset();
-// 		} catch (error) {
-// 			console.error("Error uploading image:", error);
-// 		}
-// 	};
-
-// 	return (
-// 		<form className="upload-section" onSubmit={handleImageUploadSubmit}>
-// 			<div className="file-input-container">
-// 				<input
-// 					type="file"
-// 					name="imageFile"
-// 					id="myFileInput"
-// 					className="hidden"
-// 					onChange={handleInputChange}
-// 				/>
-// 				<label htmlFor="myFileInput" className="custom-button">
-// 					Select File
-// 				</label>
-// 			</div>
-
-// 			<div className="container">
-// 				<div className="input-field input1">
-// 					<input
-// 						type="text"
-// 						name="description"
-// 						onChange={handleInputChange}
-// 						placeholder="description"
-// 					></input>
-// 				</div>
-// 				<div className="input-field input2">
-// 					<input
-// 						type="text"
-// 						name="tags"
-// 						onChange={handleInputChange}
-// 						placeholder="tags"
-// 					/>
-// 				</div>
-// 				<div className="input-field input3">
-// 					<select
-// 						type="text"
-// 						className="categoriesbtn"
-// 						name="categories"
-// 						onChange={handleInputChange}
-// 					>
-// 						<option value="">Categories</option>
-// 						<option value="photos">Photos</option>
-// 						<option value="illustrations">Illustrations</option>
-// 						<option value="logos">Logos</option>
-// 						<option value="icons">Icons</option>
-// 					</select>
-// 				</div>
-// 			</div>
-
-// 			<button type="submit" className="submitbtn">
-// 				Submit
-// 			</button>
-// 		</form>
-// 	);
-// };
-
-// export default Upload;
-
-// import React, { useMemo } from "react";
-// import { useDropzone } from "react-dropzone";
-
-// const baseStyle = {
-// 	flex: 1,
-// 	display: "flex",
-// 	flexDirection: "column",
-// 	alignItems: "center",
-// 	padding: "20px",
-// 	borderWidth: 2,
-// 	borderRadius: 2,
-// 	borderColor: "#eeeeee",
-// 	borderStyle: "dashed",
-// 	backgroundColor: "#fafafa",
-// 	color: "#bdbdbd",
-// 	outline: "none",
-// 	transition: "border .24s ease-in-out",
-// };
-
-// const focusedStyle = {
-// 	borderColor: "#2196f3",
-// };
-
-// const acceptStyle = {
-// 	borderColor: "#00e676",
-// };
-
-// const rejectStyle = {
-// 	borderColor: "#ff1744",
-// };
-
-// function Upload() {
-// 	const {
-// 		acceptedFiles,
-// 		getRootProps,
-// 		getInputProps,
-// 		isFocused,
-// 		isDragAccept,
-// 		isDragReject,
-// 		open,
-// 	} = useDropzone({
-// 		accept: {
-// 			"image/jpeg": [],
-// 			"image/png": [],
-// 			"image/jpg": [],
-// 			"image/svg": [],
-// 			"image/gif": [],
-// 		},
-// 		noClick: true,
-// 		noKeyboard: true,
-// 	});
-
-// 	const style = useMemo(
-// 		() => ({
-// 			...baseStyle,
-// 			...(isFocused ? focusedStyle : {}),
-// 			...(isDragAccept ? acceptStyle : {}),
-// 			...(isDragReject ? rejectStyle : {}),
-// 		}),
-// 		[isFocused, isDragAccept, isDragReject]
-// 	);
-
-// 	const files = acceptedFiles.map((file) => (
-// 		<li key={file.path}>
-// 			{file.path} - {file.size} bytes
-// 		</li>
-// 	));
-
-// 	return (
-// 		<div className="container">
-// 			<div {...getRootProps({ style })}>
-// 				<input {...getInputProps()} />
-// 				<p>Drag 'n' drop some files here</p>
-// 				<button type="button" onClick={open}>
-// 					Open File Dialog
-// 				</button>
-// 				<aside>
-// 					<h4>Files</h4>
-// 					<ul>{files}</ul>
-// 				</aside>
-// 			</div>
-// 		</div>
-// 	);
-// }
-
-// export default Upload;
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import { useNavigate } from "react-router-dom";
+import "./uploadPage.css";
+import Header from "../components/Header";
+import "../components/Header.css";
+import deleteIcon from "../assets/icons/delete.svg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const thumbsContainer = {
-	display: "flex",
-	flexDirection: "row",
-	flexWrap: "wrap",
-	marginTop: 16,
-};
+const Upload = () => {
+	const navigate = useNavigate();
+	const [images, setImages] = useState([]);
 
-const thumb = {
-	display: "inline-flex",
-	borderRadius: 2,
-	border: "1px solid #eaeaea",
-	marginBottom: 8,
-	marginRight: 8,
-	width: 100,
-	height: 100,
-	padding: 4,
-	boxSizing: "border-box",
-};
+	const [newImage, setNewImage] = useState({
+		description: "",
+		tags: "",
+		categories: "",
+	});
 
-const thumbInner = {
-	display: "flex",
-	minWidth: 0,
-	overflow: "hidden",
-};
+	const handleInputChange = (event) => {
+		let { name, value = null } = event.target;
 
-const img = {
-	display: "block",
-	width: "auto",
-	height: "100%",
-};
+		if (name === "imageFile") {
+			value = event.target.files[0];
+		}
 
-function Upload() {
-	const [files, setFiles] = useState([]);
-	const { getRootProps, getInputProps, open } = useDropzone({
+		setNewImage((newImage) => ({
+			...newImage,
+			[name]: value,
+		}));
+	};
+
+	const {
+		getRootProps,
+		getInputProps,
+		open,
+		isDragActive,
+		isDragAccept,
+		isDragReject,
+		isFocused,
+	} = useDropzone({
 		accept: {
-			"image/jpeg": [],
-			"image/png": [],
-			"image/jpg": [],
-			"image/svg": [],
-			"image/gif": [],
+			"image/*": [".jpeg", ".png", ".jpg", ".svg", ".gif"],
 		},
 		noClick: true,
 		noKeyboard: true,
-		onDrop: (acceptedFiles) => {
-			setFiles(
-				acceptedFiles.map((file) =>
-					Object.assign(file, {
-						preview: URL.createObjectURL(file),
-					})
-				)
+		maxFiles: 1,
+		onDrop: useCallback((acceptedFiles) => {
+			setImages(
+				acceptedFiles.map((file) => {
+					const previewURL = URL.createObjectURL(file);
+					return { file, previewURL };
+				})
 			);
-		},
+		}, []),
 	});
 
-	const thumbs = files.map((file) => (
-		<div style={thumb} key={file.name}>
-			<div style={thumbInner}>
+	const handleImageUploadSubmit = async (event) => {
+		event.preventDefault();
+		if (images.length === 0) {
+			console.error("No image file found");
+			return;
+		}
+
+		const imageFile = images[0].file;
+		const formData = new FormData();
+		formData.append("image", imageFile);
+		formData.append("description", newImage.description);
+		formData.append("tags", newImage.tags);
+		formData.append("categories", newImage.categories);
+
+		try {
+			await fetch("/api/image", {
+				method: "POST",
+				body: formData,
+			});
+			console.log("Image uploaded successfully.");
+			navigate("/"); // Navigate back to the home page after successful upload
+			event.target.reset();
+			toast.success("Image uploaded successfully!", {
+				position: "top-center",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			});
+		} catch (error) {
+			console.error("Error uploading image:", error);
+		}
+		event.target.reset();
+	};
+
+	const style = useMemo(
+		() => ({
+			flex: 1,
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			padding: "40px",
+			borderWidth: "2px",
+			borderRadius: "4px",
+			borderColor: "#dfe1e5",
+			borderStyle: "dashed",
+			backgroundColor: "#f8f8f8",
+			color: "#757575",
+			outline: "none",
+			transition: "border 0.24s ease-in-out",
+			...(isFocused ? { borderColor: "#2196f3" } : {}),
+			...(isDragAccept ? { borderColor: "#00e676" } : {}),
+			...(isDragReject ? { borderColor: "#ff1744" } : {}),
+		}),
+		[isFocused, isDragAccept, isDragReject]
+	);
+
+	const handleDeleteImage = (file) => {
+		setImages((images) => images.filter((image) => image.file !== file));
+	};
+
+	const thumbs = images.map((file) => (
+		<div className="thumb" key={file.file}>
+			<div className="thumb-inner">
 				<img
-					src={file.preview}
-					style={img}
+					src={file.previewURL}
+					className="img"
 					// Revoke data uri after image is loaded
 					onLoad={() => {
-						URL.revokeObjectURL(file.preview);
+						URL.revokeObjectURL(file.previewURL);
 					}}
 					alt=""
 				/>
+
+				<button onClick={() => handleDeleteImage(file.file)}>
+					<img src={deleteIcon} alt="" className="icon" />
+				</button>
 			</div>
 		</div>
 	));
 
 	useEffect(() => {
 		// Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-		return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
-	}, []);
+		return () => images.forEach((file) => URL.revokeObjectURL(file.preview));
+	}, [images]);
 
 	return (
-		<section className="container">
-			<div {...getRootProps({ className: "dropzone" })}>
-				<input {...getInputProps()} />
-				<p>Drag 'n' drop some files here</p>
-			</div>
-			<button type="button" onClick={open}>
-				Open File Dialog
-			</button>
-			<aside style={thumbsContainer}>{thumbs}</aside>
-		</section>
+		<>
+			<Header />
+			<section className="container">
+				<div className="upload-container" {...getRootProps({ style })}>
+					<input {...getInputProps()} />
+					{isDragAccept && <p>Image is accepted</p>}
+					{isDragReject && <p>Image is rejected</p>}
+					{!isDragActive && <p className="drop-text">Drop image here ...</p>}
+				</div>
+				<button type="button" className="select-button" onClick={open}>
+					Select Image
+				</button>
+				<div className="thumbs-container">
+					{thumbs}
+
+					{!!images.length &&
+						images.map((image) => (
+							<form
+								key={image.file}
+								className="upload-section"
+								onSubmit={handleImageUploadSubmit}
+							>
+								<div className="container">
+									<div className="input-field">
+										<input
+											type="text"
+											name="description"
+											className="input-description"
+											onChange={handleInputChange}
+											placeholder="Description"
+										/>
+									</div>
+									<div className="input-field">
+										<input
+											type="text"
+											name="tags"
+											className="input-tags"
+											onChange={handleInputChange}
+											placeholder="Tags"
+										/>
+									</div>
+									<div className="input-field">
+										<select
+											className="categories-select"
+											name="categories"
+											onChange={handleInputChange}
+										>
+											<option value="">Categories</option>
+											<option value="photos">Photos</option>
+											<option value="illustrations">Illustrations</option>
+											<option value="logos">Logos</option>
+											<option value="icons">Icons</option>
+										</select>
+									</div>
+
+									<button className="submit-button" type="submit">
+										Submit
+									</button>
+									<ToastContainer />
+								</div>
+							</form>
+						))}
+				</div>
+			</section>
+		</>
 	);
-}
+};
 
 export default Upload;
