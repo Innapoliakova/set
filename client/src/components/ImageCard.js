@@ -48,25 +48,28 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 			console.error("Invalid image key");
 			return;
 		}
-		try {
-			// Send a DELETE request to the specified endpoint (/api/{imageKey}) to delete the image
-			const response = await fetch(`/api/${imageKey}`, {
-				method: "DELETE",
-			});
+		const confirmDelete = confirm("Delete image?");
+		if (confirmDelete) {
+			try {
+				// Send a DELETE request to the specified endpoint (/api/{imageKey}) to delete the image
+				const response = await fetch(`/api/${imageKey}`, {
+					method: "DELETE",
+				});
 
-			if (response.status === 200) {
-				// If the response status is 200 (OK), parse the response message as JSON
-				const resMessage = await response.json();
-				console.log(resMessage.message);
-				// Update the state variable 'updateImages' to trigger a re-render and update the images
-				setUpdateImages((prevUpdateImages) => !prevUpdateImages);
-			} else {
-				// If the response status is not 200, throw an error indicating that the image deletion failed
-				throw new Error("Image delete failed");
+				if (response.status === 200) {
+					// If the response status is 200 (OK), parse the response message as JSON
+					const resMessage = await response.json();
+					console.log(resMessage.message);
+					// Update the state variable 'updateImages' to trigger a re-render and update the images
+					setUpdateImages((prevUpdateImages) => !prevUpdateImages);
+				} else {
+					// If the response status is not 200, throw an error indicating that the image deletion failed
+					throw new Error("Image delete failed");
+				}
+			} catch (err) {
+				// Catch any errors that occur during the fetch request or response handling
+				console.error(err);
 			}
-		} catch (err) {
-			// Catch any errors that occur during the fetch request or response handling
-			console.error(err);
 		}
 	};
 
@@ -94,12 +97,14 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 			</button>
 
 			{isLogin && (
-				<button
-					onClick={() => handleDelete(image.key)}
-					className="delete-button"
-				>
-					<img src={deleteIcon} alt="" className="icon" />
-				</button>
+				<>
+					<button
+						onClick={() => handleDelete(image.key)}
+						className="delete-button"
+					>
+						<img src={deleteIcon} alt="" className="icon" />
+					</button>
+				</>
 			)}
 			{isLogin && (
 				<button onClick={handleBookmark} className="bookmark-button">
