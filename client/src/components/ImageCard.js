@@ -96,7 +96,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 				<img src={downloadIcon} alt="" className="icon" />
 			</button>
 
-			{!isLogin && (
+			{isLogin && (
 				<>
 					<button
 						onClick={() => handleDelete(image.key)}
@@ -106,7 +106,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 					</button>
 				</>
 			)}
-			{!isLogin && (
+			{isLogin && (
 				<button onClick={handleBookmark} className="bookmark-button">
 					<img src={favouriteIcon} alt="" className="icon" />
 				</button>
