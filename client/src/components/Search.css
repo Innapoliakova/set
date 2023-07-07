@@ -5,7 +5,7 @@
 	transform: translate(-50%, -50%);
 	z-index: 2;
 	background-color: #f7f7f7;
-	border: 1px solid #f7f7f7;
+	border: 1px solid rgb(79,70,100);
 	padding-left: 50px; /* Add padding to accommodate the search icon */
 	background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/1890px-Vector_search_icon.svg.png); /* Replace 'search-icon.svg' with your search icon image path */
 	background-repeat: no-repeat;
@@ -14,12 +14,13 @@
 	margin: 0 auto;
 	width: 670px;
 	border-radius: 30px;
-	border: 1px solid #dcdcdc;
 	height: 55px;
-	border: none;
 	width: 270%;
 	font-size: 16px;
-	outline: none;
-	margin-top: 340px;
+	margin-top: 342px;
 	box-shadow: 1px 1px 8px 1px #dcdcdc;
+}
+
+.search-section > form > div > input:hover {
+	border: 2px solid rgb(79,70,100);
 }

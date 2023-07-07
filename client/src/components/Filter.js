@@ -16,7 +16,7 @@ const Filter = ({ setSelectedFilter }) => {
 					defaultChecked
 				/>
 				<label htmlFor="filter1" className="filter-option">
-					All Images
+					Home
 				</label>
 
 				<input type="radio" name="filter" id="filter2" value="photos" />

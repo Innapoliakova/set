@@ -18,27 +18,24 @@
 .filter-option {
 	color: lighten(var(--bg), 40%);
 	display: inline-block;
-	cursor: pointer;
+	transition: all 1s;
+	box-shadow: 0 0 15px 0px #2f2f2f;
 	font-weight: bold;
 	padding: 10px 20px;
 	border-radius: 25px;
+	cursor: pointer;
+	 margin-right: 10px;
 }
 
-.filter-section input[type="radio"]:checked + .filter-option {
+.filter-option:hover,
+.filter-option.selected {
+	background: var(--bg); /* Change background color on hover */
 	color: white;
-	background: var(--bg);
-}
+	
+  }
 
-.filter-option + .filter-section input[type="radio"] + .filter-option {
-	border-left: solid var(--borderWidth) var(--fg);
-}
 
-.radio-group {
-	border: solid var(--borderWidth) var(--fg);
-	display: inline-block;
-	margin: 20px;
-	border-radius: 10px;
-	overflow: hidden;
-}
+
+
 
 @import url("https://fonts.googleapis.com/css?family=Roboto");
