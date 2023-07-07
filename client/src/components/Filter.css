@@ -27,9 +27,11 @@
 	 margin-right: 10px;
 }
 
-.filter-option:hover {
+.filter-option:hover,
+.filter-option.selected {
 	background: var(--bg); /* Change background color on hover */
 	color: white;
+	
   }
 
 
