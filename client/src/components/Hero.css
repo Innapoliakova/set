@@ -25,11 +25,11 @@
 .hero h1 {
   font-size: 46px;
   font-weight:bolder;
-  color: black;
+  color: rgb(63,63,63);
 }
 
 .hero h2 {
   font-size: 26px;
-  color: black;
+  color: rgb(63,63,63);;
   margin-bottom: 160px;
 }
