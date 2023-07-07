@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
 import "./uploadPage.css";
-import Header from "../components/Header";
+import Header from "../components/HeaderUploadPage";
 import "../components/Header.css";
 import deleteIcon from "../assets/icons/delete.svg";
 import { ToastContainer, toast } from "react-toastify";
