@@ -13,7 +13,6 @@
 
 /* Shade for background page */
 .hero::after {
-  content: "";
   position: absolute;
   left: 0;
   right: 0;

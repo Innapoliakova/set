@@ -14,18 +14,25 @@ const Search = ({ setSearchQuery }) => {
 	};
 
 	return (
-		<div className="search-section">
-			<form onSubmit={handleSubmit}>
-				<div className="search-container">
-					<input
-						type="text"
-						className="search-input-field"
-						placeholder="Search"
-						onChange={handleChange}
-					/>
-				</div>
-			</form>
-		</div>
+		// <div className="search-section">
+		// 	<form onSubmit={handleSubmit}>
+		// 		<div className="search-container">
+		// 			<input
+		// 				type="text"
+		// 				className="search-input-field"
+		// 				placeholder="Search"
+		// 				onChange={handleChange}
+		// 			/>
+		// 		</div>
+		// 	</form>
+		// </div>
+
+		<form className="search-box" onSubmit={handleSubmit}>
+        <input type="text" name="" id="" placeholder="search..." onChange={handleChange} />
+        <a href="##" className="icon">
+            <i className="fas fa-search"></i>
+        </a>
+    </form>
 	);
 };
 export default Search;
