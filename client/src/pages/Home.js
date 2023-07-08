@@ -38,7 +38,7 @@ export function Home() {
 	return (
 		<div className="App">
 			<Header />
-			<Hero></Hero>
+			<Hero setSearchQuery={setSearchQuery} />
 			{/* <Search setSearchQuery={setSearchQuery} /> */}
 			<Filter setSelectedFilter={setSelectedFilter} />
 			<Gallery
