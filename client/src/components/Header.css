@@ -35,10 +35,10 @@ header.sticky {
 }
 
 .logo {
-	width: 160px;
+	width: 200px;
 	height: 70px;
 	margin-right: 10px;
-	margin-left: 20px;
+	margin-left: 30px;
 }
 
 .btn-pos {
@@ -129,16 +129,18 @@ button {
 }
 
 .logBut {
-	color: rgb(98,98,98);
+	color: white;
 	font-weight: 500;
+	background-color: rgb(57,120,248);
 }
 .logBut:hover {
 	border: 2px solid;
+	background-color: rgba(57,120,248,0.8);
 }
 
 .upBut {
 	
-	background-color: rgb(133,213,153);
+	background-color: rgb(80, 192, 108);
 	background-image: url(https://upload.wikimedia.org/wikipedia/commons/d/da/Upload_icon_mask.svg);
 	background-repeat: no-repeat;
 	background-position: left;
@@ -154,5 +156,5 @@ button {
 }
 
 .upBut:hover {
-	background-color: rgba(133,213,153,0.8);
+	background-color: rgba(80, 192, 108,0.8);
 }
