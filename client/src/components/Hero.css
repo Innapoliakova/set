@@ -11,15 +11,6 @@
   position: relative;
 }
 
-/* Shade for background page */
-.hero::after {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  background: rgba(236, 236, 236, 0.2);
-}
 
 .hero h1 {
   font-size: 46px;
