@@ -1,5 +1,15 @@
 .gallery-section {
-	width: 90%;
-	padding: 10px;
-	margin: 4rem auto;
+    width: 90%;
+    padding: 10px;
+    margin: 4rem auto;
+}
+.no-images-message {
+    width: 50%;
+	margin: auto;
+	font-family: "Raleway", sans-serif;
+	color: red;
+	text-align: center;
+	height: 150px;
+	font-size: 30px;
+	line-height: 30px;
 }
