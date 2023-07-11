@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./uploadPage.css";
 import Header from "../components/HeaderUploadPage";
 import "../components/Header.css";
@@ -158,6 +158,7 @@ const Upload = () => {
 				<button type="button" className="select-button" onClick={open}>
 					Select Image
 				</button>
+				<Link to="/" className="home-link" >Return Home</Link>
 				<div className="thumbs-container">
 					{thumbs}
 
