@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import logo from "../assets/icons/cyf.png";
 import "./Header.css";
 
-import { Link } from "react-router-dom";
+import LoginButton from "./LoginBtn";
+import LogoutButton from "./LogoutBtn";
+
+import { useAuth0 } from "@auth0/auth0-react";
+
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
 	const [showLoginForm, setShowLoginForm] = useState(false);
@@ -14,15 +19,9 @@ const Header = () => {
 	const [joinUsername, setJoinUsername] = useState("");
 	const [showHeader, setShowHeader] = useState(false);
 
-	const handleLoginClick = () => {
-		setShowLoginForm(true);
-		setSelectedForm("login");
-		setLoginEmail("");
-		setLoginPassword("");
-		setJoinEmail("");
-		setJoinPassword("");
-		setJoinUsername("");
-	};
+	const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+
+	const navigate = useNavigate();
 
 	const handleFormChange = (form) => {
 		setSelectedForm(form);
@@ -69,18 +68,40 @@ const Header = () => {
 		setShowLoginForm(false);
 	};
 
+	const handleUploadButtonClick = () => {
+		if (isAuthenticated) {
+			navigate("/upload");
+		} else {
+			const redirectUrl = window.location.origin + "/upload/";
+			loginWithRedirect({
+				appState: {
+					returnTo: redirectUrl,
+				},
+				redirectUri: redirectUrl,
+			});
+		}
+	};
+
 	return (
 		<header className={showHeader ? "show" : ""}>
 			<div className="header-section">
 				<div className="image">
 					<img src={logo} alt="Logo" className="logo" />
 				</div>
+				{isAuthenticated && (
+					<div>
+						<h2>{user.name}</h2>
+						<p>{user.email}</p>
+					</div>
+				)}
 				<div className="btn-pos">
 					<div className="login-button">
-						<button className="logBut" onClick={handleLoginClick}>Login</button>
-						<Link to="/upload">
-							<button className="upBut">Upload</button>
-						</Link>
+						<LoginButton />
+						<LogoutButton />
+
+						<button className="upBut" onClick={handleUploadButtonClick}>
+							Upload
+						</button>
 					</div>
 				</div>
 			</div>
