@@ -176,6 +176,7 @@ const Upload = () => {
 											className="input-description"
 											onChange={handleInputChange}
 											placeholder="Description"
+											required
 										/>
 									</div>
 									<div className="input-field">
@@ -185,6 +186,7 @@ const Upload = () => {
 											className="input-tags"
 											onChange={handleInputChange}
 											placeholder="Tags"
+											required
 										/>
 									</div>
 									<div className="input-field">
@@ -192,6 +194,7 @@ const Upload = () => {
 											className="categories-select"
 											name="categories"
 											onChange={handleInputChange}
+											required
 										>
 											<option value="">Categories</option>
 											<option value="photos">Photos</option>
