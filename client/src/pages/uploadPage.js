@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./uploadPage.css";
 import Header from "../components/HeaderUploadPage";
 import "../components/Header.css";
@@ -158,6 +158,7 @@ const Upload = () => {
 				<button type="button" className="select-button" onClick={open}>
 					Select Image
 				</button>
+				<Link to="/" className="home-link" >Return Home</Link>
 				<div className="thumbs-container">
 					{thumbs}
 
@@ -176,6 +177,7 @@ const Upload = () => {
 											className="input-description"
 											onChange={handleInputChange}
 											placeholder="Description"
+											required
 										/>
 									</div>
 									<div className="input-field">
@@ -185,6 +187,7 @@ const Upload = () => {
 											className="input-tags"
 											onChange={handleInputChange}
 											placeholder="Tags"
+											required
 										/>
 									</div>
 									<div className="input-field">
@@ -192,6 +195,7 @@ const Upload = () => {
 											className="categories-select"
 											name="categories"
 											onChange={handleInputChange}
+											required
 										>
 											<option value="">Categories</option>
 											<option value="photos">Photos</option>
