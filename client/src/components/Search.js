@@ -12,9 +12,13 @@ const Search = ({ setSearchQuery }) => {
 		event.preventDefault();
 		setIsLoading(true);
 		setSearchQuery(searchInput);
-		setTimeout(() => {
+		try {
+			await setSearchQuery(searchInput); // Assuming setSearchQuery is an asynchronous API call
 			setIsLoading(false);
- }, 3000);
+		  } catch (error) {
+			console.error("API call error:", error);
+			setIsLoading(false);
+		  }
 	};
 
 	return (
