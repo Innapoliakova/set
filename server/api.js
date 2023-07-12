@@ -17,12 +17,12 @@ router.get("/images", async (req, res) => {
 		let allImages;
 		if (filter !== "null") {
 			allImages = await pool.query(
-				"SELECT * FROM images WHERE categories LIKE $1 AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date;",
+				"SELECT * FROM images WHERE categories LIKE $1 AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date DESC;",
 				[filter, `%${searchQuery.toLowerCase()}%`]
 			);
 		} else {
 			allImages = await pool.query(
-				"SELECT * FROM images WHERE (lower(description) LIKE $1 OR lower(tags) LIKE $1) ORDER BY upload_date;",
+				"SELECT * FROM images WHERE (lower(description) LIKE $1 OR lower(tags) LIKE $1) ORDER BY upload_date DESC;",
 				[`%${searchQuery.toLowerCase()}%`]
 			);
 		}
