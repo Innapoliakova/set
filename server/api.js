@@ -97,13 +97,13 @@ router.post(
 
 			const imageKey = key || location.split("/")[0];
 
-			const { description, tags, categories } = req.body; // Extract description, tags, and categories from the request body
+			const { description, tags, categories, user } = req.body; // Extract description, tags, and categories from the request body
 
 			const id = uuidv4(); // Generate a unique ID for the image
 
 			await pool.query(
-				"INSERT INTO images(id,description, tags, categories, url, key) VALUES($1, $2, $3, $4, $5, $6)",
-				[id, description, tags, categories, location, imageKey]
+				"INSERT INTO images(id,description, tags, categories, url, key, owner) VALUES($1, $2, $3, $4, $5, $6 ,$7)",
+				[id, description, tags, categories, location, imageKey, user]
 			); // Use parameterized query values to add the image details to images table
 			res.status(200).json("Image were added successfully");
 		} catch (error) {
@@ -130,6 +130,26 @@ router.delete("/:imageKey", async (req, res) => {
 	} catch (error) {
 		logger.error("Error deleting image:", error);
 		res.status(500).json({ error: "Failed to delete image" });
+	}
+});
+
+router.get("/images/:owner", async (req, res) => {
+	try {
+		const { owner } = req.params;
+
+		const allImages = await pool.query(
+			"SELECT * FROM images WHERE owner LIKE $1 ORDER BY upload_date;",
+			[owner]
+		);
+
+		// Send a success response with the retrieved image data
+		return res.status(200).json({ data: allImages.rows });
+	} catch (error) {
+		// Log the error details for debugging purposes
+		logger.error(error);
+
+		// Send an error response with an appropriate status code and message
+		res.status(500).json({ error: true, message: "Internal server error" });
 	}
 });
 

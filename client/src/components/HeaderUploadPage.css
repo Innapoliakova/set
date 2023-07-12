@@ -1,33 +1,25 @@
-body {
-	font-family: "Raleway", sans-serif;
-	font-weight: 400;
-	line-height: 1.666;
-	background: #ffffff;
-	color: #555;
-}
-
 header {
-  position: sticky;
-  top: 0;
-  z-index: 999;
+	position: sticky;
+	top: 0;
+	z-index: 999;
 }
 
 header.show {
-  display: block;
+	display: block;
 }
 
 header.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 999;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 999;
 }
 
 .header-section {
-	  position: sticky;
-  top: 0;
+	position: sticky;
+	top: 0;
 	background-color: #efefef;
-	padding: 2px;
+	padding: 0 2rem;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -45,10 +37,10 @@ header.sticky {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content:end;
+	justify-content: end;
 }
 
-button {
+/* button {
 	background-color: #f2f2f2;
 	color: #333;
 	padding: 10px 20px;
@@ -58,7 +50,7 @@ button {
 	cursor: pointer;
 	margin-top: 20px;
 	margin-right: 50px;
-}
+} */
 
 .modal-container {
 	position: relative;
@@ -110,7 +102,6 @@ button {
 	margin-top: 30px;
 }
 
-
 .close-button {
 	position: absolute;
 	top: -190px;
@@ -129,7 +120,7 @@ button {
 }
 
 .logBut {
-	color: rgb(98,98,98);
+	color: rgb(98, 98, 98);
 	font-weight: 500;
 }
 .logBut:hover {
@@ -137,8 +128,7 @@ button {
 }
 
 .upBut {
-	
-	background-color: rgb(133,213,153);
+	background-color: rgb(133, 213, 153);
 	background-image: url(https://upload.wikimedia.org/wikipedia/commons/d/da/Upload_icon_mask.svg);
 	background-repeat: no-repeat;
 	background-position: left;
@@ -149,10 +139,9 @@ button {
 	padding-right: 0;
 	background-origin: content-box;
 
-  text-align: center
-	;
+	text-align: center;
 }
 
 .upBut:hover {
-	background-color: rgba(133,213,153,0.8);
+	background-color: rgba(133, 213, 153, 0.8);
 }

@@ -4,7 +4,13 @@ import downloadIcon from "../assets/icons/download.svg";
 import likeIcon from "../assets/icons/like.svg";
 import deleteIcon from "../assets/icons/delete.svg";
 
-const ImageCard = ({ image, isLogin, setUpdateImages }) => {
+import { useAuth0 } from "@auth0/auth0-react";
+
+const ImageCard = ({ image, setUpdateImages }) => {
+	const { user, isAuthenticated } = useAuth0();
+	// const sUser = process.env.REACT_APP_sUser;
+	const sUser = "google-oauth2|105695661976451935769" || "github|103330478";
+
 	const handleBookmark = () => {
 		// Handle bookmark functionality
 	};
@@ -84,19 +90,19 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 				<div className="No.download">Downloads times: {image.no_download}</div>
 				<div className="categories">Categories: {image.categories}</div>
 			</div>
-
-			<button onClick={handleLike} className="like-button">
-				<img src={likeIcon} alt="" className="icon" />
-			</button>
-
+			{!isAuthenticated && (
+				<button onClick={handleLike} className="like-button">
+					<img src={likeIcon} alt="" className="icon" />
+				</button>
+			)}
 			<button
-				onClick={() => handleDownload(image.id, image.tags, image.key)}
+				onClick={() => handleDownload(image.id)}
 				className="download-button"
 			>
 				<img src={downloadIcon} alt="" className="icon" />
 			</button>
 
-			{isLogin && (
+			{isAuthenticated && user && user.sub === sUser && (
 				<>
 					<button
 						onClick={() => handleDelete(image.key)}
@@ -106,7 +112,7 @@ const ImageCard = ({ image, isLogin, setUpdateImages }) => {
 					</button>
 				</>
 			)}
-			{isLogin && (
+			{!isAuthenticated && (
 				<button onClick={handleBookmark} className="bookmark-button">
 					<img src={favouriteIcon} alt="" className="icon" />
 				</button>
