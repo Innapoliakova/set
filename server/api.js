@@ -97,13 +97,13 @@ router.post(
 
 			const imageKey = key || location.split("/")[0];
 
-			const { description, tags, categories } = req.body; // Extract description, tags, and categories from the request body
+			const { description, tags, categories, user } = req.body; // Extract description, tags, and categories from the request body
 
 			const id = uuidv4(); // Generate a unique ID for the image
 
 			await pool.query(
-				"INSERT INTO images(id,description, tags, categories, url, key) VALUES($1, $2, $3, $4, $5, $6)",
-				[id, description, tags, categories, location, imageKey]
+				"INSERT INTO images(id,description, tags, categories, url, key, owner) VALUES($1, $2, $3, $4, $5, $6 ,$7)",
+				[id, description, tags, categories, location, imageKey, user]
 			); // Use parameterized query values to add the image details to images table
 			res.status(200).json("Image were added successfully");
 		} catch (error) {
