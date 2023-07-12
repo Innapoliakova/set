@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import logo from "../assets/icons/cyf.png";
 import "./Header.css";
 
@@ -18,11 +18,26 @@ const Header = () => {
 	const [joinPassword, setJoinPassword] = useState("");
 	const [joinUsername, setJoinUsername] = useState("");
 	const [showHeader, setShowHeader] = useState(false);
+	const [showDropdown, setShowDropdown] = useState(false);
 
 	const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
 	const navigate = useNavigate();
+	const dropdownRef = useRef(null);
 
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+				setShowDropdown(false);
+			}
+		};
+
+		window.addEventListener("click", handleClickOutside);
+
+		return () => {
+			window.removeEventListener("click", handleClickOutside);
+		};
+	}, []);
 	const handleFormChange = (form) => {
 		setSelectedForm(form);
 	};
@@ -82,22 +97,41 @@ const Header = () => {
 		}
 	};
 
+	const handleDropdownToggle = () => {
+		setShowDropdown(!showDropdown);
+	};
+
+	const handleProfileClick = () => {
+		navigate("/profile");
+	};
+
 	return (
 		<header className={showHeader ? "show" : ""}>
 			<div className="header-section">
 				<div className="image">
 					<img src={logo} alt="Logo" className="logo" />
 				</div>
-				{isAuthenticated && (
-					<div>
-						<h2>{user.name}</h2>
-						<p>{user.email}</p>
-					</div>
-				)}
 				<div className="btn-pos">
+					{isAuthenticated && (
+						<div className="profile-container" ref={dropdownRef}>
+							<img
+								src={user.picture}
+								alt={user.name}
+								className="profileImage"
+								onClick={handleDropdownToggle}
+							/>
+							{showDropdown && (
+								<ul className="dropdown-menu">
+									<li onClick={handleProfileClick}>Profile</li>
+									<li>
+										<LogoutButton />
+									</li>
+								</ul>
+							)}
+						</div>
+					)}
 					<div className="login-button">
 						<LoginButton />
-						<LogoutButton />
 
 						<button className="upBut" onClick={handleUploadButtonClick}>
 							Upload
