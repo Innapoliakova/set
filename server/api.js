@@ -133,4 +133,24 @@ router.delete("/:imageKey", async (req, res) => {
 	}
 });
 
+router.get("/images/:owner", async (req, res) => {
+	try {
+		const { owner } = req.params;
+
+		const allImages = await pool.query(
+			"SELECT * FROM images WHERE owner LIKE $1 ORDER BY upload_date;",
+			[owner]
+		);
+
+		// Send a success response with the retrieved image data
+		return res.status(200).json({ data: allImages.rows });
+	} catch (error) {
+		// Log the error details for debugging purposes
+		logger.error(error);
+
+		// Send an error response with an appropriate status code and message
+		res.status(500).json({ error: true, message: "Internal server error" });
+	}
+});
+
 export default router;
