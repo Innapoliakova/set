@@ -6,8 +6,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const ImageCard = ({ image, setUpdateImages, importedInProfile }) => {
 	const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-	const superUser =
-		process.env.REACT_APP_sUser_EMAIL || process.env.REACT_APP_sUser_GITHUB;
+	const superUser = '';
+		//process.env.REACT_APP_sUser_EMAIL || process.env.REACT_APP_sUser_GITHUB;
 
 	const handleLike = async (imageId, userSub) => {
 		try {

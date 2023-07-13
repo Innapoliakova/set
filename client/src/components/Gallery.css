@@ -1,5 +1,13 @@
 .gallery-section {
-	width: 90%;
-	padding: 10px;
-	margin: 4rem auto;
+    width: 90%;
+    padding: 10px;
+    margin: 4rem auto;
 }
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    .gallery-section {
+      width: 100%;
+      padding: 5px;
+      margin: 2rem auto;
+    }
+  }
