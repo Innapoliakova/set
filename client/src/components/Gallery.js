@@ -2,7 +2,7 @@ import ImageCard from "./ImageCard";
 import "./Gallery.css";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
-const Gallery = ({ images, message, setUpdateImages }) => {
+const Gallery = ({ images, message, setUpdateImages, importedInProfile }) => {
 	return (
 		<>
 			{message ? (
@@ -20,6 +20,7 @@ const Gallery = ({ images, message, setUpdateImages }) => {
 									key={image.id}
 									image={image}
 									setUpdateImages={setUpdateImages}
+									importedInProfile={importedInProfile}
 								/>
 							))}
 						</Masonry>

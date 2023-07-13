@@ -11,12 +11,25 @@ const ImageCard = ({ image, setUpdateImages }) => {
 	// const sUser = process.env.REACT_APP_sUser;
 	const sUser = "google-oauth2|105695661976451935769" || "github|103330478";
 
-	const handleBookmark = () => {
-		// Handle bookmark functionality
-	};
+	const handleLike = async (imageId, userSub) => {
+		try {
+			// Fetch the image data from the specified API endpoint
+			const response = await fetch(
+				`/api/image/${imageId}/user?user=${userSub}`,
+				{
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+				}
+			);
 
-	const handleLike = () => {
-		// Handle like functionality
+			if (response.status === 200) {
+				setUpdateImages((prevUpdateImages) => !prevUpdateImages);
+			} else {
+				throw new Error("Image like fail");
+			}
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	const handleDownload = async (imageId) => {
@@ -112,9 +125,33 @@ const ImageCard = ({ image, setUpdateImages }) => {
 					</button>
 				</>
 			)}
+			{isAuthenticated && (
+				<button
+					onClick={() => handleLike(image.id, user.sub)}
+					className={
+						image.liked_by_users && image.liked_by_users.includes(user.sub)
+							? "like-button-clicked"
+							: "like-button"
+					}
+				>
+					<img src={likeIcon} alt="" className="icon" />
+				</button>
+			)}
+
 			{!isAuthenticated && (
-				<button onClick={handleBookmark} className="bookmark-button">
-					<img src={favouriteIcon} alt="" className="icon" />
+				<button
+					onClick={() => {
+						const redirectUrl = window.location.origin;
+						loginWithRedirect({
+							appState: {
+								returnTo: redirectUrl,
+							},
+							redirectUri: redirectUrl,
+						});
+					}}
+					className="like-button"
+				>
+					<img src={likeIcon} alt="" className="icon" />
 				</button>
 			)}
 		</div>
