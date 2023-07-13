@@ -1,11 +1,7 @@
 import { Router } from "express";
-
 import logger from "./utils/logger";
-
 import { uploadImage, deleteImageFromS3 } from "./utils/upload&DeleteImage";
-
 import { v4 as uuidv4 } from "uuid";
-
 import pool from "./db";
 
 const router = Router();
@@ -156,19 +152,35 @@ router.get("/images/user/:owner", async (req, res) => {
 	}
 });
 
-		const allImages = await pool.query(
-			"SELECT * FROM images WHERE owner LIKE $1 ORDER BY upload_date;",
-			[owner]
+router.put("/image/:imageId/user", async (req, res) => {
+	try {
+		const { imageId } = req.params;
+		const { user } = req.query;
+
+		const userExists = await pool.query(
+			"SELECT EXISTS(SELECT 1 FROM images WHERE id = $1 AND liked_by_users @> ARRAY[$2])",
+			[imageId, user]
 		);
 
-		// Send a success response with the retrieved image data
-		return res.status(200).json({ data: allImages.rows });
+		if (!userExists.rows[0].exists) {
+			await pool.query(
+				"UPDATE images SET rating=rating + 1, liked_by_users = ARRAY_APPEND(liked_by_users, $1) WHERE id = $2",
+				[user, imageId]
+			);
+		} else {
+			await pool.query(
+				"UPDATE images SET rating = GREATEST(rating - 1, 0), liked_by_users = ARRAY_REMOVE(liked_by_users, $1) WHERE id = $2",
+				[user, imageId]
+			);
+		}
+
+		return res
+			.status(200)
+			.json({ message: "Image rating incremented successfully" });
 	} catch (error) {
-		// Log the error details for debugging purposes
 		logger.error(error);
 
-		// Send an error response with an appropriate status code and message
-		res.status(500).json({ error: true, message: "Internal server error" });
+		res.status(500).json({ error: true, message: error.message });
 	}
 });
 
