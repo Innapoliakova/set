@@ -1,12 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
-const dotenv = require("dotenv");
-
-const env = dotenv.config().parsed;
-const envKeys = Object.keys(env).reduce((prev, next) => {
-	prev[`process.env.${next}`] = JSON.stringify(env[next]);
-	return prev;
-}, {});
+const { DefinePlugin, EnvironmentPlugin } = require("webpack");
+require("dotenv").config();
 
 module.exports = {
 	entry: "./client/src/index.js",
@@ -40,6 +34,11 @@ module.exports = {
 			favicon: "./client/src/favicon.ico",
 			template: "./client/src/index.html",
 		}),
-		new webpack.DefinePlugin(envKeys),
+		new DefinePlugin({
+			"process.env.REACT_APP_AUTH0_CLIENT_ID": JSON.stringify(process.env.REACT_APP_AUTH0_CLIENT_ID),
+			"process.env.REACT_APP_AUTH0_DOMAIN": JSON.stringify(process.env.REACT_APP_AUTH0_DOMAIN),
+			"process.env.REACT_APP_sUser_EMAIL": JSON.stringify(process.env.REACT_APP_sUser_EMAIL),
+			"process.env.REACT_APP_sUser_GITHUB": JSON.stringify(process.env.REACT_APP_sUser_GITHUB),
+		}),
 	],
 };
