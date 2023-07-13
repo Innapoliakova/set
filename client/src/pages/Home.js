@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import "./Home.css";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
@@ -10,7 +9,6 @@ import Filter from "../components/Filter";
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [images, setImages] = useState([]);
-	const [isLogin, setIsLogin] = useState(true);
 	const [selectedFilter, setSelectedFilter] = useState(null);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [updateImages, setUpdateImages] = useState(true);
@@ -41,7 +39,6 @@ export function Home() {
 			<Filter setSelectedFilter={setSelectedFilter} />
 			<Gallery
 				images={images}
-				isLogin={isLogin}
 				message={message}
 				setUpdateImages={setUpdateImages}
 			/>
