@@ -133,9 +133,28 @@ router.delete("/:imageKey", async (req, res) => {
 	}
 });
 
-router.get("/images/:owner", async (req, res) => {
+router.get("/images/user/:owner", async (req, res) => {
 	try {
 		const { owner } = req.params;
+		const { userLiked, searchQuery } = req.query;
+		let allImages;
+		if (userLiked !== "Likes") {
+			allImages = await pool.query(
+				"SELECT * FROM images WHERE owner LIKE $1 AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date DESC;",
+				[owner, `%${searchQuery.toLowerCase()}%`]
+			);
+		} else {
+			allImages = await pool.query(
+				"SELECT * FROM images WHERE $1 = ANY (liked_by_users) AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date DESC;",
+				[owner, `%${searchQuery.toLowerCase()}%`]
+			);
+		}
+		return res.status(200).json({ data: allImages.rows });
+	} catch (error) {
+		logger.error(error);
+		res.status(500).json({ error: true, message: "Internal server error" });
+	}
+});
 
 		const allImages = await pool.query(
 			"SELECT * FROM images WHERE owner LIKE $1 ORDER BY upload_date;",
