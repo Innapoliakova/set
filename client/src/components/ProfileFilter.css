@@ -1,0 +1,36 @@
+:root {
+	--bg: #332f35;
+	--fg: lighten(var(--bg), 20%);
+	--borderWidth: 3px;
+}
+
+.filter-options {
+	margin: 50px auto;
+	text-align: center;
+}
+
+.filter-section input[type="radio"] {
+	position: absolute;
+	visibility: hidden;
+	display: none;
+}
+
+.filter-option {
+	color: lighten(var(--bg), 40%);
+	display: inline-block;
+	transition: all 1s;
+	box-shadow: 0 0 15px 0px #2f2f2f;
+	font-weight: bold;
+	padding: 10px 20px;
+	border-radius: 25px;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.filter-option:hover,
+.filter-option.selected {
+	background: var(--bg); /* Change background color on hover */
+	color: white;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Roboto");
