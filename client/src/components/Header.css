@@ -193,7 +193,7 @@ button:focus{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 8px 0;
+	padding: 8px;
 	margin: 4px 0 0;
 	background-color: #fff;
 	border-radius: 4px;
