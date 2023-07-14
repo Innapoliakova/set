@@ -16,26 +16,20 @@
 }
 
 .filter-option {
+	font-family: "Open Sans", sans-serif;
 	color: lighten(var(--bg), 40%);
 	display: inline-block;
 	transition: all 1s;
 	box-shadow: 0 0 15px 0px #2f2f2f;
-	font-weight: bold;
-	padding: 10px 20px;
+	font-weight: 500;
+	padding: 8px 20px;
 	border-radius: 25px;
 	cursor: pointer;
-	 margin-right: 10px;
+	margin-right: 10px;
 }
 
 .filter-option:hover,
-.filter-option.selected {
+.filter-section input[type="radio"]:checked + .filter-option {
 	background: var(--bg); /* Change background color on hover */
 	color: white;
-	
-  }
-
-
-
-
-
-@import url("https://fonts.googleapis.com/css?family=Roboto");
+}

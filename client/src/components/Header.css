@@ -1,5 +1,4 @@
 body {
-	font-family: "Raleway", sans-serif;
 	font-weight: 400;
 	line-height: 1.666;
 	background: #ffffff;
@@ -142,6 +141,7 @@ button:focus{
 }
 
 .logBut {
+	font-family: "Open Sans", sans-serif;
 	margin: 0;
 	color: white;
 	font-weight: 500;

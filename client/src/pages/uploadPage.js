@@ -184,6 +184,7 @@ const Upload = () => {
 											onChange={handleInputChange}
 											placeholder="Description"
 											required
+											spellCheck={true}
 										/>
 									</div>
 									<div className="input-field">
