@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import logo from "../assets/icons/cyf.png";
 import "./Header.css";
-
-import { Link } from "react-router-dom";
+import LoginButton from "./LoginBtn";
+import LogoutButton from "./LogoutBtn";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
 	const [showLoginForm, setShowLoginForm] = useState(false);
@@ -13,17 +15,26 @@ const Header = () => {
 	const [joinPassword, setJoinPassword] = useState("");
 	const [joinUsername, setJoinUsername] = useState("");
 	const [showHeader, setShowHeader] = useState(false);
+	const [showDropdown, setShowDropdown] = useState(false);
 
-	const handleLoginClick = () => {
-		setShowLoginForm(true);
-		setSelectedForm("login");
-		setLoginEmail("");
-		setLoginPassword("");
-		setJoinEmail("");
-		setJoinPassword("");
-		setJoinUsername("");
-	};
+	const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
+	const navigate = useNavigate();
+	const dropdownRef = useRef(null);
+
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+				setShowDropdown(false);
+			}
+		};
+
+		window.addEventListener("click", handleClickOutside);
+
+		return () => {
+			window.removeEventListener("click", handleClickOutside);
+		};
+	}, []);
 	const handleFormChange = (form) => {
 		setSelectedForm(form);
 	};
@@ -69,6 +80,28 @@ const Header = () => {
 		setShowLoginForm(false);
 	};
 
+	const handleUploadButtonClick = () => {
+		if (isAuthenticated) {
+			navigate("/upload");
+		} else {
+			const redirectUrl = window.location.origin + "/upload/";
+			loginWithRedirect({
+				appState: {
+					returnTo: redirectUrl,
+				},
+				redirectUri: redirectUrl,
+			});
+		}
+	};
+
+	const handleDropdownToggle = () => {
+		setShowDropdown(!showDropdown);
+	};
+
+	const handleProfileClick = () => {
+		navigate("/profile");
+	};
+
 	return (
 		<header className={showHeader ? "show" : ""}>
 			<div className="header-section">
@@ -76,11 +109,30 @@ const Header = () => {
 					<img src={logo} alt="Logo" className="logo" />
 				</div>
 				<div className="btn-pos">
+					{isAuthenticated && (
+						<div className="profile-container" ref={dropdownRef}>
+							<img
+								src={user.picture}
+								alt={user.name}
+								className="profileImage"
+								onClick={handleDropdownToggle}
+							/>
+							{showDropdown && (
+								<ul className="dropdown-menu">
+									<li onClick={handleProfileClick}>Profile</li>
+									<li>
+										<LogoutButton />
+									</li>
+								</ul>
+							)}
+						</div>
+					)}
 					<div className="login-button">
-						<button className="logBut" onClick={handleLoginClick}>Login</button>
-						<Link to="/upload">
-							<button className="upBut">Upload</button>
-						</Link>
+						<LoginButton />
+
+						<button className="upBut" onClick={handleUploadButtonClick}>
+							Upload
+						</button>
 					</div>
 				</div>
 			</div>

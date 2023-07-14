@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./uploadPage.css";
-import Header from "../components/HeaderUploadPage";
+import HeaderUploadPage from "../components/HeaderUploadPage";
 import "../components/Header.css";
 import deleteIcon from "../assets/icons/delete.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Upload = () => {
+	const { user } = useAuth0();
+
 	const navigate = useNavigate();
 	const [images, setImages] = useState([]);
 
@@ -69,6 +72,7 @@ const Upload = () => {
 		formData.append("description", newImage.description);
 		formData.append("tags", newImage.tags);
 		formData.append("categories", newImage.categories);
+		formData.append("user", user.sub);
 
 		try {
 			await fetch("/api/image", {
@@ -147,7 +151,7 @@ const Upload = () => {
 
 	return (
 		<>
-			<Header />
+			<HeaderUploadPage />
 			<section className="container">
 				<div className="upload-container" {...getRootProps({ style })}>
 					<input {...getInputProps()} />
@@ -158,6 +162,9 @@ const Upload = () => {
 				<button type="button" className="select-button" onClick={open}>
 					Select Image
 				</button>
+				<Link to="/" className="home-link">
+					Return Home
+				</Link>
 				<div className="thumbs-container">
 					{thumbs}
 
@@ -176,6 +183,7 @@ const Upload = () => {
 											className="input-description"
 											onChange={handleInputChange}
 											placeholder="Description"
+											required
 										/>
 									</div>
 									<div className="input-field">
@@ -185,6 +193,7 @@ const Upload = () => {
 											className="input-tags"
 											onChange={handleInputChange}
 											placeholder="Tags"
+											required
 										/>
 									</div>
 									<div className="input-field">
@@ -192,6 +201,7 @@ const Upload = () => {
 											className="categories-select"
 											name="categories"
 											onChange={handleInputChange}
+											required
 										>
 											<option value="">Categories</option>
 											<option value="photos">Photos</option>

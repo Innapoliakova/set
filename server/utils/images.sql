@@ -20,3 +20,7 @@ VALUES
         'Tags',
         'photos'
     );
+
+
+ALTER TABLE images
+ADD COLUMN liked_by_users text[];
