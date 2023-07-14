@@ -5,6 +5,7 @@
 }
 
 .search-box {
+
 	margin: 8rem 3rem 2rem 3rem;
 	background-color: #eff2f9;
 	height: 60p;
@@ -48,3 +49,4 @@ input {
 	width: 500px;
 }
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
+
