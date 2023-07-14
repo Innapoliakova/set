@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import logo from "../assets/icons/cyf.png";
 import "./Header.css";
-
 import LoginButton from "./LoginBtn";
 import LogoutButton from "./LogoutBtn";
-
 import { useAuth0 } from "@auth0/auth0-react";
-
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {

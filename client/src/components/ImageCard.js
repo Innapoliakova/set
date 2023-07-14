@@ -1,9 +1,9 @@
 
 import "./ImageCard.css";
-import favouriteIcon from "../assets/icons/favorite.svg";
 import downloadIcon from "../assets/icons/download.svg";
 import likeIcon from "../assets/icons/like.svg";
 import deleteIcon from "../assets/icons/delete.svg";
+
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 import { useAuth0 } from "@auth0/auth0-react";
@@ -47,16 +47,32 @@ const ImageCard = ({ image, setUpdateImages }) => {
  };
 
 
-	const { user, isAuthenticated } = useAuth0();
-	// const sUser = process.env.REACT_APP_sUser;
-	const sUser = "google-oauth2|105695661976451935769" || "github|103330478";
+	const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+	const superUser =
+		process.env.REACT_APP_sUser_EMAIL || process.env.REACT_APP_sUser_GITHUB;
 
-	const handleBookmark = () => {
-		// Handle bookmark functionality
-	};
 
-	const handleLike = () => {
-		// Handle like functionality
+
+
+	const handleLike = async (imageId, userSub) => {
+		try {
+			// Fetch the image data from the specified API endpoint
+			const response = await fetch(
+				`/api/image/${imageId}/user?user=${userSub}`,
+				{
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+				}
+			);
+
+			if (response.status === 200) {
+				setUpdateImages((prevUpdateImages) => !prevUpdateImages);
+			} else {
+				throw new Error("Image like fail");
+			}
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	const handleDownload = async (imageId) => {
@@ -113,7 +129,6 @@ const ImageCard = ({ image, setUpdateImages }) => {
 					throw new Error("Image delete failed");
 				}
 			} catch (err) {
-				// Catch any errors that occur during the fetch request or response handling
 				console.error(err);
 			}
 		}
@@ -136,12 +151,16 @@ const ImageCard = ({ image, setUpdateImages }) => {
 				<div className="No.download">Downloads times: {image.no_download}</div>
 				<div className="categories">Categories: {image.categories}</div>
 			</div>
+
 			{!isAuthenticated && (
 				<button onClick={handleLike} className="like-button">
 					<img src={likeIcon} alt="" className="icon" />
 
 				</button>
 			)}
+
+
+
 			<button
 				onClick={() => handleDownload(image.id)}
 				className="download-button"
@@ -158,7 +177,8 @@ const ImageCard = ({ image, setUpdateImages }) => {
 				<OpenInNewIcon className="open-window" />
 			</button>
 
-			{isAuthenticated && user && user.sub === sUser && (
+			{((isAuthenticated && user && user.sub === superUser) ||
+				(importedInProfile && isAuthenticated)) && (
 				<>
 					<button
 						onClick={() => handleDelete(image.key)}
@@ -169,6 +189,38 @@ const ImageCard = ({ image, setUpdateImages }) => {
 				</>
 			)}
 
+
+
+
+			{isAuthenticated && (
+				<button
+					onClick={() => handleLike(image.id, user.sub)}
+					className={
+						image.liked_by_users && image.liked_by_users.includes(user.sub)
+							? "like-button-clicked"
+							: "like-button"
+					}
+				>
+					<img src={likeIcon} alt="" className="icon" />
+				</button>
+			)}
+
+			{!isAuthenticated && (
+				<button
+					onClick={() => {
+						const redirectUrl = window.location.origin;
+						loginWithRedirect({
+							appState: {
+								returnTo: redirectUrl,
+							},
+							redirectUri: redirectUrl,
+						});
+					}}
+					className="like-button"
+				>
+					<img src={likeIcon} alt="" className="icon" />
+				</button>
+			)}
 
 		</div>
 	);

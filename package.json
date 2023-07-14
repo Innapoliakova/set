@@ -34,12 +34,13 @@
 	},
 	"homepage": "https://github.com/textbook/starter-kit#readme",
 	"devDependencies": {
-		"@babel/cli": "^7.22.6",
-		"@babel/core": "^7.22.8",
-		"@babel/eslint-parser": "^7.22.7",
+		"@babel/cli": "^7.22.9",
+		"@babel/core": "^7.22.9",
+		"@babel/eslint-parser": "^7.22.9",
 		"@babel/node": "^7.22.6",
-		"@babel/plugin-transform-runtime": "^7.22.7",
-		"@babel/preset-env": "^7.22.7",
+		"@babel/plugin-proposal-class-properties": "^7.18.6",
+		"@babel/plugin-transform-runtime": "^7.22.9",
+		"@babel/preset-env": "^7.22.9",
 		"@babel/preset-react": "^7.22.5",
 		"@codeyourfuture/eslint-config-standard": "^4.0.3",
 		"@textbook/build-info": "^0.5.2",
@@ -72,7 +73,7 @@
 		"webpack-merge": "^5.9.0"
 	},
 	"dependencies": {
-		"@auth0/auth0-react": "^2.1.1",
+		"@auth0/auth0-react": "^2.2.0",
 		"@aws-sdk/client-s3": "^3.369.0",
 		"@babel/runtime": "^7.22.6",
 		"@emotion/react": "^11.11.1",
