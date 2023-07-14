@@ -1,13 +1,58 @@
+
 import "./ImageCard.css";
 import downloadIcon from "../assets/icons/download.svg";
 import likeIcon from "../assets/icons/like.svg";
 import deleteIcon from "../assets/icons/delete.svg";
+
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+
 import { useAuth0 } from "@auth0/auth0-react";
 
-const ImageCard = ({ image, setUpdateImages, importedInProfile }) => {
+const ImageCard = ({ image, setUpdateImages }) => {
+	const handleOpenImage = async () => {
+		console.log("hello");
+		try {
+ // Start preloading the image
+ const img = new Image();
+ img.src = image.url;
+
+ // Open a new window and wait for it to load
+ const newWindow = window.open("", "_blank");
+ await new Promise((resolve) => {
+			newWindow.onload = resolve;
+	});
+
+ // Create the HTML content
+ const htmlContent = `
+ <div style="margin-left: 20px;">
+      <img src="${image.url}" style="width: 50vw; height: auto;">
+			<div>
+			  <img src="${image.url}" style="width: 50vw; height: auto;">
+			  <div class="details">
+				<div class="description">${image.description}</div>
+				<div class="rating">Likes: ${image.rating}</div>
+				<div class="tags">Tags: ${image.tags}</div>
+				<div class="Date">Date: ${image.upload_date.split("T")[0]}</div>
+				<div class="No.download">Downloads times: ${image.no_download}</div>
+				<div class="categories">Categories: ${image.categories}</div>
+			  </div>
+			</div>
+		  `;
+
+ // Set the HTML content in the new window
+ newWindow.document.body.innerHTML = htmlContent;
+		} catch (err) {
+	console.error(err);
+		}
+ };
+
+
 	const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 	const superUser =
 		process.env.REACT_APP_sUser_EMAIL || process.env.REACT_APP_sUser_GITHUB;
+
+
+
 
 	const handleLike = async (imageId, userSub) => {
 		try {
@@ -91,7 +136,13 @@ const ImageCard = ({ image, setUpdateImages, importedInProfile }) => {
 
 	return (
 		<div className="image-card">
-			<img width="400" height="250" src={image.url} alt="" />
+			{/* <img width="400" height="250" src={image.url} alt="" /> */}
+			<img width="400"
+            height="250"
+            src={image.url}
+          alt=""
+
+ />
 			<div className="details">
 				<div className="description">{image.description}</div>
 				<div className="rating">Likes: {image.rating}</div>
@@ -101,11 +152,29 @@ const ImageCard = ({ image, setUpdateImages, importedInProfile }) => {
 				<div className="categories">Categories: {image.categories}</div>
 			</div>
 
+			{!isAuthenticated && (
+				<button onClick={handleLike} className="like-button">
+					<img src={likeIcon} alt="" className="icon" />
+
+				</button>
+			)}
+
+
+
 			<button
 				onClick={() => handleDownload(image.id)}
 				className="download-button"
 			>
 				<img src={downloadIcon} alt="" className="icon" />
+			</button>
+			<button
+
+				onClick={() => handleOpenImage(image.id)}
+				className="open-button"
+
+			>
+
+				<OpenInNewIcon className="open-window" />
 			</button>
 
 			{((isAuthenticated && user && user.sub === superUser) ||
@@ -119,6 +188,10 @@ const ImageCard = ({ image, setUpdateImages, importedInProfile }) => {
 					</button>
 				</>
 			)}
+
+
+
+
 			{isAuthenticated && (
 				<button
 					onClick={() => handleLike(image.id, user.sub)}
@@ -148,6 +221,7 @@ const ImageCard = ({ image, setUpdateImages, importedInProfile }) => {
 					<img src={likeIcon} alt="" className="icon" />
 				</button>
 			)}
+
 		</div>
 	);
 };
