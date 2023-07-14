@@ -46,6 +46,7 @@
 .image-card .details .categories {
 	font-size: 14px;
 	margin-bottom: 5px;
+	margin-left: 10px;
 }
 
 .image-card button {
@@ -96,3 +97,13 @@
 .image-card .icon {
 	width: 30px;
 }
+.image-card .open-button  {
+	left: auto;
+	right: 10px;
+	top: 10px;
+	
+}
+.image-card .open-button {
+	color: black;
+}
+
