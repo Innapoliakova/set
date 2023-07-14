@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-
 import "./Home.css";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
-// import Search from "../components/Search";
 import Gallery from "../components/Gallery";
 import Footer from "../components/Footer";
 import Filter from "../components/Filter";
@@ -16,7 +14,7 @@ export function Home() {
     const [searchQuery, setSearchQuery] = useState("");
     const [updateImages, setUpdateImages] = useState(true);
 
-    const [isLoading, setIsLoading] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -43,8 +41,7 @@ export function Home() {
         <div className="App">
             <Header />
             <Hero setSearchQuery={setSearchQuery} isLoading={isLoading} />
-            {/* <Search setSearchQuery={setSearchQuery} /> */}
-            <Filter setSelectedFilter={setSelectedFilter} />
+               <Filter setSelectedFilter={setSelectedFilter} />
             <Gallery
                 images={images}
                 isLogin={isLogin}
@@ -54,6 +51,7 @@ export function Home() {
             <Footer />
         </div>
     );
+
 }
 
 export default Home;

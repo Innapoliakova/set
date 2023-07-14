@@ -1,6 +1,6 @@
 import "./Hero.css";
 import Search from "./Search";
-// import "./Search.css";
+
 
 const Hero = ({ setSearchQuery, isLoading }) => {
     return (

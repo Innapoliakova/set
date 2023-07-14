@@ -1,11 +1,7 @@
 import { Router } from "express";
-
 import logger from "./utils/logger";
-
 import { uploadImage, deleteImageFromS3 } from "./utils/upload&DeleteImage";
-
 import { v4 as uuidv4 } from "uuid";
-
 import pool from "./db";
 
 const router = Router();
@@ -17,12 +13,12 @@ router.get("/images", async (req, res) => {
 		let allImages;
 		if (filter !== "null") {
 			allImages = await pool.query(
-				"SELECT * FROM images WHERE categories LIKE $1 AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date;",
+				"SELECT * FROM images WHERE categories LIKE $1 AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date DESC;",
 				[filter, `%${searchQuery.toLowerCase()}%`]
 			);
 		} else {
 			allImages = await pool.query(
-				"SELECT * FROM images WHERE (lower(description) LIKE $1 OR lower(tags) LIKE $1) ORDER BY upload_date;",
+				"SELECT * FROM images WHERE (lower(description) LIKE $1 OR lower(tags) LIKE $1) ORDER BY upload_date DESC;",
 				[`%${searchQuery.toLowerCase()}%`]
 			);
 		}
@@ -97,13 +93,13 @@ router.post(
 
 			const imageKey = key || location.split("/")[0];
 
-			const { description, tags, categories } = req.body; // Extract description, tags, and categories from the request body
+			const { description, tags, categories, user } = req.body; // Extract description, tags, and categories from the request body
 
 			const id = uuidv4(); // Generate a unique ID for the image
 
 			await pool.query(
-				"INSERT INTO images(id,description, tags, categories, url, key) VALUES($1, $2, $3, $4, $5, $6)",
-				[id, description, tags, categories, location, imageKey]
+				"INSERT INTO images(id,description, tags, categories, url, key, owner) VALUES($1, $2, $3, $4, $5, $6 ,$7)",
+				[id, description, tags, categories, location, imageKey, user]
 			); // Use parameterized query values to add the image details to images table
 			res.status(200).json("Image were added successfully");
 		} catch (error) {
@@ -130,6 +126,61 @@ router.delete("/:imageKey", async (req, res) => {
 	} catch (error) {
 		logger.error("Error deleting image:", error);
 		res.status(500).json({ error: "Failed to delete image" });
+	}
+});
+
+router.get("/images/user/:owner", async (req, res) => {
+	try {
+		const { owner } = req.params;
+		const { userLiked, searchQuery } = req.query;
+		let allImages;
+		if (userLiked !== "Likes") {
+			allImages = await pool.query(
+				"SELECT * FROM images WHERE owner LIKE $1 AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date DESC;",
+				[owner, `%${searchQuery.toLowerCase()}%`]
+			);
+		} else {
+			allImages = await pool.query(
+				"SELECT * FROM images WHERE $1 = ANY (liked_by_users) AND (lower(description) LIKE $2 OR lower(tags) LIKE $2) ORDER BY upload_date DESC;",
+				[owner, `%${searchQuery.toLowerCase()}%`]
+			);
+		}
+		return res.status(200).json({ data: allImages.rows });
+	} catch (error) {
+		logger.error(error);
+		res.status(500).json({ error: true, message: "Internal server error" });
+	}
+});
+
+router.put("/image/:imageId/user", async (req, res) => {
+	try {
+		const { imageId } = req.params;
+		const { user } = req.query;
+
+		const userExists = await pool.query(
+			"SELECT EXISTS(SELECT 1 FROM images WHERE id = $1 AND liked_by_users @> ARRAY[$2])",
+			[imageId, user]
+		);
+
+		if (!userExists.rows[0].exists) {
+			await pool.query(
+				"UPDATE images SET rating=rating + 1, liked_by_users = ARRAY_APPEND(liked_by_users, $1) WHERE id = $2",
+				[user, imageId]
+			);
+		} else {
+			await pool.query(
+				"UPDATE images SET rating = GREATEST(rating - 1, 0), liked_by_users = ARRAY_REMOVE(liked_by_users, $1) WHERE id = $2",
+				[user, imageId]
+			);
+		}
+
+		return res
+			.status(200)
+			.json({ message: "Image rating incremented successfully" });
+	} catch (error) {
+		logger.error(error);
+
+		res.status(500).json({ error: true, message: error.message });
 	}
 });
 

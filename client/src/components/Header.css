@@ -7,27 +7,27 @@ body {
 }
 
 header {
-  position: sticky;
-  top: 0;
-  z-index: 999;
+	position: sticky;
+	top: 0;
+	z-index: 999;
 }
 
 header.show {
-  display: block;
+	display: block;
 }
 
 header.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 999;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 999;
 }
 
 .header-section {
-	  position: sticky;
-  top: 0;
+	position: sticky;
+	top: 0;
 	background-color: #efefef;
-	padding: 2px;
+	padding: 0 2rem;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -45,7 +45,8 @@ header.sticky {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content:end;
+	justify-content: end;
+	gap: 3rem;
 }
 
 button {
@@ -59,6 +60,19 @@ button {
 	margin-top: 20px;
 	margin-right: 50px;
 }
+/* button {
+    border: none;
+	background-color: transparent;
+}
+
+button:focus {
+    border: none;
+    outline: none;
+}
+
+button:focus{
+    outline:none !important;
+} */
 
 .modal-container {
 	position: relative;
@@ -110,7 +124,6 @@ button {
 	margin-top: 30px;
 }
 
-
 .close-button {
 	position: absolute;
 	top: -190px;
@@ -129,17 +142,18 @@ button {
 }
 
 .logBut {
+	margin: 0;
 	color: white;
 	font-weight: 500;
-	background-color: rgb(57,120,248);
+	background-color: rgb(57, 120, 248);
 }
 .logBut:hover {
 	border: 2px solid;
-	background-color: rgba(57,120,248,0.8);
+	background-color: rgba(57, 120, 248, 0.8);
 }
 
 .upBut {
-	
+	margin: 0 1rem;
 	background-color: rgb(80, 192, 108);
 	background-image: url(https://upload.wikimedia.org/wikipedia/commons/d/da/Upload_icon_mask.svg);
 	background-repeat: no-repeat;
@@ -150,11 +164,53 @@ button {
 	font-weight: 500;
 	padding-right: 0;
 	background-origin: content-box;
-
-  text-align: center
-	;
+	text-align: center;
 }
 
 .upBut:hover {
-	background-color: rgba(80, 192, 108,0.8);
+	background-color: rgba(80, 192, 108, 0.8);
+}
+
+.profile-container {
+	display: flex;
+	position: relative;
+}
+
+.profileImage {
+	width: 40px;
+	border-radius: 50%;
+}
+
+.profileImage:hover {
+	cursor: pointer;
+}
+
+.dropdown-menu {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 8px;
+	margin: 4px 0 0;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu li {
+	padding: 8px 16px;
+	color: #333;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+	background-color: #f5f5f5;
+}
+
+li {
+	list-style: none;
 }
