@@ -3,7 +3,13 @@ import "./Gallery.css";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import LoadingSpinner from "./LoadingSpinner";
 
-const Gallery = ({ images, isLoading, setUpdateImages, importedInProfile }) => {
+const Gallery = ({
+	images,
+	isLoading,
+	setUpdateImages,
+	importedInProfile,
+	selectedFilter,
+}) => {
 	return (
 		<>
 			{isLoading ? (
@@ -26,6 +32,7 @@ const Gallery = ({ images, isLoading, setUpdateImages, importedInProfile }) => {
 											image={image}
 											setUpdateImages={setUpdateImages}
 											importedInProfile={importedInProfile}
+											selectedFilter={selectedFilter}
 										/>
 									))}
 								</Masonry>
