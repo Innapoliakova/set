@@ -1,9 +1,8 @@
 body {
-    font-family: "Raleway", sans-serif;
-    font-weight: 400;
-    line-height: 1.666;
-    background: #ffffff;
-    color: #555;
+	font-weight: 400;
+	line-height: 1.666;
+	background: #ffffff;
+	color: #555;
 }
 
 header {
@@ -142,10 +141,11 @@ button:focus{
 }
 
 .logBut {
-    margin: 0;
-    color: white;
-    font-weight: 500;
-    background-color: rgb(57, 120, 248);
+	font-family: "Open Sans", sans-serif;
+	margin: 0;
+	color: white;
+	font-weight: 500;
+	background-color: rgb(57, 120, 248);
 }
 .logBut:hover {
     border: 2px solid;

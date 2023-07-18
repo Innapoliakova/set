@@ -1,7 +1,7 @@
 import "./Hero.css";
 import Search from "./Search";
 
-const Hero = ({ setSearchQuery }) => {
+const Hero = ({ setSearchQuery, isLoading }) => {
 	return (
 		<div className="hero">
 			<h1 className="">CYF's picture gallery</h1>
@@ -9,7 +9,7 @@ const Hero = ({ setSearchQuery }) => {
 				Unlock your creative potential with our user-friendly app, seamlessly
 				discovering, uploading, and utilizing a vast array of assets.
 			</h2>
-			<Search setSearchQuery={setSearchQuery} />
+			<Search setSearchQuery={setSearchQuery} isLoading={isLoading} />
 		</div>
 	);
 };

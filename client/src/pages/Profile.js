@@ -12,7 +12,7 @@ const Profile = () => {
 	const [message, setMessage] = useState("Loading...");
 	const [images, setImages] = useState([]);
 	const [updateImages, setUpdateImages] = useState(true);
-	const [selectedFilter, setSelectedFilter] = useState(null);
+	const [selectedFilter, setSelectedFilter] = useState("null");
 	const [searchQuery, setSearchQuery] = useState("");
 	const importedInProfile = true;
 	const owner = user.sub;
@@ -56,6 +56,7 @@ const Profile = () => {
 							message={message}
 							setUpdateImages={setUpdateImages}
 							importedInProfile={importedInProfile}
+							selectedFilter={selectedFilter}
 						/>
 					</div>
 				</div>

@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -7,6 +8,13 @@ import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import "./Footer.css";
 
 const Footer = () => {
+
+  const [email, setEmail] = useState("");
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <footer>
       <div className="footer-section">
@@ -22,11 +30,21 @@ const Footer = () => {
 
         <span className="newsletter">Sign up to our newsletter</span>
         <input
+          // type="email"
+          // placeholder="email address"
+          // className="email-required"
           type="email"
-          placeholder="email address"
-          className="email-required"
+                  value={email}
+                  name="EMAIL"
+                  placeholder="email address"
+                  className={`email-required ${email ? "has-value" : ""}`}
+                  id="mce-EMAIL"
+                  onChange={handleEmailChange}
+
         />
-        <button className="button">Subscribe</button><br></br>
+
+        <button className="button">Subscribe</button>
+
         <a href="https://www.facebook.com/codeyourfuture.io">
         <FacebookRoundedIcon className="fb" />
       </a>
