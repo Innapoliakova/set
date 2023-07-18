@@ -6,8 +6,10 @@ import App from "./App";
 import { createBrowserHistory } from "history";
 const history = createBrowserHistory();
 
-const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+
+
+const domain = ''; //process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId = ''; //process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 const onRedirectCallback = (appState) => {
 	history.push(

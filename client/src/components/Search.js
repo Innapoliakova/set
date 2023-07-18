@@ -27,3 +27,4 @@ const Search = ({ setSearchQuery, isLoading }) => {
     );
 };
 export default Search;
+

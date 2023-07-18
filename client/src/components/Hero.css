@@ -1,27 +1,44 @@
 .hero {
-	background-image: url("https://airtame.com/wp-content/uploads/2019/06/Code-your-future-02-2400x1098.png");
-	background-position: 50% -50px;
-	background-size: cover;
-	height: 660px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
-	position: relative;
+  background-image: url("https://airtame.com/wp-content/uploads/2019/06/Code-your-future-02-2400x1098.png");
+  background-position: 50% -50px;
+  background-size: cover;
+  /* background-position: center; */
+  height: 660px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:flex-start;
+  position: relative;
+  
 }
 
+
 .hero h1 {
-	font-size: 46px;
-	font-weight: bolder;
-	color: rgb(63, 63, 63);
-	margin: 2rem;
-	color: transparent;
+  font-size: 46px;
+  font-weight:bolder;
+  color: rgb(63,63,63);
 }
 
 .hero h2 {
-	font-size: 26px;
-	color: rgb(63, 63, 63);
-	margin: 4rem;
-	padding-bottom: 6rem;
-	color: transparent;
+  font-size: 26px;
+  color: rgb(63,63,63);;
+  margin-bottom: 160px;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 600px) {
+  .hero {
+    height: 500px;
+    
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero h2 {
+    display: none;
+    font-size: 22px;
+    margin-bottom: 120px;
+  }
 }

@@ -3,6 +3,7 @@
     padding: 10px;
     margin: 4rem auto;
 }
+
 .no-images-message {
     width: 50%;
 	margin: auto;
@@ -13,3 +14,13 @@
 	font-size: 30px;
 	line-height: 30px;
 }
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    .gallery-section {
+      width: 100%;
+      padding: 5px;
+      margin: 2rem auto;
+    }
+  }
+
