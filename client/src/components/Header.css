@@ -6,62 +6,62 @@ body {
 }
 
 header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
+	position: sticky;
+	top: 0;
+	z-index: 999;
 }
 
 header.show {
-    display: block;
+	display: block;
 }
 
 header.sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 999;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 999;
 }
 
 .header-section {
-    position: sticky;
-    top: 0;
-    background-color: #efefef;
-    padding: 0 2rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+	position: sticky;
+	top: 0;
+	background-color: #efefef;
+	padding: 0 2rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .logo {
-    width: 200px;
-    height: 70px;
-    margin-right: 10px;
-    margin-left: 30px;
+	width: 200px;
+	height: 70px;
+	margin-right: 10px;
+	margin-left: 30px;
 }
 
 .btn-pos {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-    gap: 3rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: end;
+	gap: 3rem;
 }
 
 button {
-    background-color: #f2f2f2;
-    color: #333;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    font-size: 24px;
-    cursor: pointer;
-    margin-top: 20px;
-    margin-right: 50px;
+	background-color: #f2f2f2;
+	color: #333;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 20px;
+	font-size: 24px;
+	cursor: pointer;
+	margin-top: 20px;
+	margin-right: 50px;
 }
 /* button {
     border: none;
-    background-color: transparent;
+	background-color: transparent;
 }
 
 button:focus {
@@ -74,70 +74,70 @@ button:focus{
 } */
 
 .modal-container {
-    position: relative;
+	position: relative;
 }
 
 .modal {
-    position: absolute;
-    top: 200px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
+	position: absolute;
+	top: 200px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 9999;
 }
 
 .form-field {
-    width: 400px;
-    height: 350px;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
+	width: 400px;
+	height: 350px;
+	padding: 20px;
+	background-color: #f2f2f2;
+	border-radius: 5px;
 }
 
 .form-field h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+	font-size: 24px;
+	margin-bottom: 10px;
 }
 
 .form-field input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
 }
 
 .form-field button {
-    width: 100%;
+	width: 100%;
 }
 
 .loginForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 30px;
 }
 
 .close-button {
-    position: absolute;
-    top: -190px;
-    background-color: transparent;
-    border: none;
-    font-size: 24px;
-    color: #555;
+	position: absolute;
+	top: -190px;
+	background-color: transparent;
+	border: none;
+	font-size: 24px;
+	color: #555;
 }
 
 .form-options {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
 }
 
 .logBut {
@@ -148,141 +148,69 @@ button:focus{
 	background-color: rgb(57, 120, 248);
 }
 .logBut:hover {
-    border: 2px solid;
-    background-color: rgba(57, 120, 248, 0.8);
+	border: 2px solid;
+	background-color: rgba(57, 120, 248, 0.8);
 }
 
 .upBut {
-    margin: 0 1rem;
-    background-color: rgb(80, 192, 108);
-    background-image: url(https://upload.wikimedia.org/wikipedia/commons/d/da/Upload_icon_mask.svg);
-    background-repeat: no-repeat;
-    background-position: left;
-    background-size: 22px;
-    width: 165px;
-    color: white;
-    font-weight: 500;
-    padding-right: 0;
-    background-origin: content-box;
-    text-align: center;
+	margin: 0 1rem;
+	background-color: rgb(80, 192, 108);
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/d/da/Upload_icon_mask.svg);
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: 22px;
+	width: 165px;
+	color: white;
+	font-weight: 500;
+	padding-right: 0;
+	background-origin: content-box;
+	text-align: center;
 }
 
 .upBut:hover {
-    background-color: rgba(80, 192, 108, 0.8);
+	background-color: rgba(80, 192, 108, 0.8);
 }
 
 .profile-container {
-    display: flex;
-    position: relative;
+	display: flex;
+	position: relative;
 }
 
 .profileImage {
-    width: 40px;
-    border-radius: 50%;
+	width: 40px;
+	border-radius: 50%;
 }
 
 .profileImage:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 8px 0;
-    margin: 4px 0 0;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	position: absolute;
+	top: 100%;
+	right: 0;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 8px;
+	margin: 4px 0 0;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-menu li {
-    padding: 8px 16px;
-    color: #333;
-    font-size: 14px;
-    cursor: pointer;
+	padding: 8px 16px;
+	color: #333;
+	font-size: 14px;
+	cursor: pointer;
 }
 
 .dropdown-menu li:hover {
-    background-color: #f5f5f5;
+	background-color: #f5f5f5;
 }
 
 li {
-    list-style: none;
+	list-style: none;
 }
-/* Media Query for Mobile Devices */
-@media (max-width: 610px) {
-    .logo {
-      width: 50px;
-      height: 25px;
-      margin-right: 5px;
-      margin-left: 2px;
-    }   
-    button {
-      font-size: 3px;
-      margin-top: 2px;
-      margin-right: 2px;
-    }
-    .loginForm {
-      margin-top: 20px;
-    }
-  
-    .close-button {
-      top: -150px;
-      font-size: 20px;
-    }
-  
-    .form-options {
-      flex-direction: column;
-      margin-top: 15px;
-    }
-  
-    .logBut {
-        padding: 0%;
-      font-size: 10px;
-      width: 50px;
-      height: 35px;
-    }
-  
-    .upBut {
-        background-image: none;
-        padding: 0%;
-      margin: 0.5rem 0;
-      font-size: 10px;
-      width: 50px;
-      height: 35px;
-    }
-  
-    .profileImage {
-      width: 30px;
-    }
-    
-  }
-  @media only screen and (max-width: 900px) and (min-width: 610px)  {
-     .logo {
-        width: 80px;
-        height: 25px;
-        margin-right: 5px;
-        margin-left: 2px;
-      } 
-    
-    .logBut {
-        padding: 0%;
-      font-size: 10px;
-      width: 80px;
-      height: 35px;
-    }
-  
-    .upBut {
-        background-image: none;
-        padding: 0%;
-      margin: 0.5rem 0;
-      font-size: 10px;
-      width: 80px;
-      height: 35px;
-    }
-  }

@@ -8,7 +8,6 @@ import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import "./Footer.css";
 
 const Footer = () => {
-
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (e) => {
@@ -44,7 +43,6 @@ const Footer = () => {
         />
 
         <button className="button">Subscribe</button>
-
         <a href="https://www.facebook.com/codeyourfuture.io">
         <FacebookRoundedIcon className="fb" />
       </a>

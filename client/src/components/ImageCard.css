@@ -1,42 +1,42 @@
 /* ImageCard.css */
 * {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .image-card {
-    position: relative;
-    cursor: pointer;
+	position: relative;
+	cursor: pointer;
 }
 
 .image-card img {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .image-card .details {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    color: #fff;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	color: #fff;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: flex-start;
 }
 
 .image-card:hover .details {
-    opacity: 1;
+	opacity: 1;
 }
 
 .image-card .details .description {
-    font-size: 16px;
-    margin-bottom: 10px;
+	font-size: 16px;
+	margin-bottom: 10px;
 }
 
 .image-card .details .rating,
@@ -50,48 +50,68 @@
 }
 
 .image-card button {
-    margin: 0;
-    position: absolute;
-    padding: 6px ;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    background-color: rgba(239, 239, 239, 0.903);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+	margin: 0;
+	position: absolute;
+	padding: 6px;
+	border: none;
+	border-radius: 8px;
+	color: #fff;
+	background-color: rgba(239, 239, 239, 0.903);
+	opacity: 0;
+	transition: opacity 0.3s ease;
 }
 
 .image-card:hover button {
-    opacity: 0.8;
+	opacity: 0.8;
 }
 
 .image-card button:hover {
-    opacity: 1;
-    background-color: #fff;
+	opacity: 1;
+	background-color: #fff;
 }
 
 .image-card .bookmark-button {
-    left: auto;
-    right: 10px;
-    top: 10px;
+	left: auto;
+	right: 10px;
+	top: 10px;
 }
 
 /* Additional styles for specific buttons */
 
+.image-card .like-button-clicked {
+	top: 5px;
+	left: 10px;
+
+	/* position: relative; */
+}
+
+.image-card .like-button-clicked::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231a2be8'><path d='M12 20C12 20 21 16 21 9.71405C21 6 18.9648 4 16.4543 4C15.2487 4 14.0925 4.49666 13.24 5.38071L12.7198 5.92016C12.3266 6.32798 11.6734 6.32798 11.2802 5.92016L10.76 5.38071C9.90749 4.49666 8.75128 4 7.54569 4C5 4 3 6 3 9.71405C3 16 12 20 12 20Z' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+	background-repeat: no-repeat;
+	background-size: contain;
+	filter: invert(30%) sepia(100%) saturate(5000%);
+}
+
 .image-card .like-button {
-    top: 5px;
-    left: 10px;
+	top: 5px;
+	left: 10px;
 }
 
 .image-card .download-button {
-    left: auto;
-    right: 10px;
-    bottom: 10px;
+	left: auto;
+	right: 10px;
+	bottom: 10px;
 }
 
 .image-card .delete-button {
-    bottom: 10px;
-    right: 80px;
+	bottom: 10px;
+	right: 80px;
 }
 
 .image-card .icon {
@@ -106,53 +126,4 @@
 .image-card .open-button {
 	color: black;
 }
-/* Media Query for Mobile Devices */
-@media (max-width: 480px) {
-    .image-card .details {
-      padding: 10px;
-    }
-  
-    .image-card .details .description {
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-  
-    .image-card .details .rating,
-    .image-card .details .tags,
-    .image-card .details .Date,
-    .image-card .details .No.download,
-    .image-card .details .categories {
-      font-size: 12px;
-      margin-bottom: 4px;
-    }
-  
-    .image-card button {
-      padding: 4px;
-      border-radius: 6px;
-    }
-  
-    .image-card .bookmark-button {
-      top: 6px;
-      right: 6px;
-    }
-  
-    .image-card .like-button {
-      top: 4px;
-      left: 6px;
-    }
-  
-    .image-card .download-button {
-      left: auto;
-      right: 6px;
-      bottom: 6px;
-    }
-  
-    .image-card .delete-button {
-      bottom: 6px;
-      right: 64px;
-    }
-  
-    .image-card .icon {
-      width: 20px;
-    }
-  }
+

@@ -1,136 +1,120 @@
 .footer-section{
-  padding: 23px;
-text-align: center;
-  position:relative;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #ffffff;
-  display: block;
-  font-size: 1.2em;
-  box-shadow: 0em 0.15em 2em 0px rgba(0, 0, 0, 0.15);
-  z-index: 800;
-
-}
-.button {
-  background: #ea4549;
-  color: #fff;
-  height: auto;
-font-size: 1em;
-font-weight: 600;
-line-height: 1.5em;
-position: relative;
-text-transform: none;
-margin: 0 auto;
-padding: 8px;
-border: 0;
-border-radius: 2px;
-width: auto;
-cursor: pointer;
-font-family: inherit;
-letter-spacing: 0;
-white-space: nowrap;
-transition: padding 0.25s;
--webkit-transition: padding 0.25s;
-text-shadow: none;
-box-shadow: none;
+    padding: 23px;
+ text-align: center;
+    position:relative;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: block;
+    font-size: 1.2em;
+    box-shadow: 0em 0.15em 2em 0px rgba(0, 0, 0, 0.15);
+    z-index: 800;
   
-}
-
-.fb,
-.tw,
-.link,
-.instag,
-.github,
-.email {
-  color: rgb(76, 76, 76);
- 
-  padding: 2px;
-  display: flex;
-  justify-content: space-between;
-  margin-right: 4px;
+  }
+  .button {
+    background: #ea4549;
+    color: #fff;
+    height: auto;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.5em;
   position: relative;
-  top: 5px;
-}
+  text-transform: none;
+  margin: 0 auto;
+  padding: 8px;
+  border: 0;
+  border-radius: 2px;
+  width: auto;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transition: padding 0.25s;
+  -webkit-transition: padding 0.25s;
+  text-shadow: none;
+  box-shadow: none;
+    
+  }
+  
+  .fb,
+  .tw,
+  .link,
+  .instag,
+  .github,
+  .email {
+    color: rgb(76, 76, 76);
+   
+    padding: 2px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 4px;
+    position: relative;
+    top: 5px;
+  }
+  
+  .fb :hover,
+  .tw :hover,
+  .link :hover,
+  .instag :hover,
+  .github :hover,
+  .email :hover {
+    color: red;
+  }
+  
+  .email-required {
+    background: #efefef;
 
-.fb :hover,
-.tw :hover,
-.link :hover,
-.instag :hover,
-.github :hover,
-.email :hover {
-  color: red;
-}
+    height: auto;
+  font-size: 1em;
+  line-height: 1.5em;
+  position: relative;
+  text-transform: none;
+  margin: 0 auto;
+  padding: 5px;
+  border: 0;
+  border-radius: 2px;
+  width: 300px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transition: padding 0.25s;
+  -webkit-transition: padding 0.25s;
+  text-shadow: none;
+  box-shadow: none;
 
-.email-required {
-  background: #efefef;
+   
 
-  height: auto;
-font-size: 1em;
-line-height: 1.5em;
-position: relative;
-text-transform: none;
-margin: 0 auto;
-padding: 5px;
-border: 0;
-border-radius: 2px;
-width: 300px;
-cursor: pointer;
-font-family: inherit;
-letter-spacing: 0;
-white-space: nowrap;
-transition: padding 0.25s;
--webkit-transition: padding 0.25s;
-text-shadow: none;
-box-shadow: none;
+  }
+  .newsletter {
+    margin: 10px;
+  }
 
- 
-
-}
-.newsletter {
-  margin: 10px;
-}
-
-*,
+  *,
 *:before,
 *:after {
-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-div > footer > div > div > p > a:nth-child(1),
+  div > footer > div > div > p > a:nth-child(1),
 a:link {
-color: rgb(237, 67, 67);
-text-decoration: underline;
-text-decoration-color: black;
+  color: rgb(237, 67, 67);
+  text-decoration: underline;
+  text-decoration-color: black;
 }
 
 div > footer > div > div > p > a:nth-child(2),
 a:link {
-color: rgb(237, 67, 67);
-text-decoration: underline;
-text-decoration-color: black;
+  color: rgb(237, 67, 67);
+  text-decoration: underline;
+  text-decoration-color: black;
 }
 div > footer > div > div > p > a:nth-child(3),
 a:link {
-color: rgb(237, 67, 67);
-text-decoration: underline;
-text-decoration-color: rgb(20, 18, 18);
-cursor: pointer;
+  color: rgb(237, 67, 67);
+  text-decoration: underline;
+  text-decoration-color: rgb(20, 18, 18);
+  cursor: pointer;
 }
 
-/* Media Query for Mobile Devices */
-@media (max-width: 480px) {
-
-.email-required {
-  width: 240px;
-}
-}
-@media only screen and (max-width: 800px) and (min-width: 480px)  {
-.newsletter {
-display: none;
-}
-.footer-bottom {
-width: 80%;
-margin: auto;
-}
-}
