@@ -5,7 +5,12 @@ import deleteIcon from "../assets/icons/delete.svg";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const ImageCard = ({ image, setUpdateImages, importedInProfile }) => {
+const ImageCard = ({
+	image,
+	setUpdateImages,
+	importedInProfile,
+	selectedFilter,
+}) => {
 	const handleOpenImage = async () => {
 		console.log("hello");
 		try {
@@ -157,7 +162,9 @@ const ImageCard = ({ image, setUpdateImages, importedInProfile }) => {
 			</button>
 
 			{((isAuthenticated && user && user.sub === superUser) ||
-				(importedInProfile && isAuthenticated)) && (
+				(importedInProfile &&
+					isAuthenticated &&
+					selectedFilter === "null")) && (
 				<>
 					<button
 						onClick={() => handleDelete(image.key)}
