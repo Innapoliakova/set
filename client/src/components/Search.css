@@ -1,8 +1,7 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 .search-box {
@@ -19,11 +18,9 @@
 }
 
 .search-box .icon:hover {
-    
-    background-color: #3a3935;
-    color: #fff;
+	background-color: #3a3935;
+	color: #fff;
 }
-
 
 .search-box .icon {
 	margin: 0;
@@ -54,18 +51,4 @@ input {
 	line-height: 40px;
 	color: #0a0a0a;
 }
-@import  url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
-
-
-
-/* Media Query for Mobile Devices */
- @media (max-width: 800px) {
-    .search-box{
-      
-       width: 400px;
-    }
- .icon{
-    margin-top: -41px;
- }
-    
-  } 
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");

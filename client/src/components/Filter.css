@@ -1,22 +1,21 @@
 :root {
-    --bg: #332f35;
-    --fg: lighten(var(--bg), 20%);
-    --borderWidth: 3px;
+	--bg: #332f35;
+	--fg: lighten(var(--bg), 20%);
+	--borderWidth: 3px;
 }
 
 .filter-options {
-    margin: 50px auto;
-    text-align: center;
+	margin: 50px auto;
+	text-align: center;
 }
 
 .filter-section input[type="radio"] {
-    position: absolute;
-    visibility: hidden;
-    display: none;
+	position: absolute;
+	visibility: hidden;
+	display: none;
 }
 
 .filter-option {
-
 	font-family: "Open Sans", sans-serif;
 	color: lighten(var(--bg), 40%);
 	display: inline-block;
@@ -33,19 +32,4 @@
 .filter-section input[type="radio"]:checked + .filter-option {
 	background: var(--bg); /* Change background color on hover */
 	color: white;
-    
-  }
-
-  @import url("https://fonts.googleapis.com/css?family=Roboto");
-
-@media (max-width: 480px) {
-    .filter-option {
-      font-size: 14px;
-      padding: 8px 16px;
-      margin-bottom: 10px;
-    }
-  
-    .filter-options {
-      margin: 30px auto;
-    }
-  }
+}
