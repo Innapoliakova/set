@@ -134,8 +134,7 @@ const ImageCard = ({
 
 	return (
 		<div className="image-card">
-			{/* <img width="400" height="250" src={image.url} alt="" /> */}
-			<img width="400" height="250" src={image.url} alt="" />
+			<img src={image.url} alt="" />
 			<div className="details">
 				<div className="description">{image.description}</div>
 				<div className="rating">Likes: {image.rating}</div>
