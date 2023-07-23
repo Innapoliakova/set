@@ -23,7 +23,7 @@ const Gallery = ({
 					) : (
 						<div className="gallery-section">
 							<ResponsiveMasonry
-								columnsCountBreakPoints={{ 350: 1, 400: 2, 750: 3, 900: 4 }}
+								columnsCountBreakPoints={{ 400: 1, 750: 3, 900: 4 }}
 							>
 								<Masonry gutter="1.5rem">
 									{images.map((image) => (
