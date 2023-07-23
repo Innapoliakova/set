@@ -18,8 +18,11 @@ const s3Storage = multerS3({
 	s3, // s3 instance
 	bucket: "cyf-images-fp", // change it as per your project requirement
 	acl: "public-read", // storage access type
+	contentType: multerS3.AUTO_CONTENT_TYPE,
 	metadata: (req, file, cb) => {
-		cb(null, { fieldname: file.fieldname });
+		cb(null, {
+			fieldname: file.fieldname,
+		});
 	},
 	key: (req, file, cb) => {
 		const fileName =
@@ -28,9 +31,9 @@ const s3Storage = multerS3({
 	},
 });
 
-// function to sanitize files and send error for unsupported files
+// Function to sanitize files and send an error for unsupported files
 function sanitizeFile(file, cb) {
-	// Define the allowed extension
+	// Define the allowed extensions
 	const fileExts = [".png", ".jpg", ".jpeg", ".gif", ".svg"];
 
 	// Check allowed extensions
@@ -41,10 +44,17 @@ function sanitizeFile(file, cb) {
 	// Mime type must be an image
 	const isAllowedMimeType = file.mimetype.startsWith("image/");
 
+	// Check if the file is an SVG
+	const isSVG = file.originalname.endsWith(".svg");
+
+	if (isSVG) {
+		file.mimetype = "image/svg+xml"; // Set the content type to "image/svg+xml" for SVG images
+	}
+
 	if (isAllowedExt && isAllowedMimeType) {
 		return cb(null, true); // no errors
 	} else {
-		// pass error msg to callback, which can be displayed in frontend
+		// Pass error msg to callback, which can be displayed in the frontend
 		cb(
 			"Error: Invalid file format! Please upload a file with a valid extension. Only .png, .jpg, .jpeg, .gif, .svg formats are accepted."
 		);
@@ -70,8 +80,8 @@ export const deleteImageFromS3 = async (key) => {
 			Key: key,
 		});
 		await s3.send(command);
-		logger.log("Successfully deleted image with URL: ", key);
+		console.log("Successfully deleted image");
 	} catch (err) {
-		logger.error("Error deleting image from S3:", err);
+		console.error("Error deleting image from S3:", err);
 	}
 };
